@@ -1,61 +1,114 @@
-.tileTitle {
-  margin-top: 5px;
-  height: 24px;
-  font-family: "Open Sans";
-  font-size: 18px;
-  text-align: center;
-  color: #000000;
-}
-
-.tileDescription {
-  height: 38px;
-  opacity: 0.5;
-  font-family: "Open Sans";
-  font-size: 14px;
-  text-align: center;
-  border-bottom: 1px solid #e0e4e7;
-  color: #000000;
-  margin-top: 5px;
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
 .tile {
-  background-color: #ffffff;
-  height: 347px;
-  width: 270px;
-  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.13);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
+  min-height: 460px;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.tile:hover {
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+  transform: translateY(-4px);
 }
 
 .tileImage {
-  align-self: center;
-  height: 200px;
-  padding: 20px 0 10px 0;
-}
-
-.tileImage>img {
-  height: 100%;
-}
-
-.titleBottom {
+  align-items: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #ecfeff 100%);
   display: flex;
-  margin-top: 5px;
-  align-items: baseline;
-  justify-content: space-between;
+  height: 220px;
+  justify-content: center;
+  position: relative;
 }
 
-.tileAdd {
-  float: right;
-  margin-right: 20px;
+.tileImage > img {
+  max-height: 175px;
+  max-width: 78%;
+  object-fit: contain;
 }
 
-.tilePrice {
-  float: left;
-  margin-left: 20px;
+.tileBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  left: 16px;
+  position: absolute;
+  top: 16px;
+}
+
+.tileBadge {
+  border-radius: 999px;
+  color: #ffffff;
+  font-family: "Open Sans";
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 5px 9px;
+  text-transform: uppercase;
+}
+
+.tileBadgeNew { background: #2563eb; }
+.tileBadgeSale { background: #e11d48; }
+.tileBadgeStock { background: #f59e0b; }
+
+.tileContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.tileMeta {
+  color: #0f766e;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tileTitle {
+  color: #111827;
+  font-family: "Open Sans";
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 8px 0;
+}
+
+.tileDescription {
+  color: #64748b;
+  flex: 1;
   font-family: "Open Sans";
   font-size: 14px;
-  font-weight: 600;
-  color: #000000;
+  line-height: 1.55;
+  margin: 0 0 14px;
 }
+
+.tileRating {
+  align-items: center;
+  color: #475569;
+  display: flex;
+  font-family: "Open Sans";
+  font-size: 13px;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tileStars { color: #f59e0b; letter-spacing: -1px; }
+
+.titleBottom {
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 14px;
+}
+
+.tilePriceGroup { display: flex; align-items: baseline; gap: 8px; }
+.tilePrice { color: #111827; font-family: "Open Sans"; font-size: 20px; font-weight: 800; }
+.tileOriginalPrice { color: #94a3b8; font-family: "Open Sans"; font-size: 13px; text-decoration: line-through; }
+.tileAdd { margin-right: -8px; }

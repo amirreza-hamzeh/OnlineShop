@@ -12,16 +12,16 @@ class LoginForm extends Component {
       <div>
         <div className='loginFormHeader'>Sign in to your account</div>
           <div className='loginFormRow'>
-          <Field 
+          <Field
             name="username"
             component={username=>
-              <Input field={username} hintText={"Username"} /> 
+              <Input field={username} id="login-username" label="Username" hintText="you@example.com" autoComplete="username" />
             }
          />
-          <Field 
+          <Field
             name="password"
             component={password=>
-              <Input type={"password"} field={password} hintText={"Password"} /> 
+              <Input type="password" field={password} id="login-password" label="Password" hintText="Password" autoComplete="current-password" />
             }
          />
          </div>
@@ -45,6 +45,8 @@ class LoginForm extends Component {
       <div className='loginFormButton'>
         <FlatButton
           label="Sign in"
+          type="submit"
+          keyboardFocused={false}
           onClick={handleSubmit}
           style={styles}
           labelStyle={labelStyles}
@@ -54,7 +56,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { 
+    const {
       handleSubmit,
       error,
     } = this.props;

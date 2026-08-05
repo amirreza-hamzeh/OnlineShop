@@ -1,4 +1,4 @@
-.globalContainer {
-  width: 1200px;
-  margin: 0 auto;
-}
+body { background: #f8fafc; margin: 0; }
+* { box-sizing: border-box; }
+a, button, input, select, textarea { transition: box-shadow 160ms ease, border-color 160ms ease, transform 160ms ease; }
+a:focus, button:focus, input:focus, select:focus, textarea:focus { outline: 3px solid rgba(20, 184, 166, .35); outline-offset: 2px; }

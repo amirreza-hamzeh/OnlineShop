@@ -1,16 +1,6 @@
-.productsSection {
-  float: left;
-  font-family: "Open Sans";
-  font-size: 24px;
-  color: #ffffff;
-}
-
-.titleBar {
-  height: 60px;
-}
-
-.checkout-button {
-  display: flex;
-  float: right;
-  margin-top: -50px;
-}
+.shopUtilityBar { margin: -108px auto 0; max-width: 1180px; padding: 0 24px; position: relative; z-index: 3; }
+.titleBar { align-items: center; backdrop-filter: blur(16px); background: rgba(255,255,255,.92); border: 1px solid rgba(226,232,240,.9); border-radius: 24px; box-shadow: 0 20px 60px rgba(15,23,42,.12); display: flex; justify-content: space-between; min-height: 76px; padding: 16px 20px; }
+.productsSection { color: #111827; font-family: "Open Sans"; font-size: 20px; font-weight: 900; }
+.titleActions { align-items: center; display: flex; gap: 12px; }
+.checkout-button { display: flex; }
+@media (max-width: 640px) { .titleBar { align-items: stretch; flex-direction: column; gap: 14px; } .titleActions { justify-content: space-between; } }

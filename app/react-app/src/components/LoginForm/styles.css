@@ -1,23 +1,6 @@
-.loginFormRow {
-    font-family: "Open Sans";
-}
-
-.loginFormHeader {
-    font-size: 18px;
-    font-family: "Open Sans";
-    padding-bottom: 30px;
-}
-
-.loginFormButton {
-    padding-top: 30px;
-}
-
-.loginFormContent {
-    display: flex;
-    text-align: center;
-}
-
-.errorMessage {
-    font-family: "Open Sans";
-    color: red;
-}
+.loginFormContent { background: #ffffff; border-radius: 22px; box-shadow: 0 20px 70px rgba(15, 23, 42, .16); min-width: 360px; padding: 32px; }
+.loginFormHeader { color: #111827; font-family: "Open Sans"; font-size: 26px; font-weight: 900; margin-bottom: 22px; text-align: left; }
+.loginFormRow { display: flex; flex-direction: column; }
+.loginFormButton { margin-top: 8px; text-align: right; }
+.errorMessage { color: #dc2626; display: block; font-family: "Open Sans"; font-size: 13px; margin-top: 4px; }
+@media (max-width: 480px) { .loginFormContent { min-width: 0; width: 88vw; } }
