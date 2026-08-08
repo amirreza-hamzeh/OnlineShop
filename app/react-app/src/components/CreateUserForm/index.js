@@ -18,13 +18,13 @@ class CreateUserForm extends Component {
           <Field
             name="username"
             component={username =>
-              <Input field={username} hintText={"Choose a user ID"} />
+              <Input field={username} id="create-username" label="Username" hintText={"Choose a user ID"} autoComplete="username" />
             }
           />
           <Field
             name="password"
             component={password =>
-              <Input type={"password"} field={password} hintText={"Choose a password"} />
+              <Input type={"password"} field={password} id="create-password" label="Password" hintText={"Choose a password"} autoComplete="new-password" />
             }
           />
         </div>
@@ -48,6 +48,8 @@ class CreateUserForm extends Component {
       <div className='createFormButton'>
         <FlatButton
           label="Sign up"
+          type="submit"
+          keyboardFocused={false}
           onClick={handleSubmit}
           style={styles}
           labelStyle={labelStyles}

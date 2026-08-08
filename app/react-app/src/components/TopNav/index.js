@@ -4,10 +4,6 @@ import {
   createCustomer,
   loginCustomer,
 } from '../../actions';
-import {
-  getIP,
-  getHost,
-} from '../../reducers';
 import LoginForm from '../LoginForm';
 import CreateUserForm from '../CreateUserForm';
 import SuccessMessage from '../SuccessMessage';
@@ -68,14 +64,6 @@ class TopNav extends Component {
     const { loginCustomer } = this.props;
     this.setState({ createUserSuccessful: true });
 
-    // temporary sleep so that login will work
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if (new Date().getTime() - start > 1000) {
-        break;
-      }
-    }
-
     return loginCustomer(username, password)
       .then((response) => {
         this.handleLoginSuccess(response, username)
@@ -116,15 +104,6 @@ class TopNav extends Component {
       });
   };
 
-  renderContainerId() {
-    const {ip, host} = this.props;
-    return (
-      <div className="containerSection">
-        {`IP: ${ip} HOST: ${host}`}
-      </div>
-    );
-  }
-
   toggleCreateModal = () => {
     this.setState({
       isCreateModalOpen: !this.state.isCreateModalOpen,
@@ -151,7 +130,7 @@ class TopNav extends Component {
         isOpen={this.state.isCreateModalOpen}
         onRequestClose={this.toggleCreateModal}
         style={customStyles}
-        contentLabel={''}
+        contentLabel={'Create an account'}
       >
         <div className="formContainer">
           {content}
@@ -166,7 +145,7 @@ class TopNav extends Component {
         isOpen={this.state.isLoginModalOpen}
         onRequestClose={this.toggleLoginModal}
         style={customStyles}
-        contentLabel={''}
+        contentLabel={'Sign in to your account'}
       >
         <div className="formContainer">
           <LoginForm onSubmit={this.handleLogin} />
@@ -247,7 +226,6 @@ class TopNav extends Component {
             <Logo />
           </div>
           <div className="navUser">
-            {this.renderContainerId()}
             <div className="buttonSection">
               {this.state.authenticated
                 ? this.renderAuthenticated()
@@ -263,18 +241,11 @@ class TopNav extends Component {
 }
 
 TopNav.propTypes = {
-  ip: PropTypes.string.isRequired,
-  host: PropTypes.string.isRequired,
   createCustomer: PropTypes.func.isRequired,
   loginCustomer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  ip: getIP(state),
-  host: getHost(state),
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   createCustomer,
   loginCustomer,
 })(TopNav);
