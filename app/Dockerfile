@@ -1,15 +1,17 @@
 FROM node:latest AS storefront
 WORKDIR /usr/src/atsea/app/react-app
 COPY react-app .
-RUN npm install
+RUN --mount=type=cache,target=/root/.npm npm install
 RUN npm run build
 
 FROM maven:latest AS appserver
 WORKDIR /usr/src/atsea
 COPY pom.xml .
-RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
+RUN --mount=type=cache,target=/root/.m2 \
+mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
 COPY . .
-RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
+RUN --mount=type=cache,target=/root/.m2 \
+mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
 
 FROM eclipse-temurin:8-jre-alpine
 RUN adduser -Dh /home/gordon gordon
