@@ -1,11 +1,6 @@
 import React from 'react';
 import './styles.css'
 
-const scrollToSection = id => {
-  const section = document.getElementById(id)
-  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
-
 const Header = () => (
   <header className='headerSection'>
     <div className='headerContent'>
@@ -13,8 +8,8 @@ const Header = () => (
       <h1 className='headerTitle'>Thoughtfully chosen goods for everyday living.</h1>
       <p className='headerSubtitle'>Shop practical, modern favorites across style, home, wellness, beauty, and tech — all in a cleaner, faster storefront.</p>
       <div className='headerActions'>
-        <button className='primaryHeroButton' type='button' onClick={() => scrollToSection('shop')}>Shop the catalog</button>
-        <button className='secondaryHeroButton' type='button' onClick={() => scrollToSection('featured-benefits')}>Why shop with us</button>
+        <a className='primaryHeroButton' href='#shop'>Shop the catalog</a>
+        <a className='secondaryHeroButton' href='#featured-benefits'>Why shop with us</a>
       </div>
     </div>
     <div className='headerCard' id='featured-benefits'>
