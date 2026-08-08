@@ -1,19 +1,14 @@
-.productListWrapper {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    max-width: 1240px;
-}
-
-.productListWrapper > div {
-    padding: 20px;
-    flex: 0 0 25%;
-    box-sizing: border-box;
-}
-
-@media (max-width: 600px) {
-    .productListWrapper {
-        justify-content: center;
-    }
-}
+.catalogSection { margin: -64px auto 80px; max-width: 1180px; padding: 0 24px; position: relative; z-index: 2; }
+.catalogHeader { background: #ffffff; border-radius: 28px; box-shadow: 0 20px 70px rgba(15, 23, 42, 0.12); margin-bottom: 22px; padding: 34px; text-align: center; }
+.eyebrow { color: #0f766e; font-family: "Open Sans"; font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.catalogHeader h2 { color: #111827; font-family: "Open Sans"; font-size: 36px; line-height: 1.1; margin: 10px 0; }
+.catalogHeader p { color: #64748b; font-family: "Open Sans"; font-size: 16px; margin: 0 auto; max-width: 720px; }
+.catalogToolbar { align-items: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 20px; display: flex; gap: 12px; margin-bottom: 24px; padding: 14px; }
+.catalogSearchLabel { height: 1px; left: -10000px; overflow: hidden; position: absolute; width: 1px; }
+.catalogSearch, .catalogSelect { border: 1px solid #cbd5e1; border-radius: 14px; color: #111827; font-family: "Open Sans"; font-size: 14px; min-height: 44px; padding: 0 14px; }
+.catalogSearch { flex: 1; min-width: 220px; }
+.catalogSearch:focus, .catalogSelect:focus { border-color: #0f766e; box-shadow: 0 0 0 3px rgba(20, 184, 166, .18); outline: none; }
+.productListWrapper { display: grid; gap: 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.catalogEmpty { background: #fff; border-radius: 20px; color: #64748b; font-family: "Open Sans"; padding: 36px; text-align: center; }
+@media (max-width: 960px) { .productListWrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); } .catalogToolbar { align-items: stretch; flex-direction: column; } }
+@media (max-width: 640px) { .productListWrapper { grid-template-columns: 1fr; } .catalogHeader h2 { font-size: 28px; } }
