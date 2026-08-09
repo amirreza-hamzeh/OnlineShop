@@ -22,12 +22,13 @@
   height: 220px;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .tileImage > img {
-  max-height: 175px;
-  max-width: 78%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .tileBadges {
@@ -37,6 +38,7 @@
   left: 16px;
   position: absolute;
   top: 16px;
+  z-index: 1;
 }
 
 .tileBadge {
