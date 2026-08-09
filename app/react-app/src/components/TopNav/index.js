@@ -32,13 +32,16 @@ const customStyles = {
     width: '100%',
   },
   content: {
-    top: '30%',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    border: '0x',
+    border: '0',
+    background: 'transparent',
+    overflow: 'visible',
+    padding: '20px',
   },
 };
 
@@ -60,13 +63,13 @@ class TopNav extends Component {
     this.setState({ loginSuccessful: true });
   };
 
-  handleCreateUserSuccess(username, password) {
+  handleCreateUserSuccess(identifier, password) {
     const { loginCustomer } = this.props;
     this.setState({ createUserSuccessful: true });
 
-    return loginCustomer(username, password)
+    return loginCustomer(identifier, password)
       .then((response) => {
-        this.handleLoginSuccess(response, username)
+        this.handleLoginSuccess(response, identifier)
       })
       .catch(err => {
         throw new SubmissionError({ _error: "Error logging in." })
@@ -76,27 +79,29 @@ class TopNav extends Component {
   handleCreateUser = values => {
     const {
       username,
+      email,
+      phone,
       password,
     } = values;
     const { createCustomer } = this.props;
-    return createCustomer(username, password)
+    return createCustomer(username, email, phone, password)
       .then((response) => {
-        this.handleCreateUserSuccess(username, password)
+        return this.handleCreateUserSuccess(email, password)
       })
       .catch(err => {
-        throw new SubmissionError({ username: "Username already exists" })
+        throw new SubmissionError({ _error: "That username, email address, or phone number is already in use." })
       });
   };
 
   handleLogin = values => {
     const {
-      username,
+      identifier,
       password,
     } = values;
     const { loginCustomer } = this.props;
-    return loginCustomer(username, password)
+    return loginCustomer(identifier, password)
       .then((response) => {
-        this.handleLoginSuccess(response, username)
+        this.handleLoginSuccess(response, identifier)
         this.toggleLoginModal();
       })
       .catch(err => {
