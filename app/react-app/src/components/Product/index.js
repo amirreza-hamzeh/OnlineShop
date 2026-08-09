@@ -6,7 +6,7 @@ class Product extends Component {
     const { price, quantity, name, image } = this.props;
     const image2 = (
       <img
-        alt="Logo"
+        alt={name}
         src={process.env.PUBLIC_URL + image}
         height="60px"
         width="60px"
@@ -20,12 +20,11 @@ class Product extends Component {
         <div className='columnCenter'>
           <div>{name}</div>
           <div>
-          <span>{`Quantity  ${quantity}`}</span>
-          <span className='remove'>{`remove`}</span>
+          <span>{`Qty ${quantity}`}</span>
           </div>
         </div>
         <div className='columnRight'>
-          {price}
+          {`$${(Number(price) * quantity).toFixed(2)}`}
         </div>
       </div>
     );
