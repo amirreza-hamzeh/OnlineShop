@@ -5,6 +5,11 @@ import Input from '../Input';
 import './styles.css';
 import validate from './validate.js';
 
+// Keep the Field component type stable between Redux Form updates. Defining this
+// renderer inline causes React to remount the input after every keystroke, which
+// drops the browser's focus and makes the cursor disappear.
+const renderInput = props => <Input field={props} {...props} />;
+
 class CreateUserForm extends Component {
 
   renderCreateUser() {
@@ -17,15 +22,20 @@ class CreateUserForm extends Component {
         <div className='createFormRow'>
           <Field
             name="username"
-            component={username =>
-              <Input field={username} id="create-username" label="Username" hintText={"Choose a user ID"} autoComplete="username" />
-            }
+            component={renderInput}
+            id="create-username"
+            label="Username"
+            hintText="Choose a user ID"
+            autoComplete="username"
           />
           <Field
             name="password"
-            component={password =>
-              <Input type={"password"} field={password} id="create-password" label="Password" hintText={"Choose a password"} autoComplete="new-password" />
-            }
+            component={renderInput}
+            type="password"
+            id="create-password"
+            label="Password"
+            hintText="Choose a password"
+            autoComplete="new-password"
           />
         </div>
       </div>
