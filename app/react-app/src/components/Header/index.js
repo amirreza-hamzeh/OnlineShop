@@ -9,7 +9,7 @@ const Header = () => (
       <p className='headerSubtitle'>Shop practical, modern favorites across style, home, wellness, beauty, and tech — all in a cleaner, faster storefront.</p>
       <div className='headerActions'>
         <a className='primaryHeroButton' href='#shop'>Shop the catalog</a>
-        <a className='secondaryHeroButton' href='#trust-and-safety'>Why shop with us</a>
+        <a className='secondaryHeroButton' href='#featured-benefits'>Why shop with us</a>
       </div>
     </div>
     <div className='headerCard' id='featured-benefits'>
