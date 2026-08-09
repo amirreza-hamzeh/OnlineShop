@@ -22,12 +22,13 @@
   height: 220px;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .tileImage > img {
-  max-height: 175px;
-  max-width: 78%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .tileBadges {
@@ -37,6 +38,7 @@
   left: 16px;
   position: absolute;
   top: 16px;
+  z-index: 1;
 }
 
 .tileBadge {
@@ -78,6 +80,8 @@
   line-height: 1.25;
   margin: 8px 0;
 }
+.tileTitle a { color: inherit; text-decoration: none; }
+.tileTitle a:hover { color: #0f766e; }
 
 .tileDescription {
   color: #64748b;
@@ -111,4 +115,6 @@
 .tilePriceGroup { display: flex; align-items: baseline; gap: 8px; }
 .tilePrice { color: #111827; font-family: "Open Sans"; font-size: 20px; font-weight: 800; }
 .tileOriginalPrice { color: #94a3b8; font-family: "Open Sans"; font-size: 13px; text-decoration: line-through; }
-.tileAdd { margin-right: -8px; }
+.tileAdd { align-items: center; display: flex; margin-right: -8px; }
+.tileDetailsLink { color: #475569; font-family: "Open Sans"; font-size: 12px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.tileDetailsLink:hover { color: #0f766e; text-decoration: underline; }

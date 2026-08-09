@@ -1,27 +1,32 @@
-.infoRow {
-  display: flex;
-  font-family: "Open Sans";
-}
+.infoSection, .infoSection form { width: 100%; }
+.formHeading { align-items: center; display: flex; gap: 14px; margin-bottom: 25px; }
+.formHeadingIcon { align-items: center; background: #fff0e8; border-radius: 11px; display: flex; font-size: 20px; height: 43px; justify-content: center; width: 43px; }
+.formHeading h2 { font-size: 20px; margin: 0 0 4px; }
+.formHeading p { color: #8490a2; font-size: 12px; margin: 0; }
+.paymentMethods { align-items: center; background: #f7f9fb; border: 1px solid #e6eaf0; border-radius: 11px; display: flex; gap: 8px; margin-bottom: 23px; padding: 8px; }
+.paymentMethod { background: #fff; border: 1px solid #cdd7e1; border-radius: 7px; color: #27364a; flex: 1; font-size: 12px; font-weight: 800; padding: 10px 12px; }
+.paymentMethod b { color: #138672; float: right; }
+.cardBadge { align-items: center; background: #263d76; border-radius: 4px; color: white; display: flex; font-size: 9px; font-weight: 900; height: 25px; justify-content: center; letter-spacing: -.3px; width: 39px; }
+.cardBadge.visa { background: #163b89; font-style: italic; }
+.cardBadge.express { background: #1776a3; font-size: 7px; }
+.infoRow { display: flex; gap: 18px; }
+.infoRow > div { flex: 1; min-width: 0; }
+.billingHeading { align-items: baseline; border-top: 1px solid #edf0f4; display: flex; justify-content: space-between; margin: 8px 0 10px; padding-top: 23px; }
+.billingHeading h3 { font-size: 15px; margin: 0; }
+.billingHeading span { color: #919bab; font-size: 10px; }
+.checkoutError { background: #fff0f0; border: 1px solid #f5c4c4; border-radius: 8px; color: #b42318; font-size: 12px; margin: 6px 0 14px; padding: 11px 13px; }
+.completeOrderButton { align-items: center; background: linear-gradient(135deg, #16806f, #0d655d); border: 0; border-radius: 10px; box-shadow: 0 9px 20px rgba(13, 101, 93, .22); color: #fff; cursor: pointer; display: flex; font-family: "Open Sans"; font-size: 14px; font-weight: 800; justify-content: space-between; margin-top: 10px; padding: 16px 20px; width: 100%; }
+.completeOrderButton:hover { box-shadow: 0 12px 26px rgba(13, 101, 93, .32); transform: translateY(-1px); }
+.completeOrderButton:disabled { cursor: wait; opacity: .65; }
+.completeOrderButton b { font-size: 20px; }
+.formFooter { align-items: center; display: flex; justify-content: space-between; margin-top: 17px; }
+.formFooter a, .formFooter span { color: #7d8797; font-size: 10px; text-decoration: none; }
+.formFooter a { color: #146c62; font-weight: 700; }
 
-.infoHeader {
-  padding-top: 30px;
-  padding-bottom: 20px;
-  font-size: 16px;
-  font-family: "Open Sans";
-}
-
-.infoButton {
-  padding-top: 50px;
-  float: right;
-  display: inline-flex;
-}
-
-.loginErrorMessage {
-  font-size: 14px;
-  font-family: "Open Sans";
-  color: red;
-}
-
-.infoSection {
-  display: flex;
+@media (max-width: 520px) {
+  .infoRow { gap: 12px; }
+  .formHeadingIcon { display: none; }
+  .billingHeading span { display: none; }
+  .cardBadge { width: 32px; }
+  .formFooter { align-items: flex-start; flex-direction: column; gap: 10px; }
 }

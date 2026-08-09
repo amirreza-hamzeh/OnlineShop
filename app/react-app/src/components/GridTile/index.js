@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import FlatButton from 'material-ui/FlatButton'
 import AddIcon from './AddIcon'
+import imageUrl from '../../utils/imageUrl'
+import { Link } from 'react-router'
 import './styles.css'
 
 const formatRating = rating => rating ? rating.toFixed(1) : 'New'
@@ -39,11 +41,11 @@ export default class GridTile extends Component {
       <article className="tile">
         <div className="tileImage">
           {this.renderBadges()}
-          <img alt={name} src={process.env.PUBLIC_URL + image} />
+          <img alt={name} src={imageUrl(image)} />
         </div>
         <div className="tileContent">
           <div className="tileMeta">{brand} · {category}</div>
-          <h3 className="tileTitle">{name}</h3>
+          <h3 className="tileTitle"><Link to={`/product/${this.props.productId}`}>{name}</Link></h3>
           <p className="tileDescription">{description}</p>
           <div className="tileRating" aria-label={`${formatRating(rating)} out of 5 stars`}>
             <span className="tileStars">★★★★★</span>
@@ -55,6 +57,7 @@ export default class GridTile extends Component {
               {originalPrice && originalPrice !== price ? <span className="tileOriginalPrice">{originalPrice}</span> : null}
             </div>
             <div className="tileAdd">
+              <Link className="tileDetailsLink" to={`/product/${this.props.productId}`}>View details</Link>
               <FlatButton
                 onClick={this.addToCart}
                 labelStyle={{ color: '#0f766e', fontWeight: 700 }}

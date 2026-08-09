@@ -4,11 +4,22 @@
 .catalogHeader h2 { color: #111827; font-family: "Open Sans"; font-size: 36px; line-height: 1.1; margin: 10px 0; }
 .catalogHeader p { color: #64748b; font-family: "Open Sans"; font-size: 16px; margin: 0 auto; max-width: 720px; }
 .catalogToolbar { align-items: center; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 20px; display: flex; gap: 12px; margin-bottom: 24px; padding: 14px; }
+.categoryMenu { flex: 0 0 auto; position: relative; }
+.categoryMenuButton { align-items: center; background: #0f172a; border: 0; border-radius: 14px; color: #ffffff; cursor: pointer; display: flex; font-family: "Open Sans"; font-size: 14px; font-weight: 800; gap: 10px; min-height: 44px; padding: 0 15px; }
+.categoryMenuButton:focus { box-shadow: 0 0 0 3px rgba(20, 184, 166, .28); outline: none; }
+.hamburgerIcon { display: flex; flex-direction: column; gap: 3px; width: 17px; }
+.hamburgerIcon span { background: #5eead4; border-radius: 2px; display: block; height: 2px; width: 100%; }
+.selectedCategory { color: #99f6e4; font-size: 12px; font-weight: 600; }
+.categoryMenuList { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 18px 45px rgba(15, 23, 42, .2); left: 0; min-width: 230px; overflow: hidden; padding: 7px; position: absolute; top: calc(100% + 9px); z-index: 5; }
+.categoryMenuItem { align-items: center; background: transparent; border: 0; border-radius: 10px; color: #334155; cursor: pointer; display: flex; font-family: "Open Sans"; font-size: 14px; justify-content: space-between; padding: 11px 12px; text-align: left; width: 100%; }
+.categoryMenuItem:hover, .categoryMenuItem:focus { background: #f0fdfa; color: #0f766e; outline: none; }
+.categoryMenuItemActive { background: #ccfbf1; color: #0f766e; font-weight: 800; }
+.categoryCount { align-items: center; background: #f1f5f9; border-radius: 999px; display: inline-flex; font-size: 11px; height: 24px; justify-content: center; min-width: 24px; padding: 0 7px; }
 .catalogSearchLabel { height: 1px; left: -10000px; overflow: hidden; position: absolute; width: 1px; }
 .catalogSearch, .catalogSelect { border: 1px solid #cbd5e1; border-radius: 14px; color: #111827; font-family: "Open Sans"; font-size: 14px; min-height: 44px; padding: 0 14px; }
 .catalogSearch { flex: 1; min-width: 220px; }
 .catalogSearch:focus, .catalogSelect:focus { border-color: #0f766e; box-shadow: 0 0 0 3px rgba(20, 184, 166, .18); outline: none; }
 .productListWrapper { display: grid; gap: 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .catalogEmpty { background: #fff; border-radius: 20px; color: #64748b; font-family: "Open Sans"; padding: 36px; text-align: center; }
-@media (max-width: 960px) { .productListWrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); } .catalogToolbar { align-items: stretch; flex-direction: column; } }
+@media (max-width: 960px) { .productListWrapper { grid-template-columns: repeat(2, minmax(0, 1fr)); } .catalogToolbar { align-items: stretch; flex-direction: column; } .categoryMenuButton { justify-content: flex-start; width: 100%; } .categoryMenuList { right: 0; } }
 @media (max-width: 640px) { .productListWrapper { grid-template-columns: 1fr; } .catalogHeader h2 { font-size: 28px; } }

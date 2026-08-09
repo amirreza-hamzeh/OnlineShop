@@ -1,145 +1,66 @@
-import React, { PropTypes, Component } from 'react';
-import { Link } from 'react-router';
-import { Field, reduxForm } from 'redux-form';
-import { FlatButton } from 'material-ui';
-import Input from '../../components/Input';
-import './styles.css';
+import React, { PropTypes, Component } from 'react'
+import { Link } from 'react-router'
+import { Field, reduxForm } from 'redux-form'
+import Input from '../../components/Input'
+import validate from './validate'
+import './styles.css'
 
 class CustomerInfoForm extends Component {
-
-  renderCredit() {
-    return (
-      <div>
-        <div className='infoHeader'>Credit Card Information</div>
-        <div className='infoRow'>
-          <Field
-            name="firstName"
-            component={firstName =>
-              <Input field={firstName} hintText={"First Name"} />
-            }
-          />
-          <Field
-            name="lastName"
-            component={lastName =>
-              <Input field={lastName} hintText={"Last Name"} />
-            }
-          />
-        </div>
-        <div className='infoRow'>
-          <Field
-            name="cardNumber"
-            component={cardNumber =>
-              <Input field={cardNumber} hintText={"Card Number"} />
-            }
-          />
-          <Field
-            name="cvv"
-            component={cvv =>
-              <Input field={cvv} hintText={"CVV"} />
-            }
-          />
-        </div>
-        <div className='infoRow'>
-          <Field
-            name="expirationDate"
-            component={date =>
-              <Input field={date} hintText={"MM/YY"} />
-            }
-          />
-        </div>
-      </div>
-    );
-  }
-
-  renderBilling() {
-    return (
-      <div>
-        <div className='infoHeader'>Billing Information</div>
-        <div className='infoRow'>
-          <Field
-            name="company"
-            component={company =>
-              <Input field={company} hintText={"Company"} />
-            }
-          />
-          <Field
-            name="title"
-            component={title =>
-              <Input field={title} hintText={"Title"} />
-            }
-          />
-        </div>
-        <div className='infoRow'>
-          <Field
-            name="address"
-            component={address =>
-              <Input field={address} hintText={"Address"} />
-            }
-          />
-          <Field
-            name="city"
-            component={city =>
-              <Input field={city} hintText={"City"} />
-            }
-          />
-        </div>
-      </div>
-    );
-  }
-
-  renderButtons() {
-    const labelStyles = {
-      textTransform: 'none',
-      fontFamily: 'Open Sans',
-      fontWeight: 600,
-    };
-    return (
-      <div className='infoButton'>
-        <FlatButton
-          label="Continue Shopping"
-          containerElement={<Link to="/" />}
-          style={{
-            color: '#099CEC',
-          }}
-          labelStyle={labelStyles}
-        />
-        <FlatButton
-          label="Complete Order"
-          type="submit"
-          style={{
-            color: '#fff',
-            backgroundColor: '#099CEC',
-          }}
-          labelStyle={labelStyles}
-        />
-      </div>
-    );
-  }
-
   render() {
-    const {
-      handleSubmit,
-      error,
-    } = this.props;
-    const err = error ? <span className='loginErrorMessage'>{error}</span> : null
+    const { handleSubmit, error, submitting, hasProducts } = this.props
 
     return (
       <div className="infoSection">
         <form onSubmit={handleSubmit}>
-          {this.renderCredit()}
-          {this.renderBilling()}
-          {err}
-          {this.renderButtons()}
+          <div className="formHeading">
+            <span className="formHeadingIcon" aria-hidden="true">&#128179;</span>
+            <div><h2 id="payment-heading">Payment details</h2><p>All transactions are secure and encrypted.</p></div>
+          </div>
+
+          <div className="paymentMethods" aria-label="Accepted payment methods">
+            <span className="paymentMethod selected">Card <b>&#10003;</b></span>
+            <span className="cardBadge visa">VISA</span>
+            <span className="cardBadge">MC</span>
+            <span className="cardBadge express">AMEX</span>
+          </div>
+
+          <div className="infoRow">
+            <Field name="firstName" component={field => <Input field={field} label="First name" hintText="Alex" autoComplete="cc-given-name" />} />
+            <Field name="lastName" component={field => <Input field={field} label="Last name" hintText="Morgan" autoComplete="cc-family-name" />} />
+          </div>
+          <Field name="cardNumber" component={field => <Input field={field} label="Card number" hintText="1234 5678 9012 3456" autoComplete="cc-number" />} />
+          <div className="infoRow compactRow">
+            <Field name="expirationDate" component={field => <Input field={field} label="Expiration date" hintText="MM / YY" autoComplete="cc-exp" />} />
+            <Field name="cvv" component={field => <Input field={field} label="Security code" hintText="CVV" autoComplete="cc-csc" type="password" />} />
+          </div>
+
+          <div className="billingHeading"><h3>Billing address</h3><span>Used for payment verification</span></div>
+          <Field name="address" component={field => <Input field={field} label="Street address" hintText="123 Market Street" autoComplete="billing street-address" />} />
+          <div className="infoRow compactRow">
+            <Field name="city" component={field => <Input field={field} label="City" hintText="Seattle" autoComplete="billing address-level2" />} />
+            <Field name="zipCode" component={field => <Input field={field} label="ZIP code" hintText="98101" autoComplete="billing postal-code" />} />
+          </div>
+
+          {error ? <div className="checkoutError" role="alert">{error}</div> : null}
+
+          <button className="completeOrderButton" type="submit" disabled={submitting || !hasProducts}>
+            <span>{submitting ? 'Processing securely…' : hasProducts ? 'Complete secure order' : 'Add items to continue'}</span>
+            <b aria-hidden="true">&#8594;</b>
+          </button>
+          <div className="formFooter"><Link to="/">&#8592; Return to shop</Link><span>&#128274; Your information stays private</span></div>
         </form>
       </div>
-    );
+    )
   }
 }
 
 CustomerInfoForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-};
+  error: PropTypes.string,
+  submitting: PropTypes.bool,
+  hasProducts: PropTypes.bool
+}
 
-export default CustomerInfoForm = reduxForm({
-  form: 'customerInfo',
-})(CustomerInfoForm);
+CustomerInfoForm.defaultProps = { hasProducts: true }
+
+export default reduxForm({ form: 'customerInfo', validate })(CustomerInfoForm)
