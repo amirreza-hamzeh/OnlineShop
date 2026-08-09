@@ -17,18 +17,6 @@ const product = {
 }
 
 describe('product detail helpers', () => {
-  let originalWindow
-
-  beforeEach(() => {
-    originalWindow = global.window
-    global.window = { scrollTo: jest.fn() }
-  })
-
-  afterEach(() => {
-    if (originalWindow) global.window = originalWindow
-    else delete global.window
-  })
-
   it('formats numeric and API string prices safely', () => {
     expect(formatPrice(34)).toBe('$34.00')
     expect(formatPrice('49.5')).toBe('$49.50')

@@ -114,12 +114,11 @@ public class CustomerController {
 	public ResponseEntity<?> createCustomer(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Customer : {}", customer);
 		
-		System.out.println(customerService.customerExist(customer));
-		
 		if (customerService.customerExist(customer)) {
-			logger.error("Unable to create a customer with username {}", customer.getUsername());
-			return new ResponseEntity(new CustomErrorType("A customer with username " + 
-			customer.getUsername() + " already exists."),HttpStatus.CONFLICT);
+			logger.error("Unable to create customer because an account identifier is already in use");
+			return new ResponseEntity(new CustomErrorType(
+					"A customer with that username, email address, or phone number already exists."),
+					HttpStatus.CONFLICT);
 		}
 		
 		Customer currentCustomer = customerService.createCustomer(customer);

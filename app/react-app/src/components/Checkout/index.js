@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import Product from '../../components/Product'
 import CustomerInfoForm from '../../components/CustomerInfoForm'
+import Logo from '../../components/Logo'
 import './styles.css'
 
 class Checkout extends Component {
@@ -49,10 +50,7 @@ class Checkout extends Component {
     return (
       <div className="checkoutPage">
         <header className="checkoutNav">
-          <Link className="checkoutBrand" to="/">
-            <span className="checkoutBrandMark">A</span>
-            <span>AtSea</span>
-          </Link>
+          <Logo />
           <div className="secureCheckout"><span aria-hidden="true">&#128274;</span> Secure checkout</div>
         </header>
 

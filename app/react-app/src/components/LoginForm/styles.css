@@ -1,6 +1,7 @@
-.loginFormContent { background: #ffffff; border-radius: 22px; box-shadow: 0 20px 70px rgba(15, 23, 42, .16); min-width: 360px; padding: 32px; }
-.loginFormHeader { color: #111827; font-family: "Open Sans"; font-size: 26px; font-weight: 900; margin-bottom: 22px; text-align: left; }
+@import '../authForms.css';
+
 .loginFormRow { display: flex; flex-direction: column; }
-.loginFormButton { margin-top: 8px; text-align: right; }
+.loginFormButton { margin-top: 10px; }
+.authCardLogin .authAside { background: linear-gradient(145deg, #0f172a 0%, #1e3a5f 68%, #0e7490 140%); }
+.authCardLogin .authAside::after { background: rgba(103, 232, 249, .12); }
 .errorMessage { color: #dc2626; display: block; font-family: "Open Sans"; font-size: 13px; margin-top: 4px; }
-@media (max-width: 480px) { .loginFormContent { min-width: 0; width: 88vw; } }
