@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import imageUrl from '../../utils/imageUrl'
 import './styles.css'
 
 class Product extends Component {
@@ -7,7 +8,7 @@ class Product extends Component {
     const image2 = (
       <img
         alt={name}
-        src={process.env.PUBLIC_URL + image}
+        src={imageUrl(image)}
         height="60px"
         width="60px"
       />

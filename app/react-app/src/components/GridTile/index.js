@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import FlatButton from 'material-ui/FlatButton'
 import AddIcon from './AddIcon'
+import imageUrl from '../../utils/imageUrl'
 import './styles.css'
 
 const formatRating = rating => rating ? rating.toFixed(1) : 'New'
@@ -39,7 +40,7 @@ export default class GridTile extends Component {
       <article className="tile">
         <div className="tileImage">
           {this.renderBadges()}
-          <img alt={name} src={process.env.PUBLIC_URL + image} />
+          <img alt={name} src={imageUrl(image)} />
         </div>
         <div className="tileContent">
           <div className="tileMeta">{brand} · {category}</div>

@@ -1,0 +1,14 @@
+.shopLogo {
+  color: #ffffff;
+  font-family: "Open Sans", sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 60px;
+  text-decoration: none;
+}
+
+.shopLogo:hover,
+.shopLogo:focus {
+  color: #ffffff;
+}
