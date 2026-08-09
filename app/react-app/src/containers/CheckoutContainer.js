@@ -11,6 +11,7 @@ import SuccessMessage from '../components/SuccessMessage'
 import Checkout from '../components/Checkout'
 import { Link } from 'react-router'
 import { SubmissionError } from 'redux-form'
+import { getJwtToken } from '../actions/storage'
 
 
 class CheckoutContainer extends Component {
@@ -25,41 +26,43 @@ class CheckoutContainer extends Component {
     this.setState({ orderComplete: true })
   }
 
-  // eslint-disable-next-line
   handleSubmit = (values) => {
     const {
-        customerId,
+      customerId,
+      createOrder,
       purchaseOrder,
       totalProducts,
-      quantityById
-      } = this.props
+      quantityById,
+      products,
+      checkout
+    } = this.props
 
     // This data will be used for create order endpoint
     const date = moment().format()
-    // eslint-disable-next-line
-    const {
-        firstName,
-      lastName,
-      } = values
-    // eslint-disable-next-line
     const submitData = {
       customerId,
-      name: firstName,
       orderDate: date,
-      lastName,
       quantityById
     }
 
     if (totalProducts === 0) {
       throw new SubmissionError({ _error: "Please add to cart first..." })
     }
+    if (!getJwtToken()) {
+      throw new SubmissionError({ _error: "Please sign in before completing your order." })
+    }
 
-    // TODO: Create Order
-    return purchaseOrder()
-      .then(this.handleSuccess)
-      // error: status 404
+    return createOrder(submitData)
+      .then(() => purchaseOrder())
+      .then(() => {
+        checkout(products)
+        this.handleSuccess()
+      })
       .catch((err) => {
-        throw new SubmissionError({ _error: "Please login before completing order..." })
+        const message = err && err.status === 401
+          ? "Please sign in before completing your order."
+          : "We couldn't process your order. Check your details and try again."
+        throw new SubmissionError({ _error: message })
       })
   }
 
@@ -108,7 +111,12 @@ CheckoutContainer.propTypes = {
     image: PropTypes.string.isRequired,
   })).isRequired,
   total: PropTypes.string,
-  checkout: PropTypes.func.isRequired
+  totalProducts: PropTypes.number.isRequired,
+  customerId: PropTypes.number,
+  quantityById: PropTypes.object.isRequired,
+  checkout: PropTypes.func.isRequired,
+  createOrder: PropTypes.func.isRequired,
+  purchaseOrder: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
