@@ -7,8 +7,36 @@ const ALL = 'All'
 export default class ProductsList extends Component {
   state = {
     category: ALL,
+    isCategoryMenuOpen: false,
     query: '',
     sort: 'featured'
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown)
+    document.addEventListener('click', this.handleDocumentClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown)
+    document.removeEventListener('click', this.handleDocumentClick)
+  }
+
+  handleKeyDown = event => {
+    if (event.key === 'Escape' && this.state.isCategoryMenuOpen) {
+      this.setState({ isCategoryMenuOpen: false })
+      if (this.categoryMenuButton) this.categoryMenuButton.focus()
+    }
+  }
+
+  handleDocumentClick = event => {
+    if (this.state.isCategoryMenuOpen && this.categoryMenu && !this.categoryMenu.contains(event.target)) {
+      this.setState({ isCategoryMenuOpen: false })
+    }
+  }
+
+  selectCategory = category => {
+    this.setState({ category, isCategoryMenuOpen: false, query: '' })
   }
 
   getCategories(products) {
@@ -45,6 +73,44 @@ export default class ProductsList extends Component {
   renderToolbar(categories) {
     return (
       <div className="catalogToolbar">
+        <div className="categoryMenu" ref={menu => { this.categoryMenu = menu }}>
+          <button
+            className="categoryMenuButton"
+            type="button"
+            ref={button => { this.categoryMenuButton = button }}
+            aria-controls="category-menu-list"
+            aria-expanded={this.state.isCategoryMenuOpen}
+            aria-haspopup="true"
+            aria-label={`Browse product categories. Current category: ${this.state.category}`}
+            onClick={() => this.setState({ isCategoryMenuOpen: !this.state.isCategoryMenuOpen })}
+          >
+            <span className="hamburgerIcon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+            <span>Categories</span>
+            <span className="selectedCategory">{this.state.category}</span>
+          </button>
+          {this.state.isCategoryMenuOpen && (
+            <div className="categoryMenuList" id="category-menu-list" role="menu">
+              {categories.map(category => (
+                <button
+                  className={category === this.state.category ? 'categoryMenuItem categoryMenuItemActive' : 'categoryMenuItem'}
+                  key={category}
+                  type="button"
+                  role="menuitem"
+                  onClick={() => this.selectCategory(category)}
+                >
+                  <span>{category}</span>
+                  <span className="categoryCount">
+                    {category === ALL ? this.props.products.length : this.props.products.filter(product => product.category === category).length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
         <label className="catalogSearchLabel" htmlFor="catalog-search">Search products</label>
         <input
           id="catalog-search"
@@ -54,14 +120,6 @@ export default class ProductsList extends Component {
           value={this.state.query}
           onChange={event => this.setState({ query: event.target.value })}
         />
-        <select
-          className="catalogSelect"
-          aria-label="Filter products by category"
-          value={this.state.category}
-          onChange={event => this.setState({ category: event.target.value })}
-        >
-          {categories.map(category => <option key={category} value={category}>{category}</option>)}
-        </select>
         <select
           className="catalogSelect"
           aria-label="Sort products"

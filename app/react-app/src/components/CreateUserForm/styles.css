@@ -1,18 +1,8 @@
-.createFormRow {
-  font-family: "Open Sans";
-}
+@import '../authForms.css';
 
-.createFormHeader {
-  font-size: 18px;
-  font-family: "Open Sans";
-  padding-bottom: 30px;
-}
-
-.createFormButton {
-  padding-top: 30px;
-}
-
-.createFormContent {
-  display: flex;
-  text-align: center;
-}
+.createFormRow { font-family: "Open Sans"; }
+.createFormButton { margin-top: 10px; }
+.authCardCreate { min-height: 660px; }
+.createFormContent .errorMessage { color: #dc2626; display: block; font-family: "Open Sans"; font-size: 13px; margin-top: 4px; }
+.authCardCreate .authAside { background: linear-gradient(145deg, #064e3b 0%, #0f766e 58%, #2dd4bf 150%); }
+.authCardCreate .authAside::after { background: rgba(153, 246, 228, .16); }

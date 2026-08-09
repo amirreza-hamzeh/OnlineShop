@@ -5,10 +5,4 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 60px;
-  text-decoration: none;
-}
-
-.shopLogo:hover,
-.shopLogo:focus {
-  color: #ffffff;
 }
