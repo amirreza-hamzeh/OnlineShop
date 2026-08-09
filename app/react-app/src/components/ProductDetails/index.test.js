@@ -49,4 +49,15 @@ describe('product detail helpers', () => {
     expect(wrapper.find('.addCartButton').prop('disabled')).toBe(true)
     expect(wrapper.find('.buyNowButton').prop('disabled')).toBe(true)
   })
+
+  it('returns to the top when the product page opens or changes products', () => {
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} />)
+    wrapper.instance().componentDidMount()
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
+
+    window.scrollTo.mockClear()
+    wrapper.instance().props = { ...wrapper.instance().props, product: { ...product, productId: 8 } }
+    wrapper.instance().componentDidUpdate({ product })
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
+  })
 })

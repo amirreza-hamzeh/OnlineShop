@@ -24,6 +24,10 @@ export const getDeliveryDate = (fromDate = new Date()) => {
   return deliveryDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
 }
 
+export const scrollPageToTop = () => {
+  if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0)
+}
+
 export default class ProductDetails extends Component {
   state = {
     quantity: 1,
@@ -36,6 +40,16 @@ export default class ProductDetails extends Component {
     reviewText: '',
     reviewRating: 5,
     helpfulReviews: {}
+  }
+
+  componentDidMount() {
+    scrollPageToTop()
+  }
+
+  componentDidUpdate(previousProps) {
+    const previousId = previousProps.product && previousProps.product.productId
+    const currentId = this.props.product && this.props.product.productId
+    if (currentId && currentId !== previousId) scrollPageToTop()
   }
 
   addQuantityToCart = () => {
