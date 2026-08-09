@@ -32,7 +32,7 @@ public class LoginController {
 	CustomerService customerService;
 		
 	private static class UserLogin {
-        public String username;
+        public String identifier;
         public String password;
     }
 
@@ -42,15 +42,27 @@ public class LoginController {
 		throws ServletException {
 		
 		JSONObject reponseToken = new JSONObject();
-		Customer customer = customerService.findByUserName(login.username);
+		if (login.identifier == null || login.identifier.trim().isEmpty()
+				|| login.password == null || login.password.isEmpty()) {
+			return new ResponseEntity<Object>(new CustomErrorType(
+					"Email address or phone number and password are required."), HttpStatus.BAD_REQUEST);
+		}
+		String identifier = login.identifier.trim();
+		Customer customer = customerService.findByEmailOrPhone(identifier);
+		// Account creation still signs in the newly created customer by its legacy
+		// username. Keep that internal flow working while the sign-in form accepts
+		// email addresses and phone numbers.
 		if (customer == null) {
-			logger.error("Customer with username {} not found.", login.username);
-			return new ResponseEntity(new CustomErrorType("Customer with username " + login.username 
+			customer = customerService.findByUserName(identifier);
+		}
+		if (customer == null) {
+			logger.error("Customer with email address or phone number {} not found.", identifier);
+			return new ResponseEntity(new CustomErrorType("Customer with that email address or phone number"
 					+ " not found"), HttpStatus.NOT_FOUND);
 		}
 		
-		if (Objects.deepEquals(login.password, customer.getPassword()) && Objects.equals(login.username, customer.getUsername())) {
-			String token = Jwts.builder().setSubject(login.username)
+		if (Objects.deepEquals(login.password, customer.getPassword())) {
+			String token = Jwts.builder().setSubject(customer.getUsername())
                 .claim("roles", customer.getUsername())
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256,"secretkey")

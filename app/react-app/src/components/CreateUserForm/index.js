@@ -13,12 +13,11 @@ const renderInput = props => <Input field={props} {...props} />;
 class CreateUserForm extends Component {
 
   renderCreateUser() {
-    const header = 'Create your user ID'
     return (
       <div>
-        <div className='createFormHeader'>
-          {header}
-        </div>
+        <div className="authEyebrow">Join the crew</div>
+        <h1 className="authTitle">Create your account</h1>
+        <p className="authSubtitle">Save your details for a faster, smoother checkout every time.</p>
         <div className='createFormRow'>
           <Field
             name="username"
@@ -27,6 +26,24 @@ class CreateUserForm extends Component {
             label="Username"
             hintText="Choose a user ID"
             autoComplete="username"
+          />
+          <Field
+            name="email"
+            component={renderInput}
+            type="email"
+            id="create-email"
+            label="Email address"
+            hintText="you@example.com"
+            autoComplete="email"
+          />
+          <Field
+            name="phone"
+            component={renderInput}
+            type="tel"
+            id="create-phone"
+            label="Phone number"
+            hintText="5551234567"
+            autoComplete="tel"
           />
           <Field
             name="password"
@@ -51,7 +68,10 @@ class CreateUserForm extends Component {
     };
     const styles = {
       color: '#fff',
-      backgroundColor: '#099CEC',
+      backgroundColor: '#0f766e',
+      borderRadius: '10px',
+      height: '50px',
+      width: '100%',
     };
 
     return (
@@ -71,14 +91,33 @@ class CreateUserForm extends Component {
   render() {
     const {
       handleSubmit,
+      error,
     } = this.props;
 
+    const err = error ? <span className='errorMessage'>{error}</span> : null;
+
     return (
-      <div className='createFormContent'>
-        <form onSubmit={handleSubmit}>
-          {this.renderCreateUser()}
-          {this.renderButtons()}
-        </form>
+      <div className='authCard authCardCreate createFormContent'>
+        <aside className="authAside" aria-hidden="true">
+          <div className="authBrandMark">A</div>
+          <div>
+            <span className="authAsideLabel">AT SEA SHOP</span>
+            <h2>Everything you love, one account away.</h2>
+            <ul className="authBenefits">
+              <li>Quicker, simpler checkout</li>
+              <li>Secure account access</li>
+              <li>A seamless shopping journey</li>
+            </ul>
+          </div>
+        </aside>
+        <div className="authPanel">
+          <form onSubmit={handleSubmit}>
+            {this.renderCreateUser()}
+            {err}
+            {this.renderButtons()}
+          </form>
+          <p className="authFinePrint">By creating an account, you agree to our terms and privacy policy.</p>
+        </div>
       </div>
     );
   }
