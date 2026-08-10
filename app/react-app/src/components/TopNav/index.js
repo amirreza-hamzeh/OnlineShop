@@ -47,15 +47,21 @@ class TopNav extends Component {
       fontWeight: 600,
     };
     return (
-      <div>
-        <span className="welcomeMessage">Welcome!</span>
+      <div className="authenticatedNav">
+        <Link to="/profile" className="accountMenu" aria-label="Open my profile">
+          <span className="accountAvatar">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+              <path d="M12 12c2.5 0 4.5-2.1 4.5-4.6S14.5 3 12 3 7.5 4.9 7.5 7.4 9.5 12 12 12Zm0 2c-4 0-7 2.1-7 4.9V21h14v-2.1c0-2.8-3-4.9-7-4.9Z" />
+            </svg>
+          </span>
+          <span className="accountCopy">
+            <span className="accountGreeting">Hello, welcome back</span>
+            <span className="accountLabel">My Profile</span>
+          </span>
+          <span className="accountChevron" aria-hidden="true">&#8250;</span>
+        </Link>
         <FlatButton
-          containerElement={<Link to="/profile" />}
-          style={styles}
-          labelStyle={labelStyles}
-          label="My profile"
-        />
-        <FlatButton
+          className="signOutButton"
           style={styles}
           labelStyle={labelStyles}
           onClick={this.removeToken}
@@ -72,7 +78,7 @@ class TopNav extends Component {
 
   render() {
     return (
-      <div className="globalContainer">
+      <div className={`globalContainer${this.props.solid ? ' solidNav' : ''}`}>
         <div className="navHeader">
           <div className="navLogo"><Logo /></div>
           <div className="navUser">
@@ -88,10 +94,12 @@ class TopNav extends Component {
 
 TopNav.propTypes = {
   location: PropTypes.object,
+  solid: PropTypes.bool,
 };
 
 TopNav.defaultProps = {
   location: { pathname: '/' },
+  solid: false,
 };
 
 export default TopNav;

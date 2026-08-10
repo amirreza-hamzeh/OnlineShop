@@ -63,7 +63,7 @@ export default class ProfileContainer extends Component {
   render() {
     return (
       <div className="profilePage">
-        <TopNav location={this.props.location} />
+        <TopNav location={this.props.location} solid />
         <main className="profileShell">
           <span className="profileEyebrow">Your account</span>
           <h1>My profile</h1>
