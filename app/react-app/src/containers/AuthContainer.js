@@ -41,9 +41,9 @@ export class AuthContainer extends Component {
     return (
       <main className="authPage">
         <header className="authPageHeader">
-          <Link to={getReturnPath(this.props.location)} className="authPageLogo" aria-label="Return to shop">
+          <div className="authPageLogo">
             <Logo />
-          </Link>
+          </div>
           <Link to={getReturnPath(this.props.location)} className="authBackLink">← Back to shop</Link>
         </header>
         <div className="authPageBody">
