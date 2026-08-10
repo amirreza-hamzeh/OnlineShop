@@ -1,7 +1,5 @@
 .checkoutPage { min-height: 100vh; background: #f5f7fb; color: #162033; font-family: "Open Sans", Arial, sans-serif; }
 .checkoutNav { align-items: center; background: #101a2f; display: flex; height: 76px; justify-content: space-between; padding: 0 max(5vw, 24px); }
-.checkoutBrand { align-items: center; color: #fff; display: flex; font-size: 21px; font-weight: 800; gap: 10px; letter-spacing: -.5px; text-decoration: none; }
-.checkoutBrandMark { align-items: center; background: linear-gradient(135deg, #ffb84d, #ff7b54); border-radius: 11px; box-shadow: 0 5px 16px rgba(255, 137, 64, .3); display: flex; height: 38px; justify-content: center; width: 38px; }
 .secureCheckout { color: #cbd5e1; font-size: 13px; }
 .secureCheckout span { margin-right: 7px; }
 .checkoutShell { margin: 0 auto; max-width: 1180px; padding: 36px 24px 44px; }
