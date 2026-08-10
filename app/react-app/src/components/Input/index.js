@@ -2,6 +2,17 @@ import React, { PropTypes } from 'react';
 import { TextField } from 'material-ui';
 import './styles.css';
 
+const textFieldStyle = {
+  backgroundColor: '#f8fafc',
+  border: '1px solid #dbe3ed',
+  borderRadius: '10px',
+  height: '50px',
+  padding: '0 14px',
+};
+const inputStyle = { color: '#0f172a', fontFamily: 'Open Sans', height: '48px' };
+const underlineStyle = { bottom: '-1px', left: '10px', right: '10px', width: 'auto' };
+const underlineFocusStyle = { borderColor: '#0f766e' };
+
 const Input = ({ type, field, hintText, label, id, autoComplete }) => {
   const inputId = id || field.input.name;
   const errorText = field.meta.touched && field.meta.error;
@@ -16,6 +27,10 @@ const Input = ({ type, field, hintText, label, id, autoComplete }) => {
         errorText={errorText}
         autoComplete={autoComplete}
         fullWidth={true}
+        style={textFieldStyle}
+        inputStyle={inputStyle}
+        underlineStyle={underlineStyle}
+        underlineFocusStyle={underlineFocusStyle}
         aria-invalid={Boolean(errorText)}
         {...field.input}
       />

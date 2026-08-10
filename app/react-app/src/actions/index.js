@@ -85,7 +85,7 @@ export const fetchAllCustomers = () => (dispatch) => {
   return dispatch(dispatchObj)
 };
 
-export const createCustomer = (username, password) => (dispatch) => {
+export const createCustomer = (username, email, phone, password) => (dispatch) => {
   const url = `${API}/customer/`
   let dispatchObj = {
     type: types.CREATE_CUSTOMER,
@@ -96,8 +96,17 @@ export const createCustomer = (username, password) => (dispatch) => {
         .set('Content-Type', 'application/json')
         .accept('application/json')
         .send(
-        //TODO: take out hard coded values for customer information
-        { address: "144 Townsend Street", email: "test@gmail.com", name: "Jess", password: password, phone: "9999999999", username: username, customerId: 0, enabled: "true", role: "user" }
+        {
+          address: "Not provided",
+          email: email.trim(),
+          name: username,
+          password: password,
+          phone: phone.trim(),
+          username: username,
+          customerId: 0,
+          enabled: "true",
+          role: "user"
+        }
         )
         .end()
         .then((res) => res.body)
@@ -124,7 +133,7 @@ export const getCustomer = (username, password) => (dispatch) => {
   return dispatch(dispatchObj)
 }
 
-export const loginCustomer = (username, password) => (dispatch) => {
+export const loginCustomer = (identifier, password) => (dispatch) => {
   let dispatchObj = {
     type: types.LOGIN_CUSTOMER,
     payload: {
@@ -135,7 +144,7 @@ export const loginCustomer = (username, password) => (dispatch) => {
         .accept('application/json')
         .send(
         {
-          username: username,
+          identifier: identifier,
           password: password,
         }
         )

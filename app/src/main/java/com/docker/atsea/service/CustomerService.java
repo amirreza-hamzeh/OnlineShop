@@ -9,6 +9,8 @@ public interface CustomerService {
 	Customer findById(Long customerId);
 
 	Customer findByUserName(String name);
+
+	Customer findByEmailOrPhone(String identifier);
 	
 	Customer findByName(String name);
 	
