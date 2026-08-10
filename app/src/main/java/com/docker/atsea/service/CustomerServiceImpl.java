@@ -25,6 +25,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findByUserName(name);
 	}
 
+	public Customer findByEmailOrPhone(String identifier) {
+		return customerRepository.findByEmailOrPhone(identifier);
+	}
+
 	public Customer findByName(String name) {
 		return customerRepository.findByName(name);
 	}
@@ -52,8 +56,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	public boolean customerExist(Customer customer) {
-		System.out.println(customer.getUsername());
-		return customerRepository.findByUserName(customer.getUsername()) != null;
+		return customerRepository.findByUserName(customer.getUsername()) != null
+				|| customerRepository.findByEmailOrPhone(customer.getEmail()) != null
+				|| customerRepository.findByEmailOrPhone(customer.getPhone()) != null;
 	}
 
 	public void deleteCustomerById(Long customerId) {

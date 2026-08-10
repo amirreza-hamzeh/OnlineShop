@@ -1,0 +1,17 @@
+.authCard { background: #fff; border: 1px solid rgba(148, 163, 184, .22); border-radius: 24px; box-shadow: 0 28px 80px rgba(15, 23, 42, .2); display: grid; font-family: "Open Sans"; grid-template-columns: minmax(250px, .82fr) minmax(360px, 1.18fr); max-width: 790px; min-height: 520px; overflow: hidden; width: calc(100vw - 40px); }
+.authAside { color: #fff; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 40px 34px; position: relative; }
+.authAside::after { border-radius: 50%; bottom: -105px; content: ""; height: 250px; position: absolute; right: -95px; width: 250px; }
+.authBrandMark { align-items: center; background: rgba(255, 255, 255, .15); border: 1px solid rgba(255, 255, 255, .28); border-radius: 13px; display: flex; font-size: 22px; font-weight: 900; height: 46px; justify-content: center; width: 46px; }
+.authAsideLabel { color: rgba(255, 255, 255, .7); display: block; font-size: 11px; font-weight: 800; letter-spacing: .18em; margin-bottom: 12px; }
+.authAside h2 { font-size: 27px; letter-spacing: -.03em; line-height: 1.25; margin: 0 0 18px; }
+.authAside p { color: rgba(255, 255, 255, .75); font-size: 14px; line-height: 1.7; margin: 0; }
+.authBenefits { color: rgba(255, 255, 255, .82); font-size: 13px; line-height: 1.7; list-style: none; margin: 22px 0 0; padding: 0; }
+.authBenefits li { margin: 9px 0; padding-left: 24px; position: relative; }
+.authBenefits li::before { background: rgba(255, 255, 255, .2); border-radius: 50%; color: #fff; content: "✓"; font-size: 10px; height: 17px; left: 0; line-height: 17px; position: absolute; text-align: center; top: 3px; width: 17px; }
+.authAsideBadge { align-self: flex-start; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px; color: rgba(255, 255, 255, .86); font-size: 11px; font-weight: 700; padding: 8px 12px; }
+.authPanel { align-self: center; padding: 45px 48px 32px; text-align: left; width: 100%; }
+.authEyebrow { color: #0f766e; font-size: 11px; font-weight: 900; letter-spacing: .16em; margin-bottom: 9px; text-transform: uppercase; }
+.authTitle { color: #0f172a; font-size: 30px; font-weight: 900; letter-spacing: -.035em; line-height: 1.2; margin: 0; }
+.authSubtitle { color: #64748b; font-size: 14px; line-height: 1.6; margin: 10px 0 27px; }
+.authFinePrint { color: #94a3b8; font-size: 11px; line-height: 1.5; margin: 20px 10px 0; text-align: center; }
+@media (max-width: 700px) { .authCard { display: block; max-height: calc(100vh - 30px); min-height: 0; overflow-y: auto; width: calc(100vw - 24px); } .authAside { min-height: 155px; padding: 24px; } .authAside h2 { font-size: 22px; margin: 20px 0 0; max-width: 330px; } .authAside p, .authBenefits, .authAsideBadge, .authAsideLabel { display: none; } .authPanel { padding: 30px 25px 24px; } .authTitle { font-size: 25px; } }

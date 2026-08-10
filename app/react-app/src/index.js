@@ -14,6 +14,7 @@ import App from './containers/App'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CheckoutContainer from './containers/CheckoutContainer'
+import AuthContainer from './containers/AuthContainer'
 
 
 const middleware = [
@@ -46,6 +47,8 @@ render(
       <Router history={hashHistory}>
         <Route path="/" component={App} />
         <Route path="checkout" component={CheckoutContainer} />
+        <Route path="sign-in" component={props => <AuthContainer {...props} mode="login" />} />
+        <Route path="create-account" component={props => <AuthContainer {...props} mode="create" />} />
       </Router>
     </MuiThemeProvider>
   </Provider>,
