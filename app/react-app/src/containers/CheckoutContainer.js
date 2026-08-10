@@ -12,6 +12,7 @@ import Checkout from '../components/Checkout'
 import { Link } from 'react-router'
 import { SubmissionError } from 'redux-form'
 import { getJwtToken } from '../actions/storage'
+import shop from '../api/shop'
 
 
 class CheckoutContainer extends Component {
@@ -19,7 +20,14 @@ class CheckoutContainer extends Component {
     super(props)
     this.state = {
       orderComplete: false,
+      profile: null,
     }
+  }
+
+  componentDidMount() {
+    if (getJwtToken()) shop.getProfile((error, profile) => {
+      if (!error) this.setState({ profile })
+    })
   }
 
   handleSuccess = () => {
@@ -75,6 +83,7 @@ class CheckoutContainer extends Component {
         totalProducts={totalProducts}
         onCheckoutClicked={() => checkout(products)}
         handleSubmit={this.handleSubmit}
+        profile={this.state.profile}
       />
     );
   }

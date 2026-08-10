@@ -4,8 +4,9 @@ import Product from '../../components/Product'
 import CustomerInfoForm from '../../components/CustomerInfoForm'
 import Logo from '../../components/Logo'
 import './styles.css'
+import { parseProfileAddress } from '../../utils/profileAddress'
 
-class Checkout extends Component {
+export class Checkout extends Component {
   renderProductList() {
     const { products } = this.props
 
@@ -71,7 +72,11 @@ class Checkout extends Component {
 
           <div className="checkoutGrid">
             <section className="checkoutFormCard" aria-labelledby="payment-heading">
-              <CustomerInfoForm onSubmit={this.props.handleSubmit} hasProducts={this.props.products.length > 0} />
+              <CustomerInfoForm
+                onSubmit={this.props.handleSubmit}
+                hasProducts={this.props.products.length > 0}
+                initialValues={this.profileValues()}
+              />
             </section>
 
             <aside className="orderCard" aria-label="Order summary">
@@ -97,6 +102,20 @@ class Checkout extends Component {
       </div>
     )
   }
+
+  profileValues() {
+    const profile = this.props.profile
+    if (!profile) return {}
+    const name = (profile.name || '').trim().split(/\s+/)
+    const address = parseProfileAddress(profile.address)
+    return {
+      firstName: name.shift() || '',
+      lastName: name.join(' '),
+      address: address.street,
+      city: address.city,
+      zipCode: address.postalCode
+    }
+  }
 }
 
 Checkout.propTypes = {
@@ -108,7 +127,8 @@ Checkout.propTypes = {
     image: PropTypes.string.isRequired
   })).isRequired,
   total: PropTypes.string,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  profile: PropTypes.object
 }
 
 export default Checkout

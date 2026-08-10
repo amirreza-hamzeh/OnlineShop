@@ -3,6 +3,8 @@ package com.docker.atsea.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,10 @@ import com.docker.atsea.service.CustomerService;
 import com.docker.atsea.util.CustomErrorType;
 import com.docker.atsea.util.CustomerInfo;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
@@ -31,6 +37,55 @@ public class CustomerController {
 
 	@Autowired
 	CustomerService customerService;
+
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ResponseEntity<?> getProfile(HttpServletRequest request) {
+		Customer customer = authenticatedCustomer(request);
+		if (customer == null) return unauthorized();
+		return new ResponseEntity<JSONObject>(new CustomerInfo().getCustomerInfo(customer), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateProfile(HttpServletRequest request, @RequestBody Customer profile) {
+		Customer customer = authenticatedCustomer(request);
+		if (customer == null) return unauthorized();
+		if (isBlank(profile.getName()) || !isValidEmail(profile.getEmail()) || !isValidPhone(profile.getPhone()) || isBlank(profile.getAddress())) {
+			return new ResponseEntity<CustomErrorType>(new CustomErrorType("A valid name, email, phone, and address are required"), HttpStatus.BAD_REQUEST);
+		}
+		customer.setName(profile.getName().trim());
+		customer.setEmail(profile.getEmail().trim());
+		customer.setPhone(profile.getPhone().trim());
+		customer.setAddress(profile.getAddress().trim());
+		customerService.updateCustomer(customer);
+		return new ResponseEntity<JSONObject>(new CustomerInfo().getCustomerInfo(customer), HttpStatus.OK);
+	}
+
+	private boolean isBlank(String value) {
+		return value == null || value.trim().isEmpty();
+	}
+
+	private boolean isValidEmail(String value) {
+		return !isBlank(value) && value.trim().matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+	}
+
+	private boolean isValidPhone(String value) {
+		return !isBlank(value) && value.replaceAll("\\D", "").length() >= 7;
+	}
+
+	private Customer authenticatedCustomer(HttpServletRequest request) {
+		String header = request.getHeader("Authorization");
+		if (header == null || !header.startsWith("Bearer ")) return null;
+		try {
+			Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(header.substring(7)).getBody();
+			return customerService.findByUserName(claims.getSubject());
+		} catch (JwtException | IllegalArgumentException exception) {
+			return null;
+		}
+	}
+
+	private ResponseEntity<CustomErrorType> unauthorized() {
+		return new ResponseEntity<CustomErrorType>(new CustomErrorType("Sign in to access your profile"), HttpStatus.UNAUTHORIZED);
+	}
 
 	// -------------------------------------------------------------------
 	//                   Customer methods
