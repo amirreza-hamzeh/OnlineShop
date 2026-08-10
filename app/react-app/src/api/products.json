@@ -13,7 +13,7 @@
     "isFeatured": true,
     "isNew": false,
     "description": "Durable cotton canvas tote with interior pockets for market runs, laptops, and daily essentials.",
-    "image": "/images/1.png",
+    "image": "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "bags",
       "daily carry",
@@ -34,7 +34,7 @@
     "isFeatured": true,
     "isNew": true,
     "description": "Ultra-soft midweight hoodie with a relaxed fit and brushed fleece interior.",
-    "image": "/images/2.png",
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "hoodie",
       "comfort",
@@ -55,7 +55,7 @@
     "isFeatured": true,
     "isNew": false,
     "description": "Fold-flat wireless charger built for phones, earbuds, and hotel-nightstand convenience.",
-    "image": "/images/3.png",
+    "image": "https://images.unsplash.com/photo-1587033411391-5d9e51cce126?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "charger",
       "travel",
@@ -76,7 +76,7 @@
     "isFeatured": false,
     "isNew": true,
     "description": "Minimal ceramic dripper and matching mug set for slow mornings and cafe-quality coffee.",
-    "image": "/images/4.png",
+    "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "coffee",
       "kitchen",
@@ -97,7 +97,7 @@
     "isFeatured": true,
     "isNew": false,
     "description": "Cushioned non-slip mat with alignment guides for yoga, stretching, and mobility work.",
-    "image": "/images/5.png",
+    "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "yoga",
       "wellness",
@@ -118,7 +118,7 @@
     "isFeatured": false,
     "isNew": false,
     "description": "Daily cleanser and moisturizer pair with lightweight hydration for all skin types.",
-    "image": "/images/6.png",
+    "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "skincare",
       "self care",
@@ -139,7 +139,7 @@
     "isFeatured": false,
     "isNew": true,
     "description": "Slim zip pouch with elastic loops and mesh pockets for cables, drives, and adapters.",
-    "image": "/images/7.png",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "organization",
       "travel",
@@ -160,7 +160,7 @@
     "isFeatured": true,
     "isNew": false,
     "description": "Breathable woven throw that adds texture to sofas, beds, and cozy reading corners.",
-    "image": "/images/8.png",
+    "image": "https://images.unsplash.com/photo-1580301762395-21ce84d00bc6?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "decor",
       "cozy",
@@ -181,7 +181,7 @@
     "isFeatured": false,
     "isNew": false,
     "description": "Leakproof insulated bottle with one-hand cap for workouts, hikes, and everyday hydration.",
-    "image": "/images/9.png",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=900&q=85",
     "tags": [
       "hydration",
       "outdoors",
