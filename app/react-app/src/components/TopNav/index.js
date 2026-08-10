@@ -50,6 +50,12 @@ class TopNav extends Component {
       <div>
         <span className="welcomeMessage">Welcome!</span>
         <FlatButton
+          containerElement={<Link to="/profile" />}
+          style={styles}
+          labelStyle={labelStyles}
+          label="My profile"
+        />
+        <FlatButton
           style={styles}
           labelStyle={labelStyles}
           onClick={this.removeToken}

@@ -4,6 +4,8 @@ import TopNav from '../TopNav'
 import Footer from '../Footer'
 import imageUrl from '../../utils/imageUrl'
 import { categoryPath } from '../../utils/catalogPath'
+import { getJwtToken, removeJwtToken } from '../../actions/storage'
+import { createAuthLocation } from '../../authNavigation'
 import './styles.css'
 
 const comments = [
@@ -31,10 +33,13 @@ export const scrollPageToTop = () => {
 
 export default class ProductDetails extends Component {
   commentsRequestId = 0
+  wishlistRequestId = 0
 
   state = {
     quantity: 1,
     wishedFor: false,
+    savingWishlist: false,
+    wishlistError: '',
     reviews: comments,
     reviewSort: 'recent',
     showReviewForm: false,
@@ -49,7 +54,10 @@ export default class ProductDetails extends Component {
 
   componentDidMount() {
     scrollPageToTop()
-    if (this.props.product) this.loadComments(this.props.product.productId)
+    if (this.props.product) {
+      this.loadComments(this.props.product.productId)
+      this.loadWishlist(this.props.product.productId)
+    }
   }
 
   componentDidUpdate(previousProps) {
@@ -57,13 +65,15 @@ export default class ProductDetails extends Component {
     const currentId = this.props.product && this.props.product.productId
     if (currentId && currentId !== previousId) {
       scrollPageToTop()
-      this.setState({ quantity: 1, wishedFor: false, reviews: comments, helpfulReviews: {}, savingReview: false, reviewError: '' })
+      this.setState({ quantity: 1, wishedFor: false, savingWishlist: false, wishlistError: '', reviews: comments, helpfulReviews: {}, savingReview: false, reviewError: '' })
       this.loadComments(currentId)
+      this.loadWishlist(currentId)
     }
   }
 
   componentWillUnmount() {
     this.commentsRequestId += 1
+    this.wishlistRequestId += 1
   }
 
   loadComments = productId => {
@@ -84,6 +94,48 @@ export default class ProductDetails extends Component {
         }
       })
       this.setState({ reviews: persistedReviews.concat(comments), reviewError: '' })
+    })
+  }
+
+  loadWishlist = productId => {
+    if (!getJwtToken() || !this.props.loadWishlist) return
+    const requestId = ++this.wishlistRequestId
+    this.props.loadWishlist((error, items) => {
+      if (requestId !== this.wishlistRequestId || !this.props.product || this.props.product.productId !== productId) return
+      if (error) {
+        if (error.status === 401) this.redirectToSignIn()
+        return
+      }
+      this.setState({ wishedFor: (items || []).some(item => item.product && item.product.productId === productId) })
+    })
+  }
+
+  redirectToSignIn = () => {
+    removeJwtToken()
+    hashHistory.push(createAuthLocation('/sign-in', this.props.location || { pathname: `/product/${this.props.product.productId}` }))
+  }
+
+  toggleWishlist = () => {
+    if (!getJwtToken()) {
+      this.redirectToSignIn()
+      return
+    }
+    const productId = this.props.product.productId
+    const operation = this.state.wishedFor ? this.props.removeFromWishlist : this.props.addToWishlist
+    if (!operation) return
+    const requestId = ++this.wishlistRequestId
+    this.setState({ savingWishlist: true, wishlistError: '' })
+    operation(productId, error => {
+      if (requestId !== this.wishlistRequestId || !this.props.product || this.props.product.productId !== productId) return
+      if (error) {
+        if (error.status === 401) {
+          this.redirectToSignIn()
+          return
+        }
+        this.setState({ savingWishlist: false, wishlistError: 'Your wish list could not be updated. Please try again.' })
+        return
+      }
+      this.setState(previousState => ({ wishedFor: !previousState.wishedFor, savingWishlist: false }))
     })
   }
 
@@ -209,7 +261,8 @@ export default class ProductDetails extends Component {
               <button className="addCartButton" disabled={!inventory} onClick={this.addQuantityToCart}>Add to cart</button>
               <button className="buyNowButton" disabled={!inventory} onClick={this.buyNow}>Buy now</button>
               <dl><dt>Ships from</dt><dd>At Sea Shop</dd><dt>Sold by</dt><dd>{product.brand}</dd><dt>Returns</dt><dd>30-day refund</dd></dl>
-              <button className="wishlistButton" aria-pressed={this.state.wishedFor} onClick={() => this.setState({ wishedFor: !this.state.wishedFor })}>{this.state.wishedFor ? '♥ Added to wish list' : '♡ Add to wish list'}</button>
+              <button className="wishlistButton" disabled={this.state.savingWishlist} aria-pressed={this.state.wishedFor} onClick={this.toggleWishlist}>{this.state.savingWishlist ? 'Saving…' : this.state.wishedFor ? '♥ Added to wish list' : '♡ Add to wish list'}</button>
+              {this.state.wishlistError ? <p className="wishlistError" role="alert">{this.state.wishlistError}</p> : null}
             </aside>
           </section>
 
@@ -239,5 +292,9 @@ ProductDetails.propTypes = {
   productsLoaded: PropTypes.bool,
   addToCart: PropTypes.func.isRequired,
   loadComments: PropTypes.func,
-  createComment: PropTypes.func
+  createComment: PropTypes.func,
+  loadWishlist: PropTypes.func,
+  addToWishlist: PropTypes.func,
+  removeFromWishlist: PropTypes.func,
+  location: PropTypes.object
 }
