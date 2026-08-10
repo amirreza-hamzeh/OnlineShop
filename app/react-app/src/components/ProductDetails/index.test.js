@@ -98,4 +98,51 @@ describe('product detail helpers', () => {
     expect(wrapper.state('quantity')).toBe(1)
     expect(wrapper.state('wishedFor')).toBe(false)
   })
+
+  it('loads persisted comments and saves a new comment through the API', () => {
+    const savedComment = { commentId: 4, name: 'Dana', title: 'Lasting review', text: 'Still here', rating: 5, createdAt: '2026-08-09T12:00:00Z', verified: false }
+    const loadComments = jest.fn((productId, callback) => callback(null, [savedComment]))
+    const createComment = jest.fn((productId, comment, callback) => callback(null, { ...comment, commentId: 5, createdAt: '2026-08-10T12:00:00Z', verified: false }))
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} loadComments={loadComments} createComment={createComment} />)
+    wrapper.instance().componentDidMount()
+
+    expect(loadComments).toHaveBeenCalledWith(7, expect.any(Function))
+    expect(wrapper.state('reviews')[0].title).toBe('Lasting review')
+
+    wrapper.setState({ reviewName: ' Taylor ', reviewTitle: ' New comment ', reviewText: ' Persists ', reviewRating: 4 })
+    wrapper.instance().submitReview({ preventDefault: jest.fn() })
+
+    expect(createComment).toHaveBeenCalledWith(7, { name: 'Taylor', title: 'New comment', text: 'Persists', rating: 4 }, expect.any(Function))
+    expect(wrapper.state('reviews')[0].commentId).toBe(5)
+    expect(wrapper.state('reviewName')).toBe('')
+  })
+
+  it('does not let a stale comment load overwrite a newly saved comment', () => {
+    let loadCallback
+    const loadComments = jest.fn((productId, callback) => { loadCallback = callback })
+    const createComment = jest.fn((productId, comment, callback) => callback(null, { ...comment, commentId: 9, createdAt: '2026-08-10T12:00:00Z', verified: false }))
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} loadComments={loadComments} createComment={createComment} />)
+    wrapper.instance().componentDidMount()
+    wrapper.setState({ reviewName: 'Taylor', reviewTitle: 'Saved', reviewText: 'Database copy', reviewRating: 5 })
+
+    wrapper.instance().submitReview({ preventDefault: jest.fn() })
+    loadCallback(null, [])
+
+    expect(wrapper.state('reviews')[0].commentId).toBe(9)
+  })
+
+  it('ignores comment responses after navigating to another product', () => {
+    let firstProductCallback
+    const loadComments = jest.fn((productId, callback) => {
+      if (productId === 7) firstProductCallback = callback
+    })
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} loadComments={loadComments} />)
+    wrapper.instance().componentDidMount()
+    wrapper.instance().props = { ...wrapper.instance().props, product: { ...product, productId: 8 } }
+    wrapper.instance().componentDidUpdate({ product })
+
+    firstProductCallback(null, [{ commentId: 3, name: 'Old', title: 'Wrong product', text: 'Stale', rating: 1, createdAt: '2026-08-01T12:00:00Z' }])
+
+    expect(wrapper.state('reviews')[0].title).not.toBe('Wrong product')
+  })
 })

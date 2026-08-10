@@ -30,6 +30,8 @@ export const scrollPageToTop = () => {
 }
 
 export default class ProductDetails extends Component {
+  commentsRequestId = 0
+
   state = {
     quantity: 1,
     wishedFor: false,
@@ -40,11 +42,14 @@ export default class ProductDetails extends Component {
     reviewTitle: '',
     reviewText: '',
     reviewRating: 5,
-    helpfulReviews: {}
+    helpfulReviews: {},
+    savingReview: false,
+    reviewError: ''
   }
 
   componentDidMount() {
     scrollPageToTop()
+    if (this.props.product) this.loadComments(this.props.product.productId)
   }
 
   componentDidUpdate(previousProps) {
@@ -52,8 +57,34 @@ export default class ProductDetails extends Component {
     const currentId = this.props.product && this.props.product.productId
     if (currentId && currentId !== previousId) {
       scrollPageToTop()
-      this.setState({ quantity: 1, wishedFor: false, reviews: comments, helpfulReviews: {} })
+      this.setState({ quantity: 1, wishedFor: false, reviews: comments, helpfulReviews: {}, savingReview: false, reviewError: '' })
+      this.loadComments(currentId)
     }
+  }
+
+  componentWillUnmount() {
+    this.commentsRequestId += 1
+  }
+
+  loadComments = productId => {
+    if (!this.props.loadComments) return
+    const requestId = ++this.commentsRequestId
+    this.props.loadComments(productId, (error, savedComments) => {
+      const currentProductId = this.props.product && this.props.product.productId
+      if (requestId !== this.commentsRequestId || productId !== currentProductId) return
+      if (error) {
+        this.setState({ reviewError: 'Saved reviews could not be loaded. Please try again later.' })
+        return
+      }
+      const persistedReviews = (savedComments || []).map(comment => {
+        const createdAt = new Date(comment.createdAt)
+        return {
+          ...comment,
+          date: isNaN(createdAt.getTime()) ? 'an unknown date' : createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        }
+      })
+      this.setState({ reviews: persistedReviews.concat(comments), reviewError: '' })
+    })
   }
 
   addQuantityToCart = () => {
@@ -84,14 +115,29 @@ export default class ProductDetails extends Component {
     event.preventDefault()
     const { reviewName, reviewTitle, reviewText, reviewRating } = this.state
     if (!reviewName.trim() || !reviewTitle.trim() || !reviewText.trim()) return
-    this.setState({
-      reviews: [{ name: reviewName.trim(), title: reviewTitle.trim(), text: reviewText.trim(), rating: reviewRating, date: 'Today', verified: false }].concat(this.state.reviews),
-      reviewName: '',
-      reviewTitle: '',
-      reviewText: '',
-      reviewRating: 5,
-      reviewSort: 'recent',
-      showReviewForm: false
+    const review = { name: reviewName.trim(), title: reviewTitle.trim(), text: reviewText.trim(), rating: reviewRating }
+    if (!this.props.createComment) return
+    const productId = this.props.product.productId
+    const requestId = ++this.commentsRequestId
+    this.setState({ savingReview: true, reviewError: '' })
+    this.props.createComment(productId, review, (error, savedReview) => {
+      const currentProductId = this.props.product && this.props.product.productId
+      if (requestId !== this.commentsRequestId || productId !== currentProductId) return
+      if (error) {
+        this.setState({ savingReview: false, reviewError: 'Your review could not be saved. Please try again.' })
+        return
+      }
+      this.setState(previousState => ({
+        reviews: [{ ...savedReview, date: 'Today' }].concat(previousState.reviews),
+        reviewName: '',
+        reviewTitle: '',
+        reviewText: '',
+        reviewRating: 5,
+        reviewSort: 'recent',
+        showReviewForm: false,
+        savingReview: false,
+        reviewError: ''
+      }))
     })
   }
 
@@ -173,7 +219,8 @@ export default class ProductDetails extends Component {
               <div className="summaryScore"><strong>{product.rating}</strong><span><b>★★★★★</b><small>Based on {product.reviewCount} ratings</small></span></div>
               {[5, 4, 3, 2, 1].map((star, index) => <div className="ratingBar" key={star}><span>{star} star</span><i><em style={{ width: `${[74, 18, 5, 2, 1][index]}%` }} /></i><span>{[74, 18, 5, 2, 1][index]}%</span></div>)}
               <hr /><h3>Share your thoughts</h3><p>Help other shoppers make the right choice.</p><button className="reviewButton" onClick={() => this.setState({ showReviewForm: !this.state.showReviewForm })}>Write a customer review</button>
-              {this.state.showReviewForm ? <form className="reviewForm" onSubmit={this.submitReview}><label>Your name<input required value={this.state.reviewName} onChange={event => this.setState({ reviewName: event.target.value })} /></label><label>Rating<select value={this.state.reviewRating} onChange={event => this.setState({ reviewRating: Number(event.target.value) })}>{[5, 4, 3, 2, 1].map(rating => <option value={rating} key={rating}>{rating} stars</option>)}</select></label><label>Review title<input required value={this.state.reviewTitle} onChange={event => this.setState({ reviewTitle: event.target.value })} /></label><label>Your review<textarea required value={this.state.reviewText} onChange={event => this.setState({ reviewText: event.target.value })} /></label><button type="submit">Submit review</button></form> : null}
+              {this.state.showReviewForm ? <form className="reviewForm" onSubmit={this.submitReview}><label>Your name<input required value={this.state.reviewName} onChange={event => this.setState({ reviewName: event.target.value })} /></label><label>Rating<select value={this.state.reviewRating} onChange={event => this.setState({ reviewRating: Number(event.target.value) })}>{[5, 4, 3, 2, 1].map(rating => <option value={rating} key={rating}>{rating} stars</option>)}</select></label><label>Review title<input required value={this.state.reviewTitle} onChange={event => this.setState({ reviewTitle: event.target.value })} /></label><label>Your review<textarea required value={this.state.reviewText} onChange={event => this.setState({ reviewText: event.target.value })} /></label><button type="submit" disabled={this.state.savingReview}>{this.state.savingReview ? 'Saving…' : 'Submit review'}</button></form> : null}
+              {this.state.reviewError ? <p className="reviewError" role="alert">{this.state.reviewError}</p> : null}
             </div>
             <div className="reviewList">
               <div className="reviewListHeader"><div><span className="detailBrand">Top reviews</span><h2>What customers are saying</h2></div><select aria-label="Sort reviews" value={this.state.reviewSort} onChange={event => this.setState({ reviewSort: event.target.value })}><option value="recent">Most recent</option><option value="rated">Top rated</option></select></div>
@@ -190,5 +237,7 @@ export default class ProductDetails extends Component {
 ProductDetails.propTypes = {
   product: PropTypes.object,
   productsLoaded: PropTypes.bool,
-  addToCart: PropTypes.func.isRequired
+  addToCart: PropTypes.func.isRequired,
+  loadComments: PropTypes.func,
+  createComment: PropTypes.func
 }
