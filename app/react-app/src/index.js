@@ -14,7 +14,7 @@ import App from './containers/App'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CheckoutContainer from './containers/CheckoutContainer'
-import AuthContainer from './containers/AuthContainer'
+import ProductDetailsContainer from './containers/ProductDetailsContainer'
 
 
 const middleware = [
