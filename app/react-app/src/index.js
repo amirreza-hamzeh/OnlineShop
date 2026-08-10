@@ -47,6 +47,8 @@ render(
     <MuiThemeProvider muiTheme={muiTheme}>
       <Router history={hashHistory}>
         <Route path="/" component={App} />
+        <Route path="shop/:category" component={App} />
+        <Route path="shop/:category/:productId" component={ProductDetailsContainer} />
         <Route path="product/:productId" component={ProductDetailsContainer} />
         <Route path="checkout" component={CheckoutContainer} />
         <Route path="sign-in" component={props => <AuthContainer {...props} mode="login" />} />

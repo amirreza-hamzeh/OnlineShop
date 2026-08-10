@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react'
+import { hashHistory } from 'react-router'
 import ProductItem from '../../components/ProductItem'
+import { categoryPath } from '../../utils/catalogPath'
 import './styles.css'
 
 const ALL = 'All'
 
 export default class ProductsList extends Component {
   state = {
-    category: ALL,
+    category: this.props.category || ALL,
     isCategoryMenuOpen: false,
     query: '',
     sort: 'featured'
@@ -20,6 +22,12 @@ export default class ProductsList extends Component {
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown)
     document.removeEventListener('click', this.handleDocumentClick)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.category !== this.props.category) {
+      this.setState({ category: nextProps.category || ALL, query: '' })
+    }
   }
 
   handleKeyDown = event => {
@@ -37,6 +45,7 @@ export default class ProductsList extends Component {
 
   selectCategory = category => {
     this.setState({ category, isCategoryMenuOpen: false, query: '' })
+    hashHistory.push(category === ALL ? '/' : categoryPath(category))
   }
 
   getCategories(products) {
@@ -173,4 +182,5 @@ ProductsList.propTypes = {
     image: PropTypes.string,
   })).isRequired,
   addToCart: PropTypes.func.isRequired,
+  category: PropTypes.string,
 }

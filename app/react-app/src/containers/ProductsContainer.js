@@ -4,10 +4,11 @@ import { addToCart } from '../actions'
 import { getVisibleProducts } from '../reducers/products'
 import ProductsList from '../components/ProductsList'
 
-const ProductsContainer = ({ products, addToCart }) => (
+const ProductsContainer = ({ products, addToCart, category }) => (
   <ProductsList
     products={products}
     addToCart={addToCart}
+    category={category}
   />
 )
 
@@ -20,6 +21,7 @@ ProductsContainer.propTypes = {
     image: PropTypes.string
   })).isRequired,
   addToCart: PropTypes.func.isRequired,
+  category: PropTypes.string,
 }
 
 const mapStateToProps = state => ({

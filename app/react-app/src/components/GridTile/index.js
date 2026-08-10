@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import FlatButton from 'material-ui/FlatButton'
 import AddIcon from './AddIcon'
 import imageUrl from '../../utils/imageUrl'
+import { productPath } from '../../utils/catalogPath'
 import { Link } from 'react-router'
 import './styles.css'
 
@@ -36,6 +37,7 @@ export default class GridTile extends Component {
       rating,
       reviewCount,
     } = this.props
+    const detailsPath = productPath(category, this.props.productId)
 
     return (
       <article className="tile">
@@ -45,7 +47,7 @@ export default class GridTile extends Component {
         </div>
         <div className="tileContent">
           <div className="tileMeta">{brand} · {category}</div>
-          <h3 className="tileTitle"><Link to={`/product/${this.props.productId}`}>{name}</Link></h3>
+          <h3 className="tileTitle"><Link to={detailsPath}>{name}</Link></h3>
           <p className="tileDescription">{description}</p>
           <div className="tileRating" aria-label={`${formatRating(rating)} out of 5 stars`}>
             <span className="tileStars">★★★★★</span>
@@ -57,7 +59,7 @@ export default class GridTile extends Component {
               {originalPrice && originalPrice !== price ? <span className="tileOriginalPrice">{originalPrice}</span> : null}
             </div>
             <div className="tileAdd">
-              <Link className="tileDetailsLink" to={`/product/${this.props.productId}`}>View details</Link>
+              <Link className="tileDetailsLink" to={detailsPath}>View details</Link>
               <FlatButton
                 onClick={this.addToCart}
                 labelStyle={{ color: '#0f766e', fontWeight: 700 }}

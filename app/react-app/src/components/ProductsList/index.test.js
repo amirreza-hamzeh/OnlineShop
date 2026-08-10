@@ -1,6 +1,11 @@
+jest.mock('react-router', () => ({
+  hashHistory: { push: jest.fn() }
+}))
+
 import React from 'react'
 import { shallow } from 'enzyme'
 import ProductsList from './index'
+import { hashHistory } from 'react-router'
 
 const products = [
   { productId: 1, name: 'Canvas Tote', price: 34, category: 'Accessories' },
@@ -9,6 +14,8 @@ const products = [
 ]
 
 describe('category menu', () => {
+  beforeEach(() => hashHistory.push.mockClear())
+
   it('opens from the hamburger button and filters products by category', () => {
     const wrapper = shallow(<ProductsList products={products} addToCart={jest.fn()} />)
 
@@ -26,6 +33,16 @@ describe('category menu', () => {
     expect(wrapper.state('isCategoryMenuOpen')).toBe(false)
     expect(wrapper.state('query')).toBe('')
     expect(wrapper.find('.productListWrapper').children().length).toBe(2)
+    expect(hashHistory.push).toHaveBeenCalledWith('/shop/Tech')
+  })
+
+  it('starts with the category in the path and can navigate back to the full shop', () => {
+    const wrapper = shallow(<ProductsList products={products} category="Accessories" addToCart={jest.fn()} />)
+
+    expect(wrapper.state('category')).toBe('Accessories')
+    expect(wrapper.find('.productListWrapper').children().length).toBe(1)
+    wrapper.instance().selectCategory('All')
+    expect(hashHistory.push).toHaveBeenCalledWith('/')
   })
 
   it('closes an open category menu with Escape', () => {
