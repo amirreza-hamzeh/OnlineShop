@@ -49,7 +49,10 @@ export default class ProductDetails extends Component {
   componentDidUpdate(previousProps) {
     const previousId = previousProps.product && previousProps.product.productId
     const currentId = this.props.product && this.props.product.productId
-    if (currentId && currentId !== previousId) scrollPageToTop()
+    if (currentId && currentId !== previousId) {
+      scrollPageToTop()
+      this.setState({ quantity: 1, wishedFor: false, reviews: comments, helpfulReviews: {} })
+    }
   }
 
   addQuantityToCart = () => {
@@ -145,9 +148,9 @@ export default class ProductDetails extends Component {
               <div className={inventory ? 'stockStatus' : 'stockStatus outOfStock'}>{inventory > 10 ? 'In stock' : inventory > 0 ? `Only ${inventory} left in stock` : 'Temporarily out of stock'}</div>
               <span className="quantityLabel" id="detail-quantity-label">Quantity</span>
               <div className="quantityStepper" role="group" aria-labelledby="detail-quantity-label">
-                <button className="quantityButton" type="button" aria-label="Decrease quantity" disabled={this.state.quantity === 1} onClick={this.decreaseQuantity}>−</button>
+                <button className="quantityButton" type="button" aria-label="Decrease quantity" disabled={!inventory || this.state.quantity === 1} onClick={this.decreaseQuantity}>−</button>
                 <output className="quantityValue" aria-live="polite">{this.state.quantity}</output>
-                <button className="quantityButton" type="button" aria-label="Increase quantity" onClick={this.increaseQuantity}>+</button>
+                <button className="quantityButton" type="button" aria-label="Increase quantity" disabled={!inventory} onClick={this.increaseQuantity}>+</button>
               </div>
               <button className="addCartButton" disabled={!inventory} onClick={this.addQuantityToCart}>Add to cart</button>
               <button className="buyNowButton" disabled={!inventory} onClick={this.buyNow}>Buy now</button>

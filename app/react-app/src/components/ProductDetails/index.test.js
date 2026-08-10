@@ -53,13 +53,12 @@ describe('product detail helpers', () => {
 
   it('increases quantity without a maximum and never decreases below one', () => {
     const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} />)
-    const instance = wrapper.instance()
 
-    for (let count = 0; count < 25; count += 1) instance.increaseQuantity()
+    for (let count = 0; count < 25; count += 1) wrapper.find('[aria-label="Increase quantity"]').simulate('click')
     expect(wrapper.state('quantity')).toBe(26)
     expect(wrapper.find('.quantityValue').text()).toBe('26')
 
-    for (let count = 0; count < 30; count += 1) instance.decreaseQuantity()
+    for (let count = 0; count < 30; count += 1) wrapper.find('[aria-label="Decrease quantity"]').simulate('click')
     expect(wrapper.state('quantity')).toBe(1)
     expect(wrapper.find('[aria-label="Decrease quantity"]').prop('disabled')).toBe(true)
   })
@@ -73,6 +72,8 @@ describe('product detail helpers', () => {
     expect(wrapper.find('.stockStatus').text()).toBe('Temporarily out of stock')
     expect(wrapper.find('.addCartButton').prop('disabled')).toBe(true)
     expect(wrapper.find('.buyNowButton').prop('disabled')).toBe(true)
+    expect(wrapper.find('[aria-label="Decrease quantity"]').prop('disabled')).toBe(true)
+    expect(wrapper.find('[aria-label="Increase quantity"]').prop('disabled')).toBe(true)
   })
 
   it('returns to the top when the product page opens or changes products', () => {
@@ -81,8 +82,11 @@ describe('product detail helpers', () => {
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
 
     window.scrollTo.mockClear()
+    wrapper.setState({ quantity: 12, wishedFor: true })
     wrapper.instance().props = { ...wrapper.instance().props, product: { ...product, productId: 8 } }
     wrapper.instance().componentDidUpdate({ product })
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
+    expect(wrapper.state('quantity')).toBe(1)
+    expect(wrapper.state('wishedFor')).toBe(false)
   })
 })
