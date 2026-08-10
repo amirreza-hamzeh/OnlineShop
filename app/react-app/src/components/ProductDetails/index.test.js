@@ -18,15 +18,19 @@ const product = {
 
 describe('product detail helpers', () => {
   let originalWindow
+  let originalLocalStorage
 
   beforeEach(() => {
     originalWindow = global.window
+    originalLocalStorage = global.localStorage
     global.window = { scrollTo: jest.fn() }
   })
 
   afterEach(() => {
     if (originalWindow) global.window = originalWindow
     else delete global.window
+    if (originalLocalStorage) global.localStorage = originalLocalStorage
+    else delete global.localStorage
   })
 
   it('formats numeric and API string prices safely', () => {
@@ -144,5 +148,33 @@ describe('product detail helpers', () => {
     firstProductCallback(null, [{ commentId: 3, name: 'Old', title: 'Wrong product', text: 'Stale', rating: 1, createdAt: '2026-08-01T12:00:00Z' }])
 
     expect(wrapper.state('reviews')[0].title).not.toBe('Wrong product')
+  })
+
+  it('persists wishlist changes and ignores an older wishlist load', () => {
+    global.localStorage = { getItem: jest.fn(() => 'token'), removeItem: jest.fn() }
+    let loadCallback
+    const loadWishlist = jest.fn(callback => { loadCallback = callback })
+    const addToWishlist = jest.fn((productId, callback) => callback(null, { product }))
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} loadWishlist={loadWishlist} addToWishlist={addToWishlist} />)
+    wrapper.instance().componentDidMount()
+
+    wrapper.find('.wishlistButton').simulate('click')
+    loadCallback(null, [])
+
+    expect(addToWishlist).toHaveBeenCalledWith(7, expect.any(Function))
+    expect(wrapper.state('wishedFor')).toBe(true)
+    expect(wrapper.find('.wishlistButton').text()).toContain('Added to wish list')
+  })
+
+  it('removes a saved product from the persistent wishlist', () => {
+    global.localStorage = { getItem: jest.fn(() => 'token'), removeItem: jest.fn() }
+    const removeFromWishlist = jest.fn((productId, callback) => callback(null))
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} removeFromWishlist={removeFromWishlist} />)
+    wrapper.setState({ wishedFor: true })
+
+    wrapper.find('.wishlistButton').simulate('click')
+
+    expect(removeFromWishlist).toHaveBeenCalledWith(7, expect.any(Function))
+    expect(wrapper.state('wishedFor')).toBe(false)
   })
 })

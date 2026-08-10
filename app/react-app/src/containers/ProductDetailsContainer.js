@@ -5,8 +5,8 @@ import { getProduct } from '../reducers/products'
 import ProductDetails from '../components/ProductDetails'
 import shop from '../api/shop'
 
-const ProductDetailsContainer = ({ product, productsLoaded, addToCart }) => (
-  <ProductDetails product={product} productsLoaded={productsLoaded} addToCart={addToCart} loadComments={shop.getComments} createComment={shop.createComment} />
+const ProductDetailsContainer = ({ product, productsLoaded, addToCart, location }) => (
+  <ProductDetails product={product} productsLoaded={productsLoaded} addToCart={addToCart} location={location} loadComments={shop.getComments} createComment={shop.createComment} loadWishlist={shop.getWishlist} addToWishlist={shop.addToWishlist} removeFromWishlist={shop.removeFromWishlist} />
 )
 
 ProductDetailsContainer.propTypes = {

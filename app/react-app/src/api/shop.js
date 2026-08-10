@@ -3,6 +3,7 @@
  */
 import _products from './products.json'
 import request from 'superagent'
+import { getJwtToken } from '../actions/storage'
 
 const TIMEOUT = 100
 
@@ -15,5 +16,17 @@ export default {
   createComment: (productId, comment, cb) => request
     .post(`/api/product/${productId}/comments`)
     .send(comment)
+    .end((error, response) => cb(error, response && response.body)),
+  getWishlist: cb => request
+    .get('/api/wishlist')
+    .set('Authorization', `Bearer ${getJwtToken() || ''}`)
+    .end((error, response) => cb(error, response && response.body)),
+  addToWishlist: (productId, cb) => request
+    .post(`/api/wishlist/product/${productId}`)
+    .set('Authorization', `Bearer ${getJwtToken() || ''}`)
+    .end((error, response) => cb(error, response && response.body)),
+  removeFromWishlist: (productId, cb) => request
+    .del(`/api/wishlist/product/${productId}`)
+    .set('Authorization', `Bearer ${getJwtToken() || ''}`)
     .end((error, response) => cb(error, response && response.body))
 }
