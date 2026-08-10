@@ -1,2 +1,3 @@
 .formField { margin-bottom: 20px; }
 .formLabel { color: #334155; display: block; font-family: "Open Sans"; font-size: 13px; font-weight: 800; letter-spacing: .01em; margin-bottom: 7px; }
+.formHelper { color: #64748b; display: block; font-family: "Open Sans"; font-size: 11px; line-height: 1.4; margin-top: 6px; }

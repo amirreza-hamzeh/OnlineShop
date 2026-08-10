@@ -1,8 +1,8 @@
-const digitsOnly = value => (value || '').replace(/\D/g, '')
+import { cardDigits, isValidCardLength } from './cardFields'
 
 export const isValidCardNumber = value => {
-  const digits = digitsOnly(value)
-  if (digits.length < 13 || digits.length > 19) return false
+  const digits = cardDigits(value)
+  if (!isValidCardLength(value) || /^0+$/.test(digits)) return false
 
   let sum = 0
   let doubleDigit = false
