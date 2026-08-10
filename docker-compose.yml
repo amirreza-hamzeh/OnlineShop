@@ -35,6 +35,7 @@ services:
   appserver:
     depends_on:
       - database
+      - payment_gateway
     build:
        context: app
        dockerfile: Dockerfile
@@ -50,6 +51,8 @@ services:
       - postgres_password
 
   payment_gateway:
+    depends_on:
+      - database
     build:
       context: payment_gateway
     networks:
