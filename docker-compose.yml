@@ -31,6 +31,8 @@ services:
       - postgres_password
 
   appserver:
+    depends_on:
+      - database
     build:
        context: app
        dockerfile: Dockerfile
