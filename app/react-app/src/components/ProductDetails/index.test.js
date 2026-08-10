@@ -51,6 +51,15 @@ describe('product detail helpers', () => {
     expect(addToCart).toHaveBeenCalledWith(7)
   })
 
+  it('links each breadcrumb level to the category page and shop home', () => {
+    const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} />)
+    const breadcrumb = wrapper.find('.detailBreadcrumb')
+
+    expect(breadcrumb.find('Link').at(0).prop('to')).toBe('/')
+    expect(breadcrumb.find('Link').at(1).prop('to')).toBe('/shop/Home')
+    expect(breadcrumb.find('[aria-current="page"]').text()).toBe('Test product')
+  })
+
   it('increases quantity without a maximum and never decreases below one', () => {
     const wrapper = shallow(<ProductDetails product={product} productsLoaded addToCart={jest.fn()} />)
 

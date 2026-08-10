@@ -3,6 +3,7 @@ import { Link, hashHistory } from 'react-router'
 import TopNav from '../TopNav'
 import Footer from '../Footer'
 import imageUrl from '../../utils/imageUrl'
+import { categoryPath } from '../../utils/catalogPath'
 import './styles.css'
 
 const comments = [
@@ -113,12 +114,19 @@ export default class ProductDetails extends Component {
     const savings = originalPrice > price ? originalPrice - price : 0
     const deliveryDate = getDeliveryDate()
     const inventory = Number(product.inventory) || 0
+    const previousPath = categoryPath(product.category)
 
     return (
       <div className="productDetailPage">
         <TopNav />
         <main className="detailShell">
-          <nav className="detailBreadcrumb" aria-label="Breadcrumb"><Link to="/">Shop</Link><span>/</span><Link to={`/?category=${product.category}`}>{product.category}</Link><span>/</span><span>{product.name}</span></nav>
+          <nav className="detailBreadcrumb" aria-label="Breadcrumb">
+            <Link to="/">Shop</Link>
+            <span aria-hidden="true">/</span>
+            <Link to={previousPath}>{product.category}</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{product.name}</span>
+          </nav>
           <section className="detailHero">
             <div className="detailGallery">
               <div className="detailThumb active"><img src={imageUrl(product.image)} alt="" /></div>

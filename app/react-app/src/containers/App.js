@@ -6,19 +6,20 @@ import Header from '../components/Header'
 import TitleContainer from './TitleContainer'
 import ProductsContainer from './ProductsContainer'
 
-const App = ({ location }) => (
+const App = ({ location, params }) => (
   <div>
     <GradientBackground />
     <TopNav location={location} />
     <Header />
     <TitleContainer />
-    <ProductsContainer />
+    <ProductsContainer category={params.category} />
     <Footer />
   </div>
 )
 
 App.propTypes = {
   location: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
 }
 
 export default App
