@@ -4,6 +4,8 @@ describe('payment form validation', () => {
   it('accepts a valid Luhn card number and rejects an invalid number', () => {
     expect(isValidCardNumber('4242 4242 4242 4242')).toBe(true)
     expect(isValidCardNumber('4242 4242 4242 4241')).toBe(false)
+    expect(isValidCardNumber('0000 0000 0000 0000')).toBe(false)
+    expect(isValidCardNumber('6011 1111 1111 1117')).toBe(false)
   })
 
   it('rejects malformed and expired expiration dates', () => {

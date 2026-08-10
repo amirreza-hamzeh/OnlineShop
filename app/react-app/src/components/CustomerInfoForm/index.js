@@ -3,9 +3,18 @@ import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import Input from '../../components/Input'
 import validate from './validate'
+import { formatCardNumber, formatExpirationDate, formatSecurityCode, getCardBrand } from './cardFields'
 import './styles.css'
 
 class CustomerInfoForm extends Component {
+  formattedField = (field, formatter) => ({
+    ...field,
+    input: {
+      ...field.input,
+      onChange: event => field.input.onChange(formatter(event.target.value))
+    }
+  })
+
   render() {
     const { handleSubmit, error, submitting, hasProducts } = this.props
 
@@ -28,10 +37,14 @@ class CustomerInfoForm extends Component {
             <Field name="firstName" component={field => <Input field={field} label="First name" hintText="Alex" autoComplete="cc-given-name" />} />
             <Field name="lastName" component={field => <Input field={field} label="Last name" hintText="Morgan" autoComplete="cc-family-name" />} />
           </div>
-          <Field name="cardNumber" component={field => <Input field={field} label="Card number" hintText="1234 5678 9012 3456" autoComplete="cc-number" />} />
+          <Field name="cardNumber" component={field => {
+            const formattedField = this.formattedField(field, formatCardNumber)
+            const brand = getCardBrand(field.input.value)
+            return <Input field={formattedField} label="Card number" hintText="1234 5678 9012 3456" autoComplete="cc-number" inputMode="numeric" maxLength={23} helperText={brand ? `${brand} detected` : 'Spaces are added automatically. You can also paste your number.'} />
+          }} />
           <div className="infoRow compactRow">
-            <Field name="expirationDate" component={field => <Input field={field} label="Expiration date" hintText="MM / YY" autoComplete="cc-exp" />} />
-            <Field name="cvv" component={field => <Input field={field} label="Security code" hintText="CVV" autoComplete="cc-csc" type="password" />} />
+            <Field name="expirationDate" component={field => <Input field={this.formattedField(field, formatExpirationDate)} label="Expiration date" hintText="MM / YY" autoComplete="cc-exp" inputMode="numeric" maxLength={7} helperText="Month / year" />} />
+            <Field name="cvv" component={field => <Input field={this.formattedField(field, formatSecurityCode)} label="Security code" hintText="3 or 4 digits" autoComplete="cc-csc" type="password" inputMode="numeric" maxLength={4} helperText="On the back of most cards" />} />
           </div>
 
           <div className="billingHeading"><h3>Billing address</h3><span>Used for payment verification</span></div>
