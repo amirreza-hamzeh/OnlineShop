@@ -17,6 +17,15 @@ export default {
     .post(`/api/product/${productId}/comments`)
     .send(comment)
     .end((error, response) => cb(error, response && response.body)),
+  getProfile: cb => request
+    .get('/api/profile')
+    .set('Authorization', `Bearer ${getJwtToken() || ''}`)
+    .end((error, response) => cb(error, response && response.body)),
+  updateProfile: (profile, cb) => request
+    .put('/api/profile')
+    .set('Authorization', `Bearer ${getJwtToken() || ''}`)
+    .send(profile)
+    .end((error, response) => cb(error, response && response.body)),
   getWishlist: cb => request
     .get('/api/wishlist')
     .set('Authorization', `Bearer ${getJwtToken() || ''}`)

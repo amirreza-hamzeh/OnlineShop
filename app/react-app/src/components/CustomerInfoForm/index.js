@@ -76,4 +76,4 @@ CustomerInfoForm.propTypes = {
 
 CustomerInfoForm.defaultProps = { hasProducts: true }
 
-export default reduxForm({ form: 'customerInfo', validate })(CustomerInfoForm)
+export default reduxForm({ form: 'customerInfo', validate, enableReinitialize: true })(CustomerInfoForm)

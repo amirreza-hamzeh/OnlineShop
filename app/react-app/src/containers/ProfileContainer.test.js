@@ -3,6 +3,8 @@ jest.mock('react-router', () => ({
   Link: props => <a>{props.children}</a>,
 }))
 jest.mock('../api/shop', () => ({
+  getProfile: jest.fn(),
+  updateProfile: jest.fn(),
   getWishlist: jest.fn(),
   removeFromWishlist: jest.fn(),
 }))
@@ -27,6 +29,12 @@ describe('wishlist profile', () => {
     hashHistory.replace.mockClear()
     shop.getWishlist.mockReset()
     shop.removeFromWishlist.mockReset()
+    shop.getProfile.mockReset()
+    shop.updateProfile.mockReset()
+    shop.getProfile.mockImplementation(callback => callback(null, {
+      name: 'Alex Morgan', email: 'alex@example.com', phone: '555-0100',
+      address: '123 Market Street\nSeattle, WA 98101\nUnited States'
+    }))
   })
 
   it('loads persisted products and removes them from the profile', () => {
@@ -48,5 +56,22 @@ describe('wishlist profile', () => {
 
     expect(localStorage.removeItem).toHaveBeenCalledWith('jwtToken')
     expect(hashHistory.replace).toHaveBeenCalledWith(expect.objectContaining({ pathname: '/sign-in' }))
+  })
+
+  it('shows account details and saves edits', () => {
+    shop.getWishlist.mockImplementation(callback => callback(null, []))
+    shop.updateProfile.mockImplementation((profile, callback) => callback(null, profile))
+    const wrapper = shallow(<ProfileContainer location={{ pathname: '/profile' }} />)
+    wrapper.instance().componentDidMount()
+
+    expect(wrapper.find('.profileSummary').text()).toContain('Alex Morgan')
+    wrapper.find('.accountPanelHeading > button').simulate('click')
+    wrapper.find('input[name="phone"]').simulate('change', { target: { name: 'phone', value: '555-0200' } })
+    wrapper.find('.profileForm').simulate('submit', { preventDefault: jest.fn() })
+
+    expect(shop.updateProfile).toHaveBeenCalledWith(expect.objectContaining({
+      phone: '555-0200', address: '123 Market Street\nSeattle, WA 98101\nUnited States'
+    }), expect.any(Function))
+    expect(wrapper.find('.profileSaved').length).toBe(1)
   })
 })
