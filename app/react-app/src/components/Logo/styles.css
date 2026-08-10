@@ -5,4 +5,14 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 60px;
+  text-decoration: none;
+}
+
+.shopLogo:focus {
+  outline: none;
+}
+
+.shopLogo:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
 }
