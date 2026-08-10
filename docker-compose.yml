@@ -2,6 +2,8 @@ version: "3.1"
 
 services:
   reverse_proxy:
+    depends_on:
+      - appserver
     image: nginx:alpine
     ports:
       - "80:80"
