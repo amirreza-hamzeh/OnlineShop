@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { hashHistory } from 'react-router';
+import { Link } from 'react-router';
 import Logo from '../Logo';
 import './styles.css';
 import '../globalStyles.css';
@@ -13,10 +13,6 @@ class TopNav extends Component {
     this.state = { authenticated: getJwtToken() !== null };
   }
 
-  openAuthPage = pathname => {
-    hashHistory.push(createAuthLocation(pathname, hashHistory.getCurrentLocation()));
-  };
-
   renderUnauthenticated() {
     const styles = { color: '#fff' };
     const labelStyles = {
@@ -28,15 +24,15 @@ class TopNav extends Component {
     return (
       <div>
         <FlatButton
+          containerElement={<Link to={createAuthLocation('/create-account', this.props.location)} />}
           style={styles}
           labelStyle={labelStyles}
-          onClick={() => this.openAuthPage('/create-account')}
           label="Create User"
         />
         <FlatButton
+          containerElement={<Link to={createAuthLocation('/sign-in', this.props.location)} />}
           style={styles}
           labelStyle={labelStyles}
-          onClick={() => this.openAuthPage('/sign-in')}
           label="Sign in"
         />
       </div>
@@ -83,5 +79,13 @@ class TopNav extends Component {
     );
   }
 }
+
+TopNav.propTypes = {
+  location: PropTypes.object,
+};
+
+TopNav.defaultProps = {
+  location: { pathname: '/' },
+};
 
 export default TopNav;
