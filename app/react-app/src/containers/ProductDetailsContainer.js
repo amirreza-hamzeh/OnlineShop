@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { addToCart } from '../actions'
 import { getProduct } from '../reducers/products'
 import ProductDetails from '../components/ProductDetails'
+import shop from '../api/shop'
 
 const ProductDetailsContainer = ({ product, productsLoaded, addToCart }) => (
-  <ProductDetails product={product} productsLoaded={productsLoaded} addToCart={addToCart} />
+  <ProductDetails product={product} productsLoaded={productsLoaded} addToCart={addToCart} loadComments={shop.getComments} createComment={shop.createComment} />
 )
 
 ProductDetailsContainer.propTypes = {
