@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router';
 import TopNav from './index';
 
 global.localStorage = {
@@ -43,5 +44,22 @@ describe('TopNav authentication links', () => {
       pathname: '/sign-in',
       state: { returnTo: '/checkout?step=payment' },
     }));
+  });
+
+  it('presents an accessible profile control when authenticated', () => {
+    const nav = shallow(<TopNav />);
+    nav.setState({ authenticated: true });
+    const profileLink = nav.find(Link).filterWhere(link => link.prop('to') === '/profile');
+
+    expect(profileLink.hasClass('accountMenu')).toBe(true);
+    expect(profileLink.prop('aria-label')).toBe('Open my profile');
+    expect(profileLink.find('.accountLabel').text()).toBe('My Profile');
+    expect(profileLink.find('svg').prop('aria-hidden')).toBe('true');
+  });
+
+  it('can render on a solid navigation surface outside the home hero', () => {
+    const nav = shallow(<TopNav solid />);
+
+    expect(nav.find('.globalContainer').hasClass('solidNav')).toBe(true);
   });
 });

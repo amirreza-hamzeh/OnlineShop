@@ -202,10 +202,10 @@ export default class ProductDetails extends Component {
   render() {
     const { product } = this.props
     if (!product && !this.props.productsLoaded) {
-      return <div><TopNav /><main className="detailNotFound" aria-live="polite"><h1>Loading product…</h1></main></div>
+      return <div><TopNav solid /><main className="detailNotFound" aria-live="polite"><h1>Loading product…</h1></main></div>
     }
     if (!product) {
-      return <div><TopNav /><main className="detailNotFound"><h1>Product not found</h1><Link to="/">Return to the shop</Link></main></div>
+      return <div><TopNav solid /><main className="detailNotFound"><h1>Product not found</h1><Link to="/">Return to the shop</Link></main></div>
     }
     const price = numericPrice(product.price)
     const originalPrice = numericPrice(product.originalPrice)
@@ -216,7 +216,7 @@ export default class ProductDetails extends Component {
 
     return (
       <div className="productDetailPage">
-        <TopNav />
+        <TopNav solid />
         <main className="detailShell">
           <nav className="detailBreadcrumb" aria-label="Breadcrumb">
             <Link to="/">Shop</Link>

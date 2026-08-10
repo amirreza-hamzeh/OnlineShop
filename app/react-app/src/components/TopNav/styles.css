@@ -1,9 +1,21 @@
 .globalContainer { left: 0; padding: 18px 24px; position: absolute; right: 0; top: 0; z-index: 10; }
+.globalContainer.solidNav { background: linear-gradient(90deg, #0f172a, #123f4a); box-shadow: 0 2px 12px rgba(15, 23, 42, .18); position: relative; }
 .navHeader { align-items: center; display: flex; justify-content: space-between; margin: 0 auto; max-width: 1180px; min-height: 54px; width: 100%; }
 .navLogo { align-items: center; display: flex; }
 .navUser { align-items: center; display: flex; gap: 18px; justify-content: flex-end; }
 .containerSection { color: rgba(255, 255, 255, .72); font-family: "Open Sans"; font-size: 12px; max-width: 220px; overflow: hidden; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
 .buttonSection { align-items: center; display: flex; }
 .formContainer { align-items: center; display: flex; justify-content: center; min-height: 360px; }
-.welcomeMessage { color: #ffffff; font-family: "Open Sans"; font-size: 14px; padding-right: 12px; }
-@media (max-width: 720px) { .globalContainer { padding: 14px; } .navHeader { align-items: flex-start; flex-direction: column; gap: 12px; } .navUser { align-items: flex-start; flex-direction: column; gap: 6px; width: 100%; } .containerSection { display: none; } }
+.authenticatedNav { align-items: center; display: flex; gap: 8px; }
+.accountMenu { align-items: center; border: 1px solid rgba(255, 255, 255, .3); border-radius: 12px; color: #fff; display: flex; font-family: "Open Sans", sans-serif; gap: 10px; min-height: 46px; padding: 5px 10px 5px 7px; text-decoration: none; transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.accountMenu:hover { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .72); box-shadow: 0 8px 22px rgba(2, 6, 23, .18); transform: translateY(-1px); }
+.accountMenu:focus { outline: none; }
+.accountMenu:focus-visible { box-shadow: 0 0 0 3px rgba(153, 246, 228, .55); outline: 2px solid #fff; outline-offset: 2px; }
+.accountAvatar { align-items: center; background: #fff; border-radius: 50%; color: #0f766e; display: flex; flex: 0 0 34px; height: 34px; justify-content: center; }
+.accountAvatar svg { fill: currentColor; height: 21px; width: 21px; }
+.accountCopy { display: flex; flex-direction: column; line-height: 1.15; min-width: 112px; }
+.accountGreeting { color: #ccfbf1; font-size: 10px; font-weight: 600; letter-spacing: .01em; }
+.accountLabel { font-size: 14px; font-weight: 800; margin-top: 3px; }
+.accountChevron { color: #99f6e4; font-size: 25px; line-height: 1; transform: rotate(90deg); transition: transform .18s ease; }
+.accountMenu:hover .accountChevron { transform: rotate(90deg) translateX(2px); }
+@media (max-width: 720px) { .globalContainer { padding: 14px; } .navHeader { align-items: flex-start; flex-direction: column; gap: 8px; } .navUser { align-items: flex-start; flex-direction: column; gap: 6px; width: 100%; } .containerSection { display: none; } .accountMenu { min-height: 42px; } .accountAvatar { flex-basis: 30px; height: 30px; } .accountCopy { min-width: 105px; } }
