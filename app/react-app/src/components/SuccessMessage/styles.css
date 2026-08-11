@@ -1,7 +1,7 @@
 .successPage { background: radial-gradient(circle at 50% 18%, rgba(204, 251, 241, .72), transparent 32%), linear-gradient(180deg, #f0fdfa 0, #f8fafc 48%, #fff 100%); color: #172033; font-family: "Open Sans", sans-serif; min-height: 100vh; }
-.successNav { align-items: center; background: #fff; border-bottom: 1px solid #e5eaf0; display: flex; justify-content: space-between; min-height: 74px; padding: 0 max(24px, calc((100% - 1120px) / 2)); }
-.successSecure { align-items: center; color: #667085; display: flex; font-size: 12px; font-weight: 700; gap: 7px; }
-.successSecure span { color: #0f766e; }
+.successNav { align-items: center; background: #101a2f; border-bottom: 1px solid #20304d; display: flex; justify-content: space-between; min-height: 74px; padding: 0 5vw; }
+.successSecure { align-items: center; color: #cbd5e1; display: flex; font-size: 12px; font-weight: 700; gap: 7px; }
+.successSecure span { color: #5eead4; }
 .successShell { margin: 0 auto; max-width: 980px; padding: 34px 24px 55px; }
 .successSteps { align-items: center; color: #0f766e; display: flex; font-size: 12px; font-weight: 700; justify-content: center; margin: 0 auto 30px; max-width: 570px; }
 .successSteps span { align-items: center; display: flex; gap: 8px; white-space: nowrap; }

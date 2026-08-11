@@ -11,6 +11,9 @@ describe('order success message', () => {
     expect(wrapper.find('.successMessage').text()).toBe('Your order is placed.')
     expect(wrapper.find('.journeyItem')).toHaveLength(3)
     expect(wrapper.find('.successSteps .active').text()).toContain('Confirmation')
+    expect(wrapper.text()).not.toContain('email')
+    expect(wrapper.text()).not.toContain('Tracking to follow')
+    expect(wrapper.find('i[aria-hidden="true"]')).toHaveLength(4)
   })
 
   it('provides clear routes back to shopping and to the customer profile', () => {

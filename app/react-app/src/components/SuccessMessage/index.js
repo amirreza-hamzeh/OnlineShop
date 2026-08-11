@@ -13,9 +13,9 @@ const SuccessMessage = ({ message, label, handleClick }) => (
     <main className="successShell">
       <nav className="successSteps" aria-label="Checkout progress">
         <span><b>&#10003;</b> Cart</span>
-        <i />
+        <i aria-hidden="true" />
         <span><b>&#10003;</b> Payment</span>
-        <i />
+        <i aria-hidden="true" />
         <span className="active"><b>&#10003;</b> Confirmation</span>
       </nav>
 
@@ -31,22 +31,22 @@ const SuccessMessage = ({ message, label, handleClick }) => (
         <span className="successEyebrow">Order confirmed</span>
         <h1 id="success-title">Thank you for your order!</h1>
         <p className="successMessage">{message}</p>
-        <p className="successReassurance">We are getting everything ready. A confirmation with your order details is on its way to your email.</p>
+        <p className="successReassurance">We are getting everything ready. You can review your saved account details while we prepare your order.</p>
 
         <div className="successJourney" aria-label="What happens next">
           <div className="journeyItem complete">
             <span className="journeyIcon">&#10003;</span>
             <div><strong>Order placed</strong><small>Payment confirmed</small></div>
           </div>
-          <i />
+          <i aria-hidden="true" />
           <div className="journeyItem">
             <span className="journeyIcon">&#9633;</span>
             <div><strong>Preparing</strong><small>Next up</small></div>
           </div>
-          <i />
+          <i aria-hidden="true" />
           <div className="journeyItem">
             <span className="journeyIcon">&#8594;</span>
-            <div><strong>On its way</strong><small>Tracking to follow</small></div>
+            <div><strong>On its way</strong><small>Delivery is the final step</small></div>
           </div>
         </div>
 
