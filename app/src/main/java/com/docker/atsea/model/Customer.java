@@ -25,11 +25,32 @@ public class Customer implements Serializable {
 	@NotEmpty
     @Column(name = "name", length = 255, nullable = false)
     private String name;
+
+	@Column(name = "first_name", length = 128)
+	private String firstName;
+
+	@Column(name = "last_name", length = 128)
+	private String lastName;
 	
 	@NotEmpty
 	@Column(name = "address", length = 512, nullable = false)
 	
 	private String address;
+
+	@Column(name = "street_address", length = 512)
+	private String streetAddress;
+
+	@Column(name = "city", length = 128)
+	private String city;
+
+	@Column(name = "region", length = 128)
+	private String region;
+
+	@Column(name = "postal_code", length = 32)
+	private String postalCode;
+
+	@Column(name = "country", length = 128)
+	private String country;
 	@NotEmpty
 	@Column(name = "email", length = 128, nullable = false)
     private String email;
@@ -86,6 +107,11 @@ public class Customer implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+	public String getFirstName() { return firstName; }
+	public void setFirstName(String firstName) { this.firstName = firstName; }
+	public String getLastName() { return lastName; }
+	public void setLastName(String lastName) { this.lastName = lastName; }
  
     public String getEmail() {
         return email;
@@ -102,6 +128,17 @@ public class Customer implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+	public String getStreetAddress() { return streetAddress; }
+	public void setStreetAddress(String streetAddress) { this.streetAddress = streetAddress; }
+	public String getCity() { return city; }
+	public void setCity(String city) { this.city = city; }
+	public String getRegion() { return region; }
+	public void setRegion(String region) { this.region = region; }
+	public String getPostalCode() { return postalCode; }
+	public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
+	public String getCountry() { return country; }
+	public void setCountry(String country) { this.country = country; }
  
     public String getPhone() {
         return phone;

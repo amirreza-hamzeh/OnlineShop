@@ -38,6 +38,13 @@ public class CustomerProfileControllerTest {
 	public void setup() {
 		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 		customer = new Customer(3L, "Alex", "Old address", "alex@example.com", "5551234567", "alex", "secret", true, "USER");
+		customer.setFirstName("Alex");
+		customer.setLastName("Morgan");
+		customer.setStreetAddress("Old street");
+		customer.setCity("Old city");
+		customer.setRegion("WA");
+		customer.setPostalCode("98101");
+		customer.setCountry("United States");
 		authorization = "Bearer " + Jwts.builder().setSubject("alex")
 				.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
 		when(customerService.findByUserName("alex")).thenReturn(customer);
@@ -54,21 +61,26 @@ public class CustomerProfileControllerTest {
 				.andExpect(status().isOk()).andExpect(jsonPath("$.customerId", is(3)))
 				.andExpect(jsonPath("$.email", is("alex@example.com")));
 
-		String body = "{\"name\":\"Alex Morgan\",\"email\":\"new@example.com\","
-				+ "\"phone\":\"555-765-4321\",\"address\":\"123 Market St\\nSeattle, WA 98101\\nUnited States\","
+		String body = "{\"firstName\":\"Taylor\",\"lastName\":\"Morgan\",\"email\":\"new@example.com\","
+				+ "\"phone\":\"555-765-4321\",\"streetAddress\":\"123 Market St\",\"city\":\"Seattle\","
+				+ "\"region\":\"WA\",\"postalCode\":\"98101\",\"country\":\"United States\","
 				+ "\"password\":\"attacker-value\",\"role\":\"ADMIN\"}";
 		mockMvc.perform(put("/api/profile").header("Authorization", authorization)
 				.contentType(MediaType.APPLICATION_JSON).content(body))
-				.andExpect(status().isOk()).andExpect(jsonPath("$.name", is("Alex Morgan")));
+				.andExpect(status().isOk()).andExpect(jsonPath("$.firstName", is("Taylor")))
+				.andExpect(jsonPath("$.lastName", is("Morgan"))).andExpect(jsonPath("$.city", is("Seattle")));
 
 		verify(customerService).updateCustomer(customer);
 		org.junit.Assert.assertEquals("secret", customer.getPassword());
 		org.junit.Assert.assertEquals("USER", customer.getRole());
+		org.junit.Assert.assertEquals("Taylor Morgan", customer.getName());
+		org.junit.Assert.assertEquals("123 Market St\nSeattle, WA 98101\nUnited States", customer.getAddress());
 	}
 
 	@Test
 	public void rejectsInvalidContactDetails() throws Exception {
-		String body = "{\"name\":\"Alex\",\"email\":\"invalid\",\"phone\":\"12\",\"address\":\"Home\"}";
+		String body = "{\"firstName\":\"Alex\",\"lastName\":\"Morgan\",\"email\":\"invalid\",\"phone\":\"12\","
+				+ "\"streetAddress\":\"Home\",\"city\":\"Seattle\",\"region\":\"WA\",\"postalCode\":\"98101\",\"country\":\"US\"}";
 		mockMvc.perform(put("/api/profile").header("Authorization", authorization)
 				.contentType(MediaType.APPLICATION_JSON).content(body))
 				.andExpect(status().isBadRequest());

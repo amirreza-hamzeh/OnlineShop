@@ -49,13 +49,22 @@ public class CustomerController {
 	public ResponseEntity<?> updateProfile(HttpServletRequest request, @RequestBody Customer profile) {
 		Customer customer = authenticatedCustomer(request);
 		if (customer == null) return unauthorized();
-		if (isBlank(profile.getName()) || !isValidEmail(profile.getEmail()) || !isValidPhone(profile.getPhone()) || isBlank(profile.getAddress())) {
-			return new ResponseEntity<CustomErrorType>(new CustomErrorType("A valid name, email, phone, and address are required"), HttpStatus.BAD_REQUEST);
+		if (isBlank(profile.getFirstName()) || isBlank(profile.getLastName()) || !isValidEmail(profile.getEmail())
+				|| !isValidPhone(profile.getPhone()) || isBlank(profile.getStreetAddress()) || isBlank(profile.getCity())
+				|| isBlank(profile.getRegion()) || isBlank(profile.getPostalCode()) || isBlank(profile.getCountry())) {
+			return new ResponseEntity<CustomErrorType>(new CustomErrorType("A valid first name, last name, email, phone, and complete address are required"), HttpStatus.BAD_REQUEST);
 		}
-		customer.setName(profile.getName().trim());
+		customer.setFirstName(profile.getFirstName().trim());
+		customer.setLastName(profile.getLastName().trim());
+		customer.setName(customer.getFirstName() + " " + customer.getLastName());
 		customer.setEmail(profile.getEmail().trim());
 		customer.setPhone(profile.getPhone().trim());
-		customer.setAddress(profile.getAddress().trim());
+		customer.setStreetAddress(profile.getStreetAddress().trim());
+		customer.setCity(profile.getCity().trim());
+		customer.setRegion(profile.getRegion().trim());
+		customer.setPostalCode(profile.getPostalCode().trim());
+		customer.setCountry(profile.getCountry().trim());
+		customer.setAddress(formatAddress(customer));
 		customerService.updateCustomer(customer);
 		return new ResponseEntity<JSONObject>(new CustomerInfo().getCustomerInfo(customer), HttpStatus.OK);
 	}
@@ -70,6 +79,11 @@ public class CustomerController {
 
 	private boolean isValidPhone(String value) {
 		return !isBlank(value) && value.replaceAll("\\D", "").length() >= 7;
+	}
+
+	private String formatAddress(Customer customer) {
+		return customer.getStreetAddress() + "\n" + customer.getCity() + ", " + customer.getRegion()
+				+ " " + customer.getPostalCode() + "\n" + customer.getCountry();
 	}
 
 	private Customer authenticatedCustomer(HttpServletRequest request) {

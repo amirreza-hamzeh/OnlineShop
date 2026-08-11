@@ -32,8 +32,8 @@ describe('wishlist profile', () => {
     shop.getProfile.mockReset()
     shop.updateProfile.mockReset()
     shop.getProfile.mockImplementation(callback => callback(null, {
-      name: 'Alex Morgan', email: 'alex@example.com', phone: '555-0100',
-      address: '123 Market Street\nSeattle, WA 98101\nUnited States'
+      firstName: 'Alex', lastName: 'Morgan', email: 'alex@example.com', phone: '555-0100',
+      streetAddress: '123 Market Street', city: 'Seattle', region: 'WA', postalCode: '98101', country: 'United States'
     }))
   })
 
@@ -70,7 +70,8 @@ describe('wishlist profile', () => {
     wrapper.find('.profileForm').simulate('submit', { preventDefault: jest.fn() })
 
     expect(shop.updateProfile).toHaveBeenCalledWith(expect.objectContaining({
-      phone: '555-0200', address: '123 Market Street\nSeattle, WA 98101\nUnited States'
+      firstName: 'Alex', lastName: 'Morgan', phone: '555-0200', streetAddress: '123 Market Street',
+      city: 'Seattle', region: 'WA', postalCode: '98101', country: 'United States'
     }), expect.any(Function))
     expect(wrapper.find('.profileSaved').length).toBe(1)
   })

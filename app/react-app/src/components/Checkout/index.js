@@ -106,11 +106,13 @@ export class Checkout extends Component {
   profileValues() {
     const profile = this.props.profile
     if (!profile) return {}
-    const name = (profile.name || '').trim().split(/\s+/)
-    const address = parseProfileAddress(profile.address)
+    const legacyName = (profile.name || '').trim().split(/\s+/)
+    const address = profile.streetAddress !== undefined
+      ? { street: profile.streetAddress || '', city: profile.city || '', postalCode: profile.postalCode || '' }
+      : parseProfileAddress(profile.address)
     return {
-      firstName: name.shift() || '',
-      lastName: name.join(' '),
+      firstName: profile.firstName || legacyName.shift() || '',
+      lastName: profile.lastName || legacyName.join(' '),
       address: address.street,
       city: address.city,
       zipCode: address.postalCode
