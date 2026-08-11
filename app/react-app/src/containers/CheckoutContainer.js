@@ -9,7 +9,6 @@ import {
 import { getTotal, getCartProducts, getTotalProducts, getCustomerId, getQuantityById } from '../reducers'
 import SuccessMessage from '../components/SuccessMessage'
 import Checkout from '../components/Checkout'
-import { Link } from 'react-router'
 import { SubmissionError } from 'redux-form'
 import { getJwtToken } from '../actions/storage'
 import shop from '../api/shop'
@@ -94,7 +93,6 @@ class CheckoutContainer extends Component {
       <SuccessMessage
         message={successMessage}
         label="Continue Shopping"
-        containerElement={<Link to="/" />}
       />
     );
   }
