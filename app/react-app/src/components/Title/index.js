@@ -4,12 +4,12 @@ import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router'
 import './styles.css'
 
-const Title = ({ totalProducts, showItemAdded }) => (
+const Title = ({ totalProducts, showItemAdded, lastAddedProduct }) => (
   <div className='shopUtilityBar'>
     <div className='titleBar'>
       <div className='productsSection'>Modern marketplace</div>
       <div className='titleActions'>
-        <Cart total={totalProducts} showItemAdded={showItemAdded} />
+        <Cart total={totalProducts} showItemAdded={showItemAdded} lastAddedProduct={lastAddedProduct} />
         <div className="checkout-button">
           <FlatButton
             style={{ color: '#fff', backgroundColor: '#0f766e', borderRadius: 999 }}
@@ -26,6 +26,7 @@ const Title = ({ totalProducts, showItemAdded }) => (
 Title.propTypes = {
   totalProducts: PropTypes.number,
   showItemAdded: PropTypes.bool,
+  lastAddedProduct: PropTypes.object,
 }
 
 export default Title

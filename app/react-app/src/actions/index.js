@@ -209,6 +209,8 @@ const addToCartUnsafe = productId => ({
   productId
 })
 
+let hideCartNotificationTimer
+
 export const showAddToCart = () => (dispatch) => {
   dispatch({
     type: types.SHOW_ADD_TO_CART,
@@ -218,7 +220,12 @@ export const showAddToCart = () => (dispatch) => {
 export const addToCart = productId => (dispatch, getState) => {
   dispatch(addToCartUnsafe(productId))
   dispatch(showAddToCart())
-  setTimeout(() => {
+
+  // Keep the confirmation visible for a full interval after the latest click.
+  // Without clearing the previous timer, quickly adding two products lets the
+  // first product's timer hide the confirmation for the second product early.
+  clearTimeout(hideCartNotificationTimer)
+  hideCartNotificationTimer = setTimeout(() => {
     dispatch(resetItemAdded())
   }, 2500)
 }
