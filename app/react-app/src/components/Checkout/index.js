@@ -15,8 +15,12 @@ export class Checkout extends Component {
         name={product.name}
         price={product.price}
         quantity={product.quantity}
+        inventory={product.inventory}
         image={product.image}
         key={product.productId}
+        onIncrement={() => this.props.onIncrement(product.productId)}
+        onDecrement={() => this.props.onDecrement(product.productId)}
+        onRemove={() => this.props.onRemove(product.productId)}
       />
     )) : (
       <div className="checkoutEmpty">
@@ -126,11 +130,21 @@ Checkout.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
+    inventory: PropTypes.number,
     image: PropTypes.string.isRequired
   })).isRequired,
   total: PropTypes.string,
   handleSubmit: PropTypes.func,
-  profile: PropTypes.object
+  profile: PropTypes.object,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired
+}
+
+Checkout.defaultProps = {
+  onIncrement: () => {},
+  onDecrement: () => {},
+  onRemove: () => {}
 }
 
 export default Checkout

@@ -1,4 +1,4 @@
-.checkoutSection { font-family: "Open Sans"; }
+.checkoutSection { font-family: "Open Sans"; position: relative; }
 .cartRow { align-items: center; display: flex; gap: 12px; }
 .cartQuantity { align-items: center; background: #ecfeff; border: 1px solid #99f6e4; border-radius: 999px; color: #0f766e; display: flex; font-weight: 900; gap: 7px; min-height: 42px; padding: 8px 13px; }
 .cartDigit { font-size: 15px; }

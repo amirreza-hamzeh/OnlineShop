@@ -51,12 +51,10 @@ public class Customer implements Serializable {
 
 	@Column(name = "country", length = 128)
 	private String country;
-	@NotEmpty
-	@Column(name = "email", length = 128, nullable = false)
+	@Column(name = "email", length = 128, unique = true)
     private String email;
 	
-	@NotEmpty
-	@Column(name = "phone", length = 32, nullable = false)
+	@Column(name = "phone", length = 32, unique = true)
     private String phone;
 	
 	@NotEmpty

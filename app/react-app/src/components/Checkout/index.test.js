@@ -36,3 +36,29 @@ describe('checkout saved profile', () => {
     expect(wrapper.find(CustomerInfoForm).prop('initialValues').address).toBe('')
   })
 })
+
+describe('checkout order editing', () => {
+  const product = { productId: 4, name: 'Watch', price: 25, quantity: 2, image: 'watch.png' }
+
+  it('connects the quantity and remove controls to the selected product', () => {
+    const onIncrement = jest.fn()
+    const onDecrement = jest.fn()
+    const onRemove = jest.fn()
+    const wrapper = shallow(<Checkout
+      products={[product]}
+      total="50"
+      onIncrement={onIncrement}
+      onDecrement={onDecrement}
+      onRemove={onRemove}
+    />)
+    const renderedProduct = wrapper.find('Product')
+
+    renderedProduct.prop('onIncrement')()
+    renderedProduct.prop('onDecrement')()
+    renderedProduct.prop('onRemove')()
+
+    expect(onIncrement).toHaveBeenCalledWith(4)
+    expect(onDecrement).toHaveBeenCalledWith(4)
+    expect(onRemove).toHaveBeenCalledWith(4)
+  })
+})

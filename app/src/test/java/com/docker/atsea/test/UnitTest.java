@@ -78,10 +78,45 @@ public class UnitTest {
 	
 	// Test CustomerService implementation
 	@Test
-	public void whenCustomerUserNameIsProvided_theReturnedNameIsCorrect() {	
+	public void whenCustomerUserNameIsProvided_theReturnedNameIsCorrect() {
 		Mockito.when(mockCustomerServiceImpl.findByUserName("arthurd")).thenReturn(returnCustomer);
 		String testName = returnCustomer.getName();
 		Assert.assertEquals("Arthur Dent", testName);
+	}
+
+	@Test
+	public void createCustomerUsesNormalizedEmailAsInternalIdentifier() {
+		Customer customer = new Customer(0L, "  Arthur Dent  ", "Not provided", "  AD@NULL.COM ", null,
+				null, "docker!", true, "USER");
+		Mockito.when(customerRepository.save(customer)).thenReturn(customer);
+
+		mockCustomerServiceImpl.createCustomer(customer);
+
+		Assert.assertEquals("Arthur Dent", customer.getName());
+		Assert.assertEquals("ad@null.com", customer.getEmail());
+		Assert.assertNull(customer.getPhone());
+		Assert.assertEquals("ad@null.com", customer.getUsername());
+	}
+
+	@Test
+	public void createCustomerUsesNormalizedPhoneWhenEmailIsAbsent() {
+		Customer customer = new Customer(0L, "Ford Prefect", "Not provided", null, "+1 (415) 555-5555",
+				null, "docker!", true, "USER");
+		Mockito.when(customerRepository.save(customer)).thenReturn(customer);
+
+		mockCustomerServiceImpl.createCustomer(customer);
+
+		Assert.assertEquals("14155555555", customer.getPhone());
+		Assert.assertEquals("14155555555", customer.getUsername());
+	}
+
+	@Test
+	public void findCustomerNormalizesEitherLoginIdentifier() {
+		mockCustomerServiceImpl.findByEmailOrPhone("  AD@NULL.COM ");
+		Mockito.verify(customerRepository).findByEmailOrPhone("ad@null.com");
+
+		mockCustomerServiceImpl.findByEmailOrPhone("+1 (415) 555-5555");
+		Mockito.verify(customerRepository).findByEmailOrPhone("14155555555");
 	}
 	
 	// Test ProductService implementation
