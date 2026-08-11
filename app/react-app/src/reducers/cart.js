@@ -12,6 +12,7 @@ const initialState = {
   addedIds: [],
   quantityById: {},
   itemJustAdded: false,
+  lastAddedProductId: null,
 }
 
 const addedIds = (state = initialState.addedIds, action) => {
@@ -46,6 +47,13 @@ export const getAddedIds = state => state.addedIds
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_TO_CART:
+      return {
+        ...state,
+        addedIds: addedIds(state.addedIds, action),
+        quantityById: quantityById(state.quantityById, action),
+        lastAddedProductId: action.productId,
+      }
     case SHOW_ADD_TO_CART:
       return {
         ...state,
@@ -70,6 +78,7 @@ const cart = (state = initialState, action) => {
       return action.cart
     default:
       return {
+        ...state,
         addedIds: addedIds(state.addedIds, action),
         quantityById: quantityById(state.quantityById, action)
       }

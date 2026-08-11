@@ -1,0 +1,37 @@
+.cartNotification {
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #14b8a6;
+  border-radius: 18px;
+  bottom: 28px;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, .28);
+  display: flex;
+  gap: 12px;
+  max-width: 380px;
+  min-width: 320px;
+  padding: 14px 18px 14px 14px;
+  pointer-events: none;
+  position: fixed;
+  right: 28px;
+  z-index: 1000;
+}
+
+.cartNotification[aria-hidden="true"] { visibility: hidden; }
+
+.cartNotificationCheck { align-items: center; background: #0f766e; border-radius: 50%; color: white; display: flex; flex: 0 0 30px; font-size: 18px; font-weight: 900; height: 30px; justify-content: center; }
+
+.cartNotificationImage {
+  border-radius: 9px;
+  height: 58px;
+  object-fit: cover;
+  width: 58px;
+}
+
+.cartNotificationCopy { display: flex; flex-direction: column; min-width: 0; }
+.cartNotificationCopy strong { color: #0f766e; font-size: 15px; }
+.cartNotificationName { color: #0f172a; font-size: 14px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cartNotificationTotal { color: #64748b; font-size: 12px; }
+
+@media (max-width: 640px) {
+  .cartNotification { bottom: 16px; left: 16px; max-width: none; min-width: 0; right: 16px; }
+}

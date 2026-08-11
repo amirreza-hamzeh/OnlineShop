@@ -17,6 +17,7 @@ import CheckoutContainer from './containers/CheckoutContainer'
 import ProductDetailsContainer from './containers/ProductDetailsContainer'
 import AuthContainer from './containers/AuthContainer'
 import ProfileContainer from './containers/ProfileContainer'
+import CartNotificationContainer from './containers/CartNotificationContainer'
 
 
 const middleware = [
@@ -46,16 +47,19 @@ store.dispatch(fetchAllDummyItems())
 render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
-      <Router history={hashHistory}>
-        <Route path="/" component={App} />
-        <Route path="shop/:category" component={App} />
-        <Route path="shop/:category/:productId" component={ProductDetailsContainer} />
-        <Route path="product/:productId" component={ProductDetailsContainer} />
-        <Route path="checkout" component={CheckoutContainer} />
-        <Route path="sign-in" component={props => <AuthContainer {...props} mode="login" />} />
-        <Route path="create-account" component={props => <AuthContainer {...props} mode="create" />} />
-        <Route path="profile" component={ProfileContainer} />
-      </Router>
+      <div>
+        <Router history={hashHistory}>
+          <Route path="/" component={App} />
+          <Route path="shop/:category" component={App} />
+          <Route path="shop/:category/:productId" component={ProductDetailsContainer} />
+          <Route path="product/:productId" component={ProductDetailsContainer} />
+          <Route path="checkout" component={CheckoutContainer} />
+          <Route path="sign-in" component={props => <AuthContainer {...props} mode="login" />} />
+          <Route path="create-account" component={props => <AuthContainer {...props} mode="create" />} />
+          <Route path="profile" component={ProfileContainer} />
+        </Router>
+        <CartNotificationContainer />
+      </div>
     </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
