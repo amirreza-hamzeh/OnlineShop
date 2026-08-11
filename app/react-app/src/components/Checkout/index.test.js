@@ -9,10 +9,8 @@ describe('checkout saved profile', () => {
       products={[]}
       total="0"
       handleSubmit={jest.fn()}
-      profile={{
-        name: 'Alex Morgan',
-        address: '123 Market Street\nApartment 4B\nSeattle, WA 98101\nUnited States'
-      }}
+      profile={{ firstName: 'Alex', lastName: 'Morgan', streetAddress: '123 Market Street\nApartment 4B',
+        city: 'Seattle', region: 'WA', postalCode: '98101', country: 'United States' }}
     />)
 
     expect(wrapper.find(CustomerInfoForm).prop('initialValues')).toEqual({
@@ -22,6 +20,15 @@ describe('checkout saved profile', () => {
       city: 'Seattle',
       zipCode: '98101'
     })
+  })
+
+  it('uses the separately saved first and last names instead of the username', () => {
+    const wrapper = shallow(<Checkout products={[]} total="0" profile={{
+      username: 'alex1987', firstName: 'Alex', lastName: 'Morgan', streetAddress: '1 Main St', city: 'Boston', postalCode: '02108'
+    }} />)
+    expect(wrapper.find(CustomerInfoForm).prop('initialValues')).toEqual(expect.objectContaining({
+      firstName: 'Alex', lastName: 'Morgan', city: 'Boston', zipCode: '02108'
+    }))
   })
 
   it('does not put the registration placeholder into checkout', () => {

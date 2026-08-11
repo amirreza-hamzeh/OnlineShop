@@ -14,7 +14,7 @@ export default class ProfileContainer extends Component {
   loadRequestId = 0
   state = {
     items: [], loading: true, error: '', profileLoading: true, profileError: '',
-    profile: { name: '', email: '', phone: '', address: '' }, address: emptyProfileAddress(),
+    profile: { firstName: '', lastName: '', email: '', phone: '' }, address: emptyProfileAddress(),
     editing: false, saving: false, saved: false
   }
 
@@ -59,7 +59,14 @@ export default class ProfileContainer extends Component {
         return
       }
       const loadedProfile = profile || {}
-      this.setState({ profile: loadedProfile, address: parseProfileAddress(loadedProfile.address), profileLoading: false, profileError: '' })
+      const legacyName = (loadedProfile.name || '').trim().split(/\s+/)
+      const address = loadedProfile.streetAddress !== undefined
+        ? { street: loadedProfile.streetAddress || '', city: loadedProfile.city || '', region: loadedProfile.region || '', postalCode: loadedProfile.postalCode || '', country: loadedProfile.country || '' }
+        : parseProfileAddress(loadedProfile.address)
+      this.setState({
+        profile: { ...loadedProfile, firstName: loadedProfile.firstName || legacyName.shift() || '', lastName: loadedProfile.lastName || legacyName.join(' ') },
+        address, profileLoading: false, profileError: ''
+      })
     })
   }
 
@@ -85,11 +92,16 @@ export default class ProfileContainer extends Component {
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(profile.email || '')
     const phoneValid = (profile.phone || '').replace(/\D/g, '').length >= 7
     const addressComplete = Object.keys(address).every(key => (address[key] || '').trim())
-    if (!(profile.name || '').trim() || !emailValid || !phoneValid || !addressComplete) {
-      this.setState({ profileError: 'Enter a valid name, email, phone number, and complete delivery address.' })
+    if (!(profile.firstName || '').trim() || !(profile.lastName || '').trim() || !emailValid || !phoneValid || !addressComplete) {
+      this.setState({ profileError: 'Enter a valid first name, last name, email, phone number, and complete delivery address.' })
       return
     }
-    const profileToSave = { ...profile, address: formatProfileAddress(address) }
+    const profileToSave = {
+      ...profile,
+      firstName: profile.firstName.trim(), lastName: profile.lastName.trim(),
+      streetAddress: address.street.trim(), city: address.city.trim(), region: address.region.trim(),
+      postalCode: address.postalCode.trim(), country: address.country.trim()
+    }
     this.setState({ saving: true, profileError: '', saved: false })
     shop.updateProfile(profileToSave, (error, savedProfile) => {
       if (!this.active) return
@@ -98,7 +110,10 @@ export default class ProfileContainer extends Component {
         this.setState({ saving: false, profileError: 'We could not save your details. Please try again.' })
         return
       }
-      this.setState({ profile: savedProfile, address: parseProfileAddress(savedProfile.address), saving: false, editing: false, saved: true })
+      this.setState({ profile: savedProfile, address: {
+        street: savedProfile.streetAddress, city: savedProfile.city, region: savedProfile.region,
+        postalCode: savedProfile.postalCode, country: savedProfile.country
+      }, saving: false, editing: false, saved: true })
     })
   }
 
@@ -134,7 +149,7 @@ export default class ProfileContainer extends Component {
             {this.state.profileError ? <p className="profileError" role="alert">{this.state.profileError}</p> : null}
             {this.state.saved ? <p className="profileSaved" role="status">&#10003; Your details are saved and ready for checkout.</p> : null}
             {!this.state.profileLoading && this.state.editing ? <form className="profileForm" onSubmit={this.saveProfile}>
-              <label>Full name<input name="name" value={this.state.profile.name || ''} onChange={this.changeProfile} autoComplete="name" /></label>
+              <div className="profileFormRow"><label>First name<input name="firstName" value={this.state.profile.firstName || ''} onChange={this.changeProfile} autoComplete="given-name" /></label><label>Last name<input name="lastName" value={this.state.profile.lastName || ''} onChange={this.changeProfile} autoComplete="family-name" /></label></div>
               <div className="profileFormRow"><label>Email address<input name="email" type="email" value={this.state.profile.email || ''} onChange={this.changeProfile} autoComplete="email" /></label><label>Phone number<input name="phone" type="tel" value={this.state.profile.phone || ''} onChange={this.changeProfile} autoComplete="tel" /></label></div>
               <fieldset className="addressFields"><legend>Saved delivery address</legend>
                 <label>Street address<textarea name="street" rows="2" value={this.state.address.street} onChange={this.changeAddress} autoComplete="street-address" placeholder="123 Market Street, apartment 4B" /></label>
@@ -145,8 +160,8 @@ export default class ProfileContainer extends Component {
               <div className="profileActions"><button type="submit" disabled={this.state.saving}>{this.state.saving ? 'Saving…' : 'Save changes'}</button><button type="button" onClick={() => { this.setState({ editing: false, profileError: '' }); this.loadProfile() }}>Cancel</button></div>
             </form> : null}
             {!this.state.profileLoading && !this.state.editing ? <div className="profileSummary">
-              <div><span>Name</span><strong>{this.state.profile.name || 'Not provided'}</strong></div><div><span>Email</span><strong>{this.state.profile.email || 'Not provided'}</strong></div><div><span>Phone</span><strong>{this.state.profile.phone || 'Not provided'}</strong></div>
-              <article className="addressCard"><div className="addressCardHeader"><span aria-hidden="true">&#8962;</span><div><b>Default delivery address</b><small>Used at checkout</small></div></div><p>{this.state.profile.address || 'Add an address to make checkout faster.'}</p><span className="defaultBadge">Default</span></article>
+              <div><span>Name</span><strong>{[this.state.profile.firstName, this.state.profile.lastName].filter(Boolean).join(' ') || 'Not provided'}</strong></div><div><span>Email</span><strong>{this.state.profile.email || 'Not provided'}</strong></div><div><span>Phone</span><strong>{this.state.profile.phone || 'Not provided'}</strong></div>
+              <article className="addressCard"><div className="addressCardHeader"><span aria-hidden="true">&#8962;</span><div><b>Default delivery address</b><small>Used at checkout</small></div></div><p>{this.state.address.street ? formatProfileAddress(this.state.address) : 'Add an address to make checkout faster.'}</p><span className="defaultBadge">Default</span></article>
             </div> : null}
           </section>
           <section className="wishlistPanel">
