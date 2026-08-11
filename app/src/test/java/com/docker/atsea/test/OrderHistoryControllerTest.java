@@ -4,8 +4,10 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
@@ -14,7 +16,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -62,6 +66,27 @@ public class OrderHistoryControllerTest {
 				.andExpect(jsonPath("$.customerId", is(3)))
 				.andExpect(jsonPath("$.status", is("Delivered")));
 		org.junit.Assert.assertEquals(Long.valueOf(3L), order.getCustomerId());
+	}
+
+	@Test
+	public void creatingAnOrderUsesTheAuthenticatedCustomerAndGeneratedId() throws Exception {
+		Order createdOrder = new Order();
+		createdOrder.setOrderId(42L);
+		when(orderService.createOrder(Mockito.any(Order.class))).thenReturn(createdOrder);
+
+		mockMvc.perform(post("/api/order/").header("Authorization", authorization)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{\"orderId\":99,\"customerId\":88,\"status\":\"Delivered\","
+						+ "\"productsOrdered\":{\"1\":2}}"))
+				.andExpect(status().isCreated())
+				.andExpect(header().string("Location", "http://localhost/api/order/42"))
+				.andExpect(jsonPath("$.orderId", is(42)));
+
+		ArgumentCaptor<Order> captor = ArgumentCaptor.forClass(Order.class);
+		Mockito.verify(orderService).createOrder(captor.capture());
+		org.junit.Assert.assertNull(captor.getValue().getOrderId());
+		org.junit.Assert.assertEquals(Long.valueOf(3L), captor.getValue().getCustomerId());
+		org.junit.Assert.assertEquals("Processing", captor.getValue().getStatus());
 	}
 
 	@Test

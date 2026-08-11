@@ -15,21 +15,12 @@ export const createOrder = (values) => (dispatch) => {
       promise:
       request
         .post(url)
-        // TODO: will there ever be some sort of authentication here? for username and password.
         .set('Content-Type', 'application/json')
         .set('Authorization', 'Bearer ' + (token || ''))
         .accept('application/json')
         .send(
         {
-          /*
-            TODO: orderId is hard coded in because the api will return a null pointer exception without it.
-            However, the orderId is decided by the backend. If we pass an id in the request, and it already exists,
-            we will get an "Unable to create."
-            0 was chosen because the backend begins incrementing it's order id at 1.
-          */
-          "orderId": 0,
           "orderDate": values.orderDate,
-          "customerId": values.customerId,
           "productsOrdered": values.quantityById,
         }
         )

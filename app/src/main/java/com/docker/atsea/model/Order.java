@@ -81,11 +81,11 @@ public class Order implements Serializable {
         return status != null && !status.trim().isEmpty();
     }
     
-    public long getOrderId() {
+    public Long getOrderId() {
     	return orderId;
     }
     
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
     

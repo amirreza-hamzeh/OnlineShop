@@ -54,20 +54,39 @@ public class OrderController {
 		order.setStatus("Processing");
 		logger.info("Creating order : {}", order);
 
-		if (orderService.orderExists(order)) {
-			logger.error("Unable to create. An order with id {} already exist", order.getOrderId());
-			return new ResponseEntity(new CustomErrorType("Unable to create. An order with id " + 
-			order.getOrderId() + " already exists."),HttpStatus.CONFLICT);
-		}
-				
+		// The database owns order identifiers. Ignoring a client-supplied ID avoids
+		// collisions and prevents one customer from targeting another order.
+		order.setOrderId(null);
 		Order currentOrder = orderService.createOrder(order);
 		Long currentOrderId = currentOrder.getOrderId();
 		JSONObject orderInfo = new JSONObject();
 		orderInfo.put("orderId", currentOrderId);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/order/").buildAndExpand(order.getOrderId()).toUri());
-		return new ResponseEntity<JSONObject>(orderInfo, HttpStatus.CREATED);
+		headers.setLocation(ucBuilder.path("/api/order/{orderId}").buildAndExpand(currentOrderId).toUri());
+		return new ResponseEntity<JSONObject>(orderInfo, headers, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/profile/orders", method = RequestMethod.GET)
+	public ResponseEntity<?> listCustomerOrders(HttpServletRequest request) {
+		Customer customer = authenticatedCustomer(request);
+		if (customer == null) return unauthorized();
+		return new ResponseEntity<List<Order>>(orderService.findOrdersByCustomerId(customer.getCustomerId()), HttpStatus.OK);
+	}
+
+	private Customer authenticatedCustomer(HttpServletRequest request) {
+		String header = request.getHeader("Authorization");
+		if (header == null || !header.startsWith("Bearer ")) return null;
+		try {
+			Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(header.substring(7)).getBody();
+			return customerService.findByUserName(claims.getSubject());
+		} catch (JwtException | IllegalArgumentException exception) {
+			return null;
+		}
+	}
+
+	private ResponseEntity<CustomErrorType> unauthorized() {
+		return new ResponseEntity<CustomErrorType>(new CustomErrorType("Sign in to access your orders"), HttpStatus.UNAUTHORIZED);
 	}
 
 	@RequestMapping(value = "/profile/orders", method = RequestMethod.GET)
