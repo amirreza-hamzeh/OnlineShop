@@ -85,7 +85,7 @@ export const fetchAllCustomers = () => (dispatch) => {
   return dispatch(dispatchObj)
 };
 
-export const createCustomer = (username, email, phone, password) => (dispatch) => {
+export const createCustomer = (name, email, phone, password) => (dispatch) => {
   const url = `${API}/customer/`
   let dispatchObj = {
     type: types.CREATE_CUSTOMER,
@@ -98,11 +98,10 @@ export const createCustomer = (username, email, phone, password) => (dispatch) =
         .send(
         {
           address: "Not provided",
-          email: email.trim(),
-          name: username,
+          email: email ? email.trim() : null,
+          name: name.trim(),
           password: password,
-          phone: phone.trim(),
-          username: username,
+          phone: phone ? phone.trim() : null,
           customerId: 0,
           enabled: "true",
           role: "user"

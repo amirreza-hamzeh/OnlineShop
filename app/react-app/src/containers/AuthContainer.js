@@ -26,14 +26,14 @@ export class AuthContainer extends Component {
       throw new SubmissionError({ _error: 'We could not sign you in with those details.' });
     });
 
-  handleCreateUser = ({ username, email, phone, password }) => this.props.createCustomer(
-    username, email, phone, password
-  ).then(() => this.props.loginCustomer(email, password)
+  handleCreateUser = ({ name, email, phone, password }) => this.props.createCustomer(
+    name, email, phone, password
+  ).then(() => this.props.loginCustomer(email || phone, password)
     .then(this.finishLogin)
     .catch(() => {
       throw new SubmissionError({ _error: 'Your account was created, but we could not sign you in.' });
     }), () => {
-      throw new SubmissionError({ _error: 'That username, email address, or phone number is already in use.' });
+      throw new SubmissionError({ _error: 'That email address or phone number is already in use.' });
     });
 
   render() {

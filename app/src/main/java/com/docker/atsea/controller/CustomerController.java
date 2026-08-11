@@ -182,11 +182,19 @@ public class CustomerController {
 	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
 	public ResponseEntity<?> createCustomer(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Customer : {}", customer);
+		if (customer.getName() == null || customer.getName().trim().isEmpty()
+				|| ((customer.getEmail() == null || customer.getEmail().trim().isEmpty())
+						&& (customer.getPhone() == null || customer.getPhone().trim().isEmpty()))
+				|| customer.getPassword() == null || customer.getPassword().isEmpty()) {
+			return new ResponseEntity(new CustomErrorType(
+					"Name, password, and either an email address or phone number are required."),
+					HttpStatus.BAD_REQUEST);
+		}
 		
 		if (customerService.customerExist(customer)) {
 			logger.error("Unable to create customer because an account identifier is already in use");
 			return new ResponseEntity(new CustomErrorType(
-					"A customer with that username, email address, or phone number already exists."),
+					"A customer with that email address or phone number already exists."),
 					HttpStatus.CONFLICT);
 		}
 		
