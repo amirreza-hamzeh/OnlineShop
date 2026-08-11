@@ -49,5 +49,9 @@ public class OrderServiceImpl implements OrderService {
 
 	public List<Order> findAllOrders() {
 		return (List<Order>) orderRepository.findAll();
-	}	
+	}
+
+	public List<Order> findOrdersByCustomerId(Long customerId) {
+		return orderRepository.findByCustomerIdOrderByOrderDateDescOrderIdDesc(customerId);
+	}
 }

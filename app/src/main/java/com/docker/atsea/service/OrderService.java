@@ -7,6 +7,8 @@ import com.docker.atsea.model.Order;
 public interface OrderService {
 
 	List<Order> findAllOrders();
+
+	List<Order> findOrdersByCustomerId(Long customerId);
 	
 	Order findById(Long orderId);
 	

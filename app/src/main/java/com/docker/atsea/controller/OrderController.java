@@ -2,6 +2,8 @@ package com.docker.atsea.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.docker.atsea.model.Order;
+import com.docker.atsea.model.Customer;
+import com.docker.atsea.service.CustomerService;
 import com.docker.atsea.service.OrderService;
 import com.docker.atsea.util.CustomErrorType;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +36,9 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+
+	@Autowired
+	CustomerService customerService;
 	// -------------------------------------------------------------------
 	//                   Order methods
 	//--------------------------------------------------------------------
@@ -36,7 +47,11 @@ public class OrderController {
 	// -------------------Create an Order-------------------------------------------
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/order/", method = RequestMethod.POST)
-	public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> createOrder(HttpServletRequest request, @RequestBody Order order, UriComponentsBuilder ucBuilder) {
+		Customer customer = authenticatedCustomer(request);
+		if (customer == null) return unauthorized();
+		order.setCustomerId(customer.getCustomerId());
+		order.setStatus("Processing");
 		logger.info("Creating order : {}", order);
 
 		if (orderService.orderExists(order)) {
@@ -53,6 +68,28 @@ public class OrderController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/api/order/").buildAndExpand(order.getOrderId()).toUri());
 		return new ResponseEntity<JSONObject>(orderInfo, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/profile/orders", method = RequestMethod.GET)
+	public ResponseEntity<?> listCustomerOrders(HttpServletRequest request) {
+		Customer customer = authenticatedCustomer(request);
+		if (customer == null) return unauthorized();
+		return new ResponseEntity<List<Order>>(orderService.findOrdersByCustomerId(customer.getCustomerId()), HttpStatus.OK);
+	}
+
+	private Customer authenticatedCustomer(HttpServletRequest request) {
+		String header = request.getHeader("Authorization");
+		if (header == null || !header.startsWith("Bearer ")) return null;
+		try {
+			Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(header.substring(7)).getBody();
+			return customerService.findByUserName(claims.getSubject());
+		} catch (JwtException | IllegalArgumentException exception) {
+			return null;
+		}
+	}
+
+	private ResponseEntity<CustomErrorType> unauthorized() {
+		return new ResponseEntity<CustomErrorType>(new CustomErrorType("Sign in to access your orders"), HttpStatus.UNAUTHORIZED);
 	}
 
 
@@ -115,9 +152,12 @@ public class OrderController {
 					HttpStatus.NOT_FOUND);
 		}
 
-		currentOrder.setCustomerId(order.getCustomerId());
-		currentOrder.setOrderDate(order.getOrderDate());
-		currentOrder.setProductsOrdered(order.getProductsOrdered());
+		if (order.getCustomerId() != null) currentOrder.setCustomerId(order.getCustomerId());
+		if (order.getOrderDate() != null) currentOrder.setOrderDate(order.getOrderDate());
+		if (order.getProductsOrdered() != null && !order.getProductsOrdered().isEmpty()) {
+			currentOrder.setProductsOrdered(order.getProductsOrdered());
+		}
+		if (order.hasStatus()) currentOrder.setStatus(order.getStatus());
 		orderService.updateOrder(currentOrder);
 		
 		JSONObject orderInfo = new JSONObject();
@@ -125,6 +165,7 @@ public class OrderController {
 		orderInfo.put("customerId", currentOrder.getCustomerId());
 		orderInfo.put("orderDate", currentOrder.getOrderDate());
 		orderInfo.put("productsOrdered", currentOrder.getProductsOrdered());
+		orderInfo.put("status", currentOrder.getStatus());
 		return new ResponseEntity<JSONObject>(orderInfo, HttpStatus.OK);
 	}
 

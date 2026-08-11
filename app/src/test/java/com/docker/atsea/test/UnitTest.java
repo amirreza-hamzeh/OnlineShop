@@ -133,5 +133,17 @@ public class UnitTest {
 		Mockito.when(mockOrderServiceImpl.findById(1l)).thenReturn(referenceOrder);
 		Assert.assertNotEquals(mockOrder, referenceOrder);
 	}
+
+	@Test
+	public void orderStatusSupportsLegacyRowsAndKnownFulfillmentStates() {
+		mockOrder.setStatus(null);
+		Assert.assertEquals("Processing", mockOrder.getStatus());
+		Assert.assertFalse(mockOrder.hasStatus());
+		mockOrder.setStatus("SHIPPED");
+		Assert.assertEquals("Shipped", mockOrder.getStatus());
+		Assert.assertTrue(mockOrder.hasStatus());
+		mockOrder.setStatus("delivered");
+		Assert.assertEquals("Delivered", mockOrder.getStatus());
+	}
 	
 }
