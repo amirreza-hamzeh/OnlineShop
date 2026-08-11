@@ -1,5 +1,7 @@
 import {
   ADD_TO_CART,
+  DECREMENT_CART_ITEM,
+  REMOVE_FROM_CART,
   SHOW_ADD_TO_CART,
   RESET_ADD_TO_CART,
   CHECKOUT_REQUEST,
@@ -54,6 +56,27 @@ const cart = (state = initialState, action) => {
         quantityById: quantityById(state.quantityById, action),
         lastAddedProductId: action.productId,
       }
+    case DECREMENT_CART_ITEM: {
+      const quantity = state.quantityById[action.productId] || 0
+      if (quantity <= 1) return state
+      return {
+        ...state,
+        quantityById: {
+          ...state.quantityById,
+          [action.productId]: quantity - 1
+        }
+      }
+    }
+    case REMOVE_FROM_CART: {
+      const addedIds = state.addedIds.filter(id => id !== action.productId)
+      const quantityById = { ...state.quantityById }
+      delete quantityById[action.productId]
+      return {
+        ...state,
+        addedIds,
+        quantityById
+      }
+    }
     case SHOW_ADD_TO_CART:
       return {
         ...state,

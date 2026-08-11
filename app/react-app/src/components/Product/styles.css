@@ -4,6 +4,14 @@
 .columnLeft img { background: #f5f7f9; border-radius: 9px; height: 55px; object-fit: contain; padding: 3px; width: 55px; }
 .columnCenter { color: #293548; flex: 1; font-size: 12px; font-weight: 700; line-height: 1.35; min-width: 0; }
 .columnCenter > div:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.columnCenter > div:last-child { color: #8a94a5; font-size: 10px; font-weight: 400; margin-top: 4px; }
+.columnCenter > div:last-child { color: #8a94a5; font-size: 10px; font-weight: 400; margin-top: 7px; }
+.quantityEditor { align-items: center; display: flex; gap: 7px; }
+.quantityEditor button { align-items: center; background: #fff; border: 1px solid #d8dee7; border-radius: 5px; color: #146c62; cursor: pointer; display: flex; font-size: 15px; height: 24px; justify-content: center; padding: 0; width: 24px; }
+.quantityEditor button:hover:not(:disabled) { background: #effaf7; border-color: #9fd4c8; }
+.quantityEditor button:focus, .removeProduct:focus { outline: 2px solid #63b3a4; outline-offset: 2px; }
+.quantityEditor button:disabled { color: #b9c0ca; cursor: not-allowed; }
+.quantityEditor span { color: #293548; font-size: 11px; min-width: 13px; text-align: center; }
+.inventoryLimit { color: #a05a2c; display: block; font-size: 9px; font-weight: 600; margin-top: 4px; }
 .remove { display: none; }
-.columnRight { color: #1d2939; font-size: 12px; font-weight: 800; }
+.columnRight { align-items: flex-end; color: #1d2939; display: flex; flex-direction: column; font-size: 12px; gap: 9px; }
+.removeProduct { background: none; border: 0; color: #a94343; cursor: pointer; font-size: 10px; padding: 0; text-decoration: underline; }

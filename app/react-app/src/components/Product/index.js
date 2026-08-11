@@ -4,7 +4,8 @@ import './styles.css'
 
 class Product extends Component {
   render() {
-    const { price, quantity, name, image } = this.props;
+    const { price, quantity, inventory, name, image, onIncrement, onDecrement, onRemove } = this.props;
+    const atInventoryLimit = typeof inventory === 'number' && quantity >= inventory
     const image2 = (
       <img
         alt={name}
@@ -20,12 +21,16 @@ class Product extends Component {
         </div>
         <div className='columnCenter'>
           <div>{name}</div>
-          <div>
-          <span>{`Qty ${quantity}`}</span>
+          <div className="quantityEditor" aria-label={`Quantity for ${name}`}>
+            <button type="button" onClick={onDecrement} disabled={quantity <= 1} aria-label={`Decrease ${name} quantity`}>−</button>
+            <span aria-live="polite">{quantity}</span>
+            <button type="button" onClick={onIncrement} disabled={atInventoryLimit} aria-label={`Increase ${name} quantity`}>+</button>
           </div>
+          {atInventoryLimit && <small className="inventoryLimit" role="status">Maximum available</small>}
         </div>
         <div className='columnRight'>
-          {`$${(Number(price) * quantity).toFixed(2)}`}
+          <strong>{`$${(Number(price) * quantity).toFixed(2)}`}</strong>
+          <button type="button" className="removeProduct" onClick={onRemove} aria-label={`Remove ${name} from order`}>Remove</button>
         </div>
       </div>
     );
@@ -36,8 +41,12 @@ class Product extends Component {
 Product.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
+  inventory: PropTypes.number,
   name: PropTypes.string,
   image: PropTypes.string,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 }
 
 export default Product
