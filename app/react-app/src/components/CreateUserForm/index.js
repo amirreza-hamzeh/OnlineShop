@@ -17,22 +17,22 @@ class CreateUserForm extends Component {
       <div>
         <div className="authEyebrow">Join the crew</div>
         <h1 className="authTitle">Create your account</h1>
-        <p className="authSubtitle">Save your details for a faster, smoother checkout every time.</p>
+        <p className="authSubtitle">Enter your name and either an email address or phone number.</p>
         <div className='createFormRow'>
           <Field
-            name="username"
+            name="name"
             component={renderInput}
-            id="create-username"
-            label="Username"
-            hintText="Choose a user ID"
-            autoComplete="username"
+            id="create-name"
+            label="Name"
+            hintText="Enter your full name"
+            autoComplete="name"
           />
           <Field
             name="email"
             component={renderInput}
             type="email"
             id="create-email"
-            label="Email address"
+            label="Email address (optional)"
             hintText="you@example.com"
             autoComplete="email"
           />
@@ -41,7 +41,7 @@ class CreateUserForm extends Component {
             component={renderInput}
             type="tel"
             id="create-phone"
-            label="Phone number"
+            label="Phone number (optional)"
             hintText="5551234567"
             autoComplete="tel"
           />

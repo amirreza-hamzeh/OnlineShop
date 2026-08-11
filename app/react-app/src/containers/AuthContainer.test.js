@@ -47,15 +47,30 @@ describe('full-page authentication flow', () => {
     const container = makeContainer({ mode: 'create', createCustomer, loginCustomer });
 
     return container.handleCreateUser({
-      username: 'shopper',
+      name: 'Shopper Jones',
       email: 'shopper@example.com',
       phone: '5551234567',
       password: 'secret',
     }).then(() => {
-      expect(createCustomer).toHaveBeenCalledWith('shopper', 'shopper@example.com', '5551234567', 'secret');
+      expect(createCustomer).toHaveBeenCalledWith('Shopper Jones', 'shopper@example.com', '5551234567', 'secret');
       expect(loginCustomer).toHaveBeenCalledWith('shopper@example.com', 'secret');
       expect(localStorage.getItem('jwtToken')).toBe('new-account-token');
       expect(hashHistory.replace).toHaveBeenCalledWith('/checkout?step=payment');
+    });
+  });
+
+  it('signs a phone-only account in with its phone number', () => {
+    const createCustomer = jest.fn(() => Promise.resolve({ value: { customerId: 43 } }));
+    const loginCustomer = jest.fn(() => Promise.resolve({ value: { token: 'phone-account-token' } }));
+    const container = makeContainer({ mode: 'create', createCustomer, loginCustomer });
+
+    return container.handleCreateUser({
+      name: 'Phone Shopper',
+      phone: '+1 555 123 4567',
+      password: 'secret',
+    }).then(() => {
+      expect(createCustomer).toHaveBeenCalledWith('Phone Shopper', undefined, '+1 555 123 4567', 'secret');
+      expect(loginCustomer).toHaveBeenCalledWith('+1 555 123 4567', 'secret');
     });
   });
 
