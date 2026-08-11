@@ -26,6 +26,10 @@ export default {
     .set('Authorization', `Bearer ${getJwtToken() || ''}`)
     .send(profile)
     .end((error, response) => cb(error, response && response.body)),
+  getOrders: cb => request
+    .get('/api/profile/orders')
+    .set('Authorization', `Bearer ${getJwtToken() || ''}`)
+    .end((error, response) => cb(error, response && response.body)),
   getWishlist: cb => request
     .get('/api/wishlist')
     .set('Authorization', `Bearer ${getJwtToken() || ''}`)

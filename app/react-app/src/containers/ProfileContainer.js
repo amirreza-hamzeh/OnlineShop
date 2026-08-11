@@ -4,9 +4,11 @@ import TopNav from '../components/TopNav'
 import Footer from '../components/Footer'
 import imageUrl from '../utils/imageUrl'
 import shop from '../api/shop'
+import products from '../api/products.json'
 import { getJwtToken, removeJwtToken } from '../actions/storage'
 import { createAuthLocation } from '../authNavigation'
 import { emptyProfileAddress, formatProfileAddress, parseProfileAddress } from '../utils/profileAddress'
+import { formatOrderDate } from '../utils/orderDate'
 import './ProfileContainer.css'
 
 export default class ProfileContainer extends Component {
@@ -14,6 +16,7 @@ export default class ProfileContainer extends Component {
   loadRequestId = 0
   state = {
     items: [], loading: true, error: '', profileLoading: true, profileError: '',
+    orders: [], ordersLoading: true, ordersError: '',
     profile: { firstName: '', lastName: '', email: '', phone: '' }, address: emptyProfileAddress(),
     editing: false, saving: false, saved: false
   }
@@ -26,6 +29,7 @@ export default class ProfileContainer extends Component {
     }
     this.loadWishlist()
     this.loadProfile()
+    this.loadOrders()
   }
 
   componentWillUnmount() {
@@ -69,6 +73,28 @@ export default class ProfileContainer extends Component {
       })
     })
   }
+
+  loadOrders = () => {
+    shop.getOrders((error, orders) => {
+      if (!this.active) return
+      if (error) {
+        if (error.status === 401) return this.signInAgain()
+        this.setState({ ordersLoading: false, ordersError: 'We could not load your orders. Please try again.' })
+        return
+      }
+      this.setState({ orders: orders || [], ordersLoading: false, ordersError: '' })
+    })
+  }
+
+  orderItems = order => Object.keys(order.productsOrdered || {}).map(productId => {
+    const product = products.find(candidate => candidate.productId === Number(productId))
+    return { productId, product, quantity: order.productsOrdered[productId] }
+  })
+
+  orderTotal = order => this.orderItems(order).reduce((subtotal, item) =>
+    subtotal + (item.product ? item.product.price * item.quantity : 0), 0) * 1.06
+
+  statusStep = status => ({ Processing: 1, Shipped: 2, Delivered: 3 }[status] || 1)
 
   signInAgain = () => {
     removeJwtToken()
@@ -163,6 +189,27 @@ export default class ProfileContainer extends Component {
               <div><span>Name</span><strong>{[this.state.profile.firstName, this.state.profile.lastName].filter(Boolean).join(' ') || 'Not provided'}</strong></div><div><span>Email</span><strong>{this.state.profile.email || 'Not provided'}</strong></div><div><span>Phone</span><strong>{this.state.profile.phone || 'Not provided'}</strong></div>
               <article className="addressCard"><div className="addressCardHeader"><span aria-hidden="true">&#8962;</span><div><b>Default delivery address</b><small>Used at checkout</small></div></div><p>{this.state.address.street ? formatProfileAddress(this.state.address) : 'Add an address to make checkout faster.'}</p><span className="defaultBadge">Default</span></article>
             </div> : null}
+          </section>
+          <section className="ordersPanel" aria-labelledby="orders-heading">
+            <div className="ordersHeading"><div><h2 id="orders-heading">My orders</h2><p>Track your purchases from confirmation to delivery.</p></div><span className="ordersCount">{this.state.orders.length} {this.state.orders.length === 1 ? 'order' : 'orders'}</span></div>
+            {this.state.ordersLoading ? <p className="profileStatus">Loading your orders…</p> : null}
+            {this.state.ordersError ? <p className="profileError" role="alert">{this.state.ordersError}</p> : null}
+            {!this.state.ordersLoading && !this.state.ordersError && !this.state.orders.length ? <div className="profileEmpty ordersEmpty"><span aria-hidden="true">&#128230;</span><h3>No orders yet</h3><p>Once you complete checkout, your order and its delivery status will appear here.</p><Link to="/">Start shopping</Link></div> : null}
+            <div className="ordersList">
+              {this.state.orders.map(order => {
+                const items = this.orderItems(order)
+                const step = this.statusStep(order.status)
+                return <article className="orderHistoryCard" key={order.orderId}>
+                  <header><div><small>Order</small><strong>#{order.orderId}</strong></div><div><small>Placed</small><strong>{formatOrderDate(order.orderDate)}</strong></div><div><small>Estimated total</small><strong>${this.orderTotal(order).toFixed(2)}</strong></div><span className={`orderStatus status${step}`}>{order.status || 'Processing'}</span></header>
+                  <div className="orderHistoryBody">
+                    <div className="orderItemList">{items.map(item => <div className="orderHistoryItem" key={item.productId}>{item.product ? <img src={imageUrl(item.product.image)} alt="" /> : null}<div><strong>{item.product ? item.product.name : `Product #${item.productId}`}</strong><small>Qty {item.quantity}</small></div></div>)}</div>
+                    <div className="orderProgress" aria-label={`Order status: ${order.status || 'Processing'}`}>
+                      <div className={step >= 1 ? 'complete' : ''}><span>&#10003;</span><b>Processing</b></div><i className={step >= 2 ? 'complete' : ''} /><div className={step >= 2 ? 'complete' : ''}><span>&#10003;</span><b>Shipped</b></div><i className={step >= 3 ? 'complete' : ''} /><div className={step >= 3 ? 'complete' : ''}><span>&#10003;</span><b>Delivered</b></div>
+                    </div>
+                  </div>
+                </article>
+              })}
+            </div>
           </section>
           <section className="wishlistPanel">
             <div><h2>Wish list</h2><p>Your saved products are stored here and available whenever you sign in.</p></div>

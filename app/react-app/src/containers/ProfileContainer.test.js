@@ -5,6 +5,7 @@ jest.mock('react-router', () => ({
 jest.mock('../api/shop', () => ({
   getProfile: jest.fn(),
   updateProfile: jest.fn(),
+  getOrders: jest.fn(),
   getWishlist: jest.fn(),
   removeFromWishlist: jest.fn(),
 }))
@@ -31,10 +32,26 @@ describe('wishlist profile', () => {
     shop.removeFromWishlist.mockReset()
     shop.getProfile.mockReset()
     shop.updateProfile.mockReset()
+    shop.getOrders.mockReset()
+    shop.getOrders.mockImplementation(callback => callback(null, []))
     shop.getProfile.mockImplementation(callback => callback(null, {
       firstName: 'Alex', lastName: 'Morgan', email: 'alex@example.com', phone: '555-0100',
       streetAddress: '123 Market Street', city: 'Seattle', region: 'WA', postalCode: '98101', country: 'United States'
     }))
+  })
+
+  it('shows completed orders with their current delivery status', () => {
+    shop.getWishlist.mockImplementation(callback => callback(null, []))
+    shop.getOrders.mockImplementation(callback => callback(null, [{
+      orderId: 42, orderDate: '2026-08-11', status: 'Shipped', productsOrdered: { 1: 2 }
+    }]))
+    const wrapper = shallow(<ProfileContainer location={{ pathname: '/profile' }} />)
+    wrapper.instance().componentDidMount()
+
+    expect(wrapper.find('.orderHistoryCard').text()).toContain('#42')
+    expect(wrapper.find('.orderHistoryCard').text()).toContain('Shipped')
+    expect(wrapper.find('.orderHistoryItem').text()).toContain('Everyday Canvas Tote')
+    expect(wrapper.find('.orderHistoryCard').text()).toContain('$72.08')
   })
 
   it('loads persisted products and removes them from the profile', () => {
@@ -46,7 +63,7 @@ describe('wishlist profile', () => {
     expect(wrapper.find('.wishlistCard h3 Link').prop('children')).toBe('Everyday Canvas Tote')
     wrapper.find('.wishlistCard button').simulate('click')
     expect(shop.removeFromWishlist).toHaveBeenCalledWith(1, expect.any(Function))
-    expect(wrapper.find('.profileEmpty').length).toBe(1)
+    expect(wrapper.find('.wishlistPanel .profileEmpty').length).toBe(1)
   })
 
   it('clears an expired token and returns to sign in', () => {
