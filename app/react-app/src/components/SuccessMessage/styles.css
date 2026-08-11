@@ -1,13 +1,39 @@
-.successMessage {
-  font-family: 'Open Sans';
-  font-size: 20px;
-  color: #56b25e;
-}
-
-.successContainer {
-  width: 100%;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.successPage { background: radial-gradient(circle at 50% 18%, rgba(204, 251, 241, .72), transparent 32%), linear-gradient(180deg, #f0fdfa 0, #f8fafc 48%, #fff 100%); color: #172033; font-family: "Open Sans", sans-serif; min-height: 100vh; }
+.successNav { align-items: center; background: #fff; border-bottom: 1px solid #e5eaf0; display: flex; justify-content: space-between; min-height: 74px; padding: 0 max(24px, calc((100% - 1120px) / 2)); }
+.successSecure { align-items: center; color: #667085; display: flex; font-size: 12px; font-weight: 700; gap: 7px; }
+.successSecure span { color: #0f766e; }
+.successShell { margin: 0 auto; max-width: 980px; padding: 34px 24px 55px; }
+.successSteps { align-items: center; color: #0f766e; display: flex; font-size: 12px; font-weight: 700; justify-content: center; margin: 0 auto 30px; max-width: 570px; }
+.successSteps span { align-items: center; display: flex; gap: 8px; white-space: nowrap; }
+.successSteps b { align-items: center; background: #dff5ef; border: 1px solid #bce6db; border-radius: 50%; display: flex; font-size: 11px; height: 25px; justify-content: center; width: 25px; }
+.successSteps .active b { background: #0f766e; border-color: #0f766e; box-shadow: 0 4px 12px rgba(15, 118, 110, .24); color: #fff; }
+.successSteps i { background: #a7d9cf; height: 1px; margin: 0 14px; width: 74px; }
+.successCard { background: rgba(255, 255, 255, .96); border: 1px solid #dfe9e7; border-radius: 26px; box-shadow: 0 28px 80px rgba(15, 65, 61, .12); overflow: hidden; padding: 45px 60px 40px; position: relative; text-align: center; }
+.successCard::before { background: linear-gradient(90deg, #0f766e, #2dd4bf, #f59e0b); content: ""; height: 5px; left: 0; position: absolute; right: 0; top: 0; }
+.successCelebration { align-items: center; display: flex; height: 88px; justify-content: center; margin-bottom: 8px; position: relative; }
+.successCheck { align-items: center; background: linear-gradient(145deg, #16a085, #0f766e); border: 8px solid #dff8f1; border-radius: 50%; box-shadow: 0 10px 28px rgba(15, 118, 110, .25); display: flex; height: 80px; justify-content: center; width: 80px; }
+.successCheck svg { height: 45px; width: 45px; }
+.successCheck path { fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5; }
+.spark { color: #f59e0b; font-size: 17px; position: absolute; }
+.sparkOne { margin-left: -138px; margin-top: -36px; }.sparkTwo { color: #2dd4bf; font-size: 11px; margin-left: -112px; margin-top: 48px; }.sparkThree { color: #2dd4bf; font-size: 12px; margin-left: 120px; margin-top: -44px; }.sparkFour { margin-left: 142px; margin-top: 36px; }
+.successEyebrow { color: #0f766e; display: block; font-size: 11px; font-weight: 900; letter-spacing: 1.7px; margin-top: 16px; text-transform: uppercase; }
+.successCard h1 { color: #172033; font-size: 34px; letter-spacing: -.8px; margin: 8px 0 9px; }
+.successMessage { color: #4a5568; font-size: 16px; font-weight: 700; margin: 0; }
+.successReassurance { color: #718096; font-size: 13px; line-height: 1.7; margin: 9px auto 28px; max-width: 570px; }
+.successJourney { align-items: center; background: #f7faf9; border: 1px solid #e3ecea; border-radius: 16px; display: grid; grid-template-columns: 1fr 42px 1fr 42px 1fr; padding: 20px 23px; text-align: left; }
+.journeyItem { align-items: center; color: #8792a2; display: flex; gap: 10px; }
+.journeyItem.complete { color: #0f766e; }
+.journeyIcon { align-items: center; background: #e8eeed; border-radius: 50%; display: flex; flex: 0 0 31px; font-size: 13px; font-weight: 900; height: 31px; justify-content: center; }
+.complete .journeyIcon { background: #d8f3eb; }
+.journeyItem strong, .journeyItem small { display: block; }.journeyItem strong { color: #344054; font-size: 12px; }.journeyItem small { font-size: 10px; margin-top: 3px; }.successJourney > i { border-top: 1px dashed #cbd5d2; height: 1px; margin: 0 8px; }
+.successActions { align-items: center; display: flex; gap: 12px; justify-content: center; margin-top: 29px; }
+.successPrimaryButton, .successSecondaryButton { border-radius: 10px; font-size: 13px; font-weight: 800; padding: 14px 21px; text-decoration: none; }
+.successPrimaryButton { align-items: center; background: linear-gradient(135deg, #16806f, #0d655d); box-shadow: 0 9px 20px rgba(13, 101, 93, .22); color: #fff; display: flex; gap: 18px; }
+.successPrimaryButton:hover { box-shadow: 0 12px 25px rgba(13, 101, 93, .3); transform: translateY(-1px); }
+.successSecondaryButton { background: #fff; border: 1px solid #ccd8d5; color: #3d4a59; }
+.successSecondaryButton:hover { background: #f6faf9; border-color: #8ebdb4; }
+.successTrust { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); margin: 24px 20px 0; }
+.successTrust > span { align-items: center; color: #657184; display: flex; gap: 11px; justify-content: center; }
+.successTrust b { color: #0f766e; font-size: 20px; }.successTrust strong, .successTrust small { display: block; }.successTrust strong { color: #344054; font-size: 11px; }.successTrust small { font-size: 9px; margin-top: 2px; }
+.successHelp { color: #8a94a3; font-size: 11px; margin: 27px 0 0; text-align: center; }.successHelp a { color: #0f766e; font-weight: 800; }
+@media (max-width: 700px) { .successShell { padding: 24px 14px 40px; }.successSteps i { margin: 0 6px; width: 20px; }.successSteps span { font-size: 0; }.successSteps span b { font-size: 11px; }.successCard { padding: 39px 20px 32px; }.successCard h1 { font-size: 28px; }.successJourney { gap: 11px; grid-template-columns: 1fr; }.successJourney > i { border-left: 1px dashed #cbd5d2; border-top: 0; height: 15px; margin-left: 15px; }.successActions { align-items: stretch; flex-direction: column; }.successPrimaryButton { justify-content: space-between; }.successSecondaryButton { text-align: center; }.successTrust { gap: 13px; grid-template-columns: 1fr; }.successTrust > span { justify-content: flex-start; }.successNav { padding: 0 17px; } }
