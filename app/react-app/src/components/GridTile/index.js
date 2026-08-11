@@ -10,7 +10,8 @@ const formatRating = rating => rating ? rating.toFixed(1) : 'New'
 
 export default class GridTile extends Component {
   addToCart = () => {
-    const { onAddToCartClicked, productId } = this.props
+    const { inventory, onAddToCartClicked, productId } = this.props
+    if (inventory <= 0) return
     onAddToCartClicked(productId)
   }
 
@@ -36,6 +37,7 @@ export default class GridTile extends Component {
       image,
       rating,
       reviewCount,
+      inventory,
     } = this.props
     const detailsPath = productPath(category, this.props.productId)
 
@@ -61,9 +63,10 @@ export default class GridTile extends Component {
             <div className="tileAdd">
               <Link className="tileDetailsLink" to={detailsPath}>View details</Link>
               <FlatButton
+                disabled={inventory <= 0}
                 onClick={this.addToCart}
                 labelStyle={{ color: '#0f766e', fontWeight: 700 }}
-                label="Add"
+                label={inventory <= 0 ? 'Out of stock' : 'Add'}
                 labelPosition="before"
                 icon={<AddIcon />}
               />

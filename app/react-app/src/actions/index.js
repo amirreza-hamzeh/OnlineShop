@@ -208,26 +208,6 @@ const addToCartUnsafe = productId => ({
   productId
 })
 
-export const incrementCartItem = productId => (dispatch, getState) => {
-  const state = getState()
-  const product = state.products && state.products.byId && state.products.byId[productId]
-  const quantity = state.cart.quantityById[productId] || 0
-
-  if (!product || typeof product.inventory !== 'number' || quantity < product.inventory) {
-    dispatch(addToCartUnsafe(productId))
-  }
-}
-
-export const decrementCartItem = productId => ({
-  type: types.DECREMENT_CART_ITEM,
-  productId
-})
-
-export const removeFromCart = productId => ({
-  type: types.REMOVE_FROM_CART,
-  productId
-})
-
 let hideCartNotificationTimer
 
 export const showAddToCart = () => (dispatch) => {
