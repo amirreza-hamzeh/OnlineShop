@@ -5,6 +5,9 @@ import {
   checkout,
   createOrder,
   purchaseOrder,
+  incrementCartItem,
+  decrementCartItem,
+  removeFromCart,
 } from '../actions'
 import { getTotal, getCartProducts, getTotalProducts, getCustomerId, getQuantityById } from '../reducers'
 import SuccessMessage from '../components/SuccessMessage'
@@ -83,6 +86,9 @@ class CheckoutContainer extends Component {
         onCheckoutClicked={() => checkout(products)}
         handleSubmit={this.handleSubmit}
         profile={this.state.profile}
+        onIncrement={this.props.incrementCartItem}
+        onDecrement={this.props.decrementCartItem}
+        onRemove={this.props.removeFromCart}
       />
     );
   }
@@ -123,7 +129,10 @@ CheckoutContainer.propTypes = {
   quantityById: PropTypes.object.isRequired,
   checkout: PropTypes.func.isRequired,
   createOrder: PropTypes.func.isRequired,
-  purchaseOrder: PropTypes.func.isRequired
+  purchaseOrder: PropTypes.func.isRequired,
+  incrementCartItem: PropTypes.func.isRequired,
+  decrementCartItem: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -136,5 +145,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { checkout, createOrder, purchaseOrder }
+  { checkout, createOrder, purchaseOrder, incrementCartItem, decrementCartItem, removeFromCart }
 )(CheckoutContainer)
