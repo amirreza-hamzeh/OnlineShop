@@ -40,6 +40,13 @@ export const itemJustAddedSelector = state => {
   return state.cart.itemJustAdded
 }
 
+export const getLastAddedProduct = state => {
+  const productId = state.cart.lastAddedProductId
+  return productId === null || productId === undefined
+    ? null
+    : getProduct(state, productId)
+}
+
 export const getTotal = state =>
   getAddedIds(state)
     .reduce((total, id) =>
