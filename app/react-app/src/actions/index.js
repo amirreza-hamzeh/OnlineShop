@@ -8,6 +8,7 @@ const UTILITY = '/utility'
 
 export const createOrder = (values) => (dispatch) => {
   const url = `${API}/order/`
+  const token = getJwtToken()
   let dispatchObj = {
     type: types.CREATE_ORDER,
     payload: {
@@ -16,6 +17,7 @@ export const createOrder = (values) => (dispatch) => {
         .post(url)
         // TODO: will there ever be some sort of authentication here? for username and password.
         .set('Content-Type', 'application/json')
+        .set('Authorization', 'Bearer ' + (token || ''))
         .accept('application/json')
         .send(
         {

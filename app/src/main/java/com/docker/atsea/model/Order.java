@@ -28,6 +28,11 @@ public class Order implements Serializable {
         
     @Column(name = "customerid")
     private Long customerId;
+
+    // Keep this nullable for databases that already contain orders. The getter
+    // supplies the initial state for legacy rows created before status existed.
+    @Column(name = "status")
+    private String status;
     
     @ElementCollection
     @MapKeyColumn(name="productid")
@@ -60,6 +65,21 @@ public class Order implements Serializable {
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
+
+    public String getStatus() {
+        if (status == null || status.trim().isEmpty()) return "Processing";
+        if ("shipped".equalsIgnoreCase(status)) return "Shipped";
+        if ("delivered".equalsIgnoreCase(status)) return "Delivered";
+        return "Processing";
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean hasStatus() {
+        return status != null && !status.trim().isEmpty();
+    }
     
     public long getOrderId() {
     	return orderId;
@@ -90,6 +110,7 @@ public class Order implements Serializable {
 		return "Order [customerId = " + customerId + 
 				      "orderDate= " + orderDate + 
 				      "orderId = "+ orderId + 
+				      "status = " + getStatus() +
 				      "productsOrdered = " + productsOrdered +
 				      "]";
 	}
