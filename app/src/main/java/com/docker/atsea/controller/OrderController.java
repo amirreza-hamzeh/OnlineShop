@@ -89,6 +89,28 @@ public class OrderController {
 		return new ResponseEntity<CustomErrorType>(new CustomErrorType("Sign in to access your orders"), HttpStatus.UNAUTHORIZED);
 	}
 
+	@RequestMapping(value = "/profile/orders", method = RequestMethod.GET)
+	public ResponseEntity<?> listCustomerOrders(HttpServletRequest request) {
+		Customer customer = authenticatedCustomer(request);
+		if (customer == null) return unauthorized();
+		return new ResponseEntity<List<Order>>(orderService.findOrdersByCustomerId(customer.getCustomerId()), HttpStatus.OK);
+	}
+
+	private Customer authenticatedCustomer(HttpServletRequest request) {
+		String header = request.getHeader("Authorization");
+		if (header == null || !header.startsWith("Bearer ")) return null;
+		try {
+			Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(header.substring(7)).getBody();
+			return customerService.findByUserName(claims.getSubject());
+		} catch (JwtException | IllegalArgumentException exception) {
+			return null;
+		}
+	}
+
+	private ResponseEntity<CustomErrorType> unauthorized() {
+		return new ResponseEntity<CustomErrorType>(new CustomErrorType("Sign in to access your orders"), HttpStatus.UNAUTHORIZED);
+	}
+
 
 	// ------------------- Delete an Order-----------------------------------------
 
