@@ -2,19 +2,19 @@ version: "3.1"
 
 services:
 
-  atsea-database:
-    image: atsea-db
+  onlineshop-database:
+    image: onlineshop-db
     ports:
       - "1433:1433"
     networks:
       - app-net
 
-  atsea-api:
-    image: atsea-api
+  onlineshop-api:
+    image: onlineshop-api
     ports:
       - "8080:8080" 
     depends_on:
-      - atsea-database
+      - onlineshop-database
     networks:
       - app-net
 

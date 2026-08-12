@@ -8,11 +8,11 @@ RUN Remove-Website -Name 'Default Web Site'; `
     New-Item -Path 'C:\web-app' -Type Directory; `
     New-Website -Name 'web-app' -PhysicalPath 'C:\web-app' -Port 8080 -Force
 
-COPY out/_PublishedWebsites/Docker.AtSea.Api /web-app
+COPY out/_PublishedWebsites/Docker.OnlineShop.Api /web-app
 
 HEALTHCHECK CMD powershell -command `
     try { `
-     $response = iwr http://localhost:8080/atsea/utility/containerid -UseBasicParsing; `
+     $response = iwr http://localhost:8080/onlineshop/utility/containerid -UseBasicParsing; `
      if ($response.StatusCode -eq 200) { return 0} `
      else {return 1}; `
     } catch { return 1 }

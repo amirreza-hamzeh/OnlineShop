@@ -1,9 +1,9 @@
-![](atsea_store.png)
-#  AtSea Shop Demonstration Application
+![](onlineshop_store.png)
+#  OnlineShop Shop Demonstration Application
 
-The AtSea Shop is a demonstration application comprised of: 
+The OnlineShop Shop is a demonstration application comprised of:
 
-* Java REST application written using Spring-Boot, 
+* Java REST application written using Spring-Boot,
 * a database for product inventory, customer data, and orders,
 * a React shopping cart,
 * a NGINX reverse proxy implementing https,
@@ -13,7 +13,7 @@ The AtSea Shop is a demonstration application comprised of:
 
 This example uses features in Docker 17.05 CE Edge. Install this version to run the example.
 
-# Building and Running the AtSea Shop
+# Building and Running the OnlineShop Shop
 
 ## Secrets
 
@@ -34,12 +34,12 @@ docker secret create postgres_password certs/domain.key
 To create a secret for staging the payment gateway:
 
 ```
-echo staging | docker secret create staging_token - 
+echo staging | docker secret create staging_token -
 ```
 
 ## Run as an application
 
-To run the AtSea shop as an application:
+To run the OnlineShop shop as an application:
 ```
 docker-compose up --build
 ```
@@ -48,7 +48,7 @@ docker-compose up --build
 ```
 #If you need to create a Swarm
 docker swarm init
-docker stack deploy -c docker-stack.yml atsea
+docker stack deploy -c docker-stack.yml onlineshop
 ```
 
 ## A simplified development environment
@@ -60,7 +60,7 @@ docker-compose --file docker-compose-dev.yml up --build
 
 
 
-## The AtSea Shop 
+## The OnlineShop Shop
 
 The URL for the content is `http://localhost:8080/`
 

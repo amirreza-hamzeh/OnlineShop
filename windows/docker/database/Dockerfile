@@ -13,7 +13,7 @@ CMD ./InitializeDatabase.ps1 -sa_password $env:sa_password -Verbose
 
 HEALTHCHECK CMD powershell -command `
     try { `
-     $result = invoke-sqlcmd -Query 'SELECT TOP 1 1 FROM Products' -Database AtSeaDB; `
+     $result = invoke-sqlcmd -Query 'SELECT TOP 1 1 FROM Products' -Database OnlineShopDB; `
      if ($result[0] -eq 1) { return 0} `
      else {return 1}; `
     } catch { return 1 }
