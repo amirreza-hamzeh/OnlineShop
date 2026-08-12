@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </section>
       <div className='copyright'>
-        &copy; 2017 At Sea Shop. Shop thoughtfully, shop confidently.
+        &copy; 2026 OnlineShop. Shop thoughtfully, shop confidently.
       </div>
     </footer>
 

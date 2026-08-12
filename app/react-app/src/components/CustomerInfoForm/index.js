@@ -51,7 +51,7 @@ class CustomerInfoForm extends Component {
           <Field name="address" component={field => <Input field={field} label="Street address" hintText="123 Market Street" autoComplete="billing street-address" />} />
           <div className="infoRow compactRow">
             <Field name="city" component={field => <Input field={field} label="City" hintText="Seattle" autoComplete="billing address-level2" />} />
-            <Field name="zipCode" component={field => <Input field={field} label="ZIP code" hintText="98101" autoComplete="billing postal-code" />} />
+            <Field name="zipCode" component={field => <Input field={field} label="Postal code" hintText="98101" autoComplete="billing postal-code" />} />
           </div>
 
           {error ? <div className="checkoutError" role="alert">{error}</div> : null}

@@ -39,7 +39,7 @@ const validate = values => {
   if (!/^\d{3,4}$/.test(values.cvv || '')) errors.cvv = 'Enter 3 or 4 digits'
   if (!values.address || !values.address.trim()) errors.address = 'Street address is required'
   if (!values.city || !values.city.trim()) errors.city = 'City is required'
-  if (!/^\d{5}(-\d{4})?$/.test(values.zipCode || '')) errors.zipCode = 'Enter a valid ZIP code'
+  if (!/^\d{10}(-\d{4})?$/.test(values.zipCode || '')) errors.zipCode = 'Enter a valid Postal code'
   return errors
 }
 

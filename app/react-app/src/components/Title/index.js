@@ -7,7 +7,7 @@ import './styles.css'
 const Title = ({ totalProducts }) => (
   <div className='shopUtilityBar'>
     <div className='titleBar'>
-      <div className='productsSection'>Modern marketplace</div>
+      <div className='productsSection'>Marketplace</div>
       <div className='titleActions'>
         <Cart total={totalProducts} />
         <div className="checkout-button">
