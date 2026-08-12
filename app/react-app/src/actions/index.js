@@ -222,6 +222,21 @@ export const addToCart = productId => (dispatch, getState) => {
   }, 2500)
 }
 
+export const incrementCartItem = productId => ({
+  type: types.INCREMENT_CART_ITEM,
+  productId
+})
+
+export const decrementCartItem = productId => ({
+  type: types.DECREMENT_CART_ITEM,
+  productId
+})
+
+export const removeFromCart = productId => ({
+  type: types.REMOVE_FROM_CART,
+  productId
+})
+
 export const checkout = products => (dispatch, getState) => {
   const { cart } = getState()
 

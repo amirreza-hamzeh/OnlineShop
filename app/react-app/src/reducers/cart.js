@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  INCREMENT_CART_ITEM,
   DECREMENT_CART_ITEM,
   REMOVE_FROM_CART,
   SHOW_ADD_TO_CART,
@@ -56,6 +57,38 @@ const cart = (state = initialState, action) => {
         quantityById: quantityById(state.quantityById, action),
         lastAddedProductId: action.productId,
       }
+    case INCREMENT_CART_ITEM: {
+      const currentQuantity = getQuantity(state, action.productId)
+      if (currentQuantity === 0) return state
+      return {
+        ...state,
+        quantityById: {
+          ...state.quantityById,
+          [action.productId]: currentQuantity + 1
+        }
+      }
+    }
+    case DECREMENT_CART_ITEM: {
+      const currentQuantity = getQuantity(state, action.productId)
+      if (currentQuantity <= 1) return state
+      return {
+        ...state,
+        quantityById: {
+          ...state.quantityById,
+          [action.productId]: currentQuantity - 1
+        }
+      }
+    }
+    case REMOVE_FROM_CART: {
+      if (state.addedIds.indexOf(action.productId) === -1) return state
+      const nextQuantityById = { ...state.quantityById }
+      delete nextQuantityById[action.productId]
+      return {
+        ...state,
+        addedIds: state.addedIds.filter(productId => productId !== action.productId),
+        quantityById: nextQuantityById
+      }
+    }
     case SHOW_ADD_TO_CART:
       return {
         ...state,
