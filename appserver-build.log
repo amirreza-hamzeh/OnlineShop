@@ -1,6 +1,6 @@
 --progress is a global compose flag, better use `docker compose --progress xx build ...
-time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-app/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- Image atsea_app Building 
+time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/onlineshop-sample-shop-app/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image onlineshop_app Building
 #1 [internal] load local bake definitions
 #1 reading from stdin 570B done
 #1 DONE 0.0s
@@ -30,14 +30,14 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #8 resolve docker.io/library/node:latest@sha256:0473e7dc433a1310f436edee02aa79737ec78a4b345433ab0963d4a256f9ad85 0.0s done
 #8 DONE 0.0s
 
-#9 [storefront 2/5] WORKDIR /usr/src/atsea/app/react-app
+#9 [storefront 2/5] WORKDIR /usr/src/onlineshop/app/react-app
 #9 CACHED
 
 #10 [appserver 1/6] FROM docker.io/library/maven:latest@sha256:d5617b9a6307e1b51dc7c55edf09bacb66f1c91fb861949c34a3a0d4e16bd241
 #10 resolve docker.io/library/maven:latest@sha256:d5617b9a6307e1b51dc7c55edf09bacb66f1c91fb861949c34a3a0d4e16bd241 0.0s done
 #10 DONE 0.0s
 
-#11 [appserver 2/6] WORKDIR /usr/src/atsea
+#11 [appserver 2/6] WORKDIR /usr/src/onlineshop
 #11 CACHED
 
 #12 [internal] load build context
@@ -95,9 +95,9 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #18 5.518 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/16/apache-16.pom (15 kB at 121 kB/s)
 #18 5.528 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-dependency-plugin/2.10/maven-dependency-plugin-2.10.jar
 #18 5.871 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-dependency-plugin/2.10/maven-dependency-plugin-2.10.jar (160 kB at 466 kB/s)
-#18 5.896 [INFO] 
-#18 5.897 [INFO] -----------------------< com.docker.atsea:AtSea >-----------------------
-#18 5.897 [INFO] Building atsea 0.0.1-SNAPSHOT
+#18 5.896 [INFO]
+#18 5.897 [INFO] -----------------------< com.docker.onlineshop:OnlineShop >-----------------------
+#18 5.897 [INFO] Building onlineshop 0.0.1-SNAPSHOT
 #18 5.901 [INFO]   from pom.xml
 #18 5.901 [INFO] --------------------------------[ jar ]---------------------------------
 #18 5.925 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-web/1.5.3.RELEASE/spring-boot-starter-web-1.5.3.RELEASE.pom
@@ -711,8 +711,8 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #18 45.03 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/rest-assured/xml-path/3.0.2/xml-path-3.0.2.jar (71 kB at 6.0 kB/s)
 #18 45.16 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar (435 kB at 36 kB/s)
 #18 46.48 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/groovy/groovy/2.4.10/groovy-2.4.10.jar (4.6 MB at 341 kB/s)
-#18 46.55 [INFO] 
-#18 46.55 [INFO] --- dependency:2.10:resolve (default-cli) @ AtSea ---
+#18 46.55 [INFO]
+#18 46.55 [INFO] --- dependency:2.10:resolve (default-cli) @ OnlineShop ---
 #18 46.56 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.2.1/maven-artifact-2.2.1.pom
 #18 46.71 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.2.1/maven-artifact-2.2.1.pom (1.6 kB at 10 kB/s)
 #18 46.72 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven/2.2.1/maven-2.2.1.pom
@@ -1325,7 +1325,7 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #18 85.16 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.jar (134 kB at 45 kB/s)
 #18 85.25 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/classworlds/classworlds/1.1/classworlds-1.1.jar (38 kB at 12 kB/s)
 #18 85.54 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar (575 kB at 172 kB/s)
-#18 85.73 [INFO] 
+#18 85.73 [INFO]
 #18 85.73 [INFO] The following files have been resolved:
 #18 85.73 [INFO]    org.springframework.boot:spring-boot-starter-aop:jar:1.5.3.RELEASE:compile
 #18 85.73 [INFO]    org.apache.commons:commons-lang3:jar:3.4:compile
@@ -1451,7 +1451,7 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #18 85.73 [INFO]    org.springframework.boot:spring-boot-starter-security:jar:1.5.3.RELEASE:compile
 #18 85.73 [INFO]    com.fasterxml:classmate:jar:1.3.3:compile
 #18 85.73 [INFO]    com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:test
-#18 85.73 [INFO] 
+#18 85.73 [INFO]
 #18 85.73 [INFO] ------------------------------------------------------------------------
 #18 85.73 [INFO] BUILD SUCCESS
 #18 85.73 [INFO] ------------------------------------------------------------------------
@@ -1468,9 +1468,9 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 
 #20 [appserver 6/6] RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
 #20 1.285 [INFO] Scanning for projects...
-#20 1.406 [INFO] 
-#20 1.407 [INFO] -----------------------< com.docker.atsea:AtSea >-----------------------
-#20 1.407 [INFO] Building atsea 0.0.1-SNAPSHOT
+#20 1.406 [INFO]
+#20 1.407 [INFO] -----------------------< com.docker.onlineshop:OnlineShop >-----------------------
+#20 1.407 [INFO] Building onlineshop 0.0.1-SNAPSHOT
 #20 1.407 [INFO]   from pom.xml
 #20 1.407 [INFO] --------------------------------[ jar ]---------------------------------
 #20 1.554 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-maven-plugin/1.5.3.RELEASE/spring-boot-maven-plugin-1.5.3.RELEASE.pom
@@ -1502,8 +1502,8 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #20 4.027 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.6/maven-jar-plugin-2.6.jar
 #20 4.181 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/2.6/maven-jar-plugin-2.6.jar (26 kB at 168 kB/s)
 #20 4.340 [WARNING] 1 problem was encountered while building the effective model for org.javassist:javassist:jar:3.21.0-GA during dependency collection step for project (use -X to see details)
-#20 4.614 [INFO] 
-#20 4.617 [INFO] --- resources:2.6:resources (default-resources) @ AtSea ---
+#20 4.614 [INFO]
+#20 4.617 [INFO] --- resources:2.6:resources (default-resources) @ OnlineShop ---
 #20 4.628 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.pom
 #20 4.752 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.0.6/maven-project-2.0.6.pom (2.6 kB at 21 kB/s)
 #20 4.757 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.0.6/maven-settings-2.0.6.pom
@@ -1599,8 +1599,8 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #20 9.503 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 #20 9.508 [INFO] Copying 1 resource
 #20 9.518 [INFO] Copying 0 resource
-#20 9.519 [INFO] 
-#20 9.519 [INFO] --- compiler:3.1:compile (default-compile) @ AtSea ---
+#20 9.519 [INFO]
+#20 9.519 [INFO] --- compiler:3.1:compile (default-compile) @ OnlineShop ---
 #20 9.525 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.pom
 #20 9.673 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0.9/maven-plugin-api-2.0.9.pom (1.5 kB at 10 kB/s)
 #20 9.684 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven/2.0.9/maven-2.0.9.pom
@@ -1714,222 +1714,222 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #20 15.02 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/log4j/log4j/1.2.12/log4j-1.2.12.jar (358 kB at 307 kB/s)
 #20 15.08 [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/collections/google-collections/1.0/google-collections-1.0.jar (640 kB at 518 kB/s)
 #20 15.16 [INFO] Changes detected - recompiling the module!
-#20 15.16 [INFO] Compiling 26 source files to /usr/src/atsea/target/classes
+#20 15.16 [INFO] Compiling 26 source files to /usr/src/onlineshop/target/classes
 #20 15.68 [INFO] -------------------------------------------------------------
-#20 15.68 [ERROR] COMPILATION ERROR : 
+#20 15.68 [ERROR] COMPILATION ERROR :
 #20 15.68 [INFO] -------------------------------------------------------------
 #20 15.69 [ERROR] error reading /usr/share/maven/ref/repository/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar; Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/model/Product.java:[1,1] cannot access com.docker.atsea.model
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/model/Product.java:[1,1] cannot access com.docker.onlineshop.model
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/CustomerRepository.java:[1,1] cannot access com.docker.atsea.repositories
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/CustomerRepository.java:[1,1] cannot access com.docker.onlineshop.repositories
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/PurchaseController.java:[1,1] cannot access com.docker.atsea.controller
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/PurchaseController.java:[1,1] cannot access com.docker.onlineshop.controller
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/security/JwtFilter.java:[1,1] cannot access com.docker.atsea.security
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/security/JwtFilter.java:[1,1] cannot access com.docker.onlineshop.security
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/util/CustomErrorType.java:[1,1] cannot access com.docker.atsea.util
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/util/CustomErrorType.java:[1,1] cannot access com.docker.onlineshop.util
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/service/OrderServiceImpl.java:[1,1] cannot access com.docker.atsea.service
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/service/OrderServiceImpl.java:[1,1] cannot access com.docker.onlineshop.service
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/WebConfiguration.java:[1,1] cannot access com.docker.atsea.configuration
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/WebConfiguration.java:[1,1] cannot access com.docker.onlineshop.configuration
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/AtSeaApp.java:[1,1] cannot access com.docker.atsea
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/OnlineShopApp.java:[1,1] cannot access com.docker.onlineshop
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[25,8] cannot access java.lang
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[25,8] cannot access java.lang
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[23,2] cannot find symbol
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[23,2] cannot find symbol
 #20 15.69   symbol: class RestController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[24,2] cannot find symbol
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[24,2] cannot find symbol
 #20 15.69   symbol: class RequestMapping
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[27,29] cannot find symbol
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[27,29] cannot find symbol
 #20 15.69   symbol:   class Logger
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[30,9] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[30,9] cannot find symbol
 #20 15.69   symbol:   class OrderService
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[39,59] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[39,59] cannot find symbol
 #20 15.69   symbol:   class Order
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[39,72] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[39,72] cannot find symbol
 #20 15.69   symbol:   class UriComponentsBuilder
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[39,16] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[39,16] cannot find symbol
 #20 15.69   symbol:   class ResponseEntity
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[63,16] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[63,16] cannot find symbol
 #20 15.69   symbol:   class ResponseEntity
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[80,16] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[80,16] cannot find symbol
 #20 15.69   symbol:   class ResponseEntity
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[80,31] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[80,31] cannot find symbol
 #20 15.69   symbol:   class List
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[80,36] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[80,36] cannot find symbol
 #20 15.69   symbol:   class Order
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[93,16] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[93,16] cannot find symbol
 #20 15.69   symbol:   class ResponseEntity
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[107,98] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[107,98] cannot find symbol
 #20 15.69   symbol:   class Order
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[107,16] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[107,16] cannot find symbol
 #20 15.69   symbol:   class ResponseEntity
-#20 15.69   location: class com.docker.atsea.controller.OrderController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[21,8] cannot access com.docker
+#20 15.69   location: class com.docker.onlineshop.controller.OrderController
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[21,8] cannot access com.docker
 #20 15.69   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[19,2] cannot find symbol
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[19,2] cannot find symbol
 #20 15.69   symbol: class RestController
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[20,2] cannot find symbol
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[20,2] cannot find symbol
 #20 15.69   symbol: class RequestMapping
-#20 15.69 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[22,29] cannot find symbol
+#20 15.69 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[22,29] cannot find symbol
 #20 15.69   symbol:   class Logger
-#20 15.69   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[25,9] cannot find symbol
+#20 15.69   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[25,9] cannot find symbol
 #20 15.70   symbol:   class ProductService
-#20 15.70   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[35,16] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[35,16] cannot find symbol
 #20 15.70   symbol:   class ResponseEntity
-#20 15.70   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[35,31] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[35,31] cannot find symbol
 #20 15.70   symbol:   class List
-#20 15.70   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[35,36] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[35,36] cannot find symbol
 #20 15.70   symbol:   class Product
-#20 15.70   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[47,16] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[47,16] cannot find symbol
 #20 15.70   symbol:   class ResponseEntity
-#20 15.70   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[14,8] cannot access com
+#20 15.70   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[14,8] cannot access com
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[17,16] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[17,16] cannot find symbol
 #20 15.70   symbol:   class CustomerService
-#20 15.70   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[22,16] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[22,16] cannot find symbol
 #20 15.70   symbol:   class OrderService
-#20 15.70   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[27,16] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[27,16] cannot find symbol
 #20 15.70   symbol:   class ProductService
-#20 15.70   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[34,16] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[34,16] cannot find symbol
 #20 15.70   symbol:   class ComboPooledDataSource
-#20 15.70   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[3,8] cannot access org
+#20 15.70   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[3,8] cannot access org
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[3,11] cannot access org.springframework
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[3,11] cannot access org.springframework
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[3,47] import requires canonical name for <any>.data.jpa.repository.JpaRepository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[4,27] cannot access org.springframework.stereotype
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[3,47] import requires canonical name for <any>.data.jpa.repository.JpaRepository
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[4,27] cannot access org.springframework.stereotype
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[4,38] package org.springframework.stereotype does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[5,27] cannot access org.springframework.transaction
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[4,38] package org.springframework.stereotype does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[5,27] cannot access org.springframework.transaction
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[5,39] cannot access org.springframework.transaction.annotation
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[5,39] cannot access org.springframework.transaction.annotation
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[5,50] import requires canonical name for <any>.Transactional
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[7,30] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[5,50] import requires canonical name for <any>.Transactional
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[7,30] cannot find symbol
 #20 15.70   symbol:   class Product
-#20 15.70   location: package com.docker.atsea.model
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[11,44] cannot find symbol
+#20 15.70   location: package com.docker.onlineshop.model
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[11,44] cannot find symbol
 #20 15.70   symbol: class JpaRepository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[9,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[9,2] cannot find symbol
 #20 15.70   symbol: class Repository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[10,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[10,2] cannot find symbol
 #20 15.70   symbol: class Transactional
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[11,58] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[11,58] cannot find symbol
 #20 15.70   symbol: class Product
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[11,67] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[11,67] cannot find symbol
 #20 15.70   symbol: class Long
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[13,9] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[13,9] cannot find symbol
 #20 15.70   symbol:   class Product
-#20 15.70   location: interface com.docker.atsea.repositories.ProductRepository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[3,11] cannot access org.json
+#20 15.70   location: interface com.docker.onlineshop.repositories.ProductRepository
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[3,11] cannot access org.json
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[3,16] cannot access org.json.simple
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[3,16] cannot access org.json.simple
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[3,23] import requires canonical name for <any>.JSONObject
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[4,27] cannot access org.springframework.beans
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[3,23] import requires canonical name for <any>.JSONObject
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[4,27] cannot access org.springframework.beans
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[4,33] cannot access org.springframework.beans.factory
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[4,33] cannot access org.springframework.beans.factory
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[4,52] import requires canonical name for <any>.annotation.Autowired
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[5,27] cannot access org.springframework.http
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[4,52] import requires canonical name for <any>.annotation.Autowired
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[5,27] cannot access org.springframework.http
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[5,32] package org.springframework.http does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[6,32] package org.springframework.http does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[7,27] cannot access org.springframework.web
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[5,32] package org.springframework.http does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[6,32] package org.springframework.http does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[7,27] cannot access org.springframework.web
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[7,31] cannot access org.springframework.web.bind
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[7,31] cannot access org.springframework.web.bind
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[7,47] import requires canonical name for <any>.annotation.RequestMapping
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[8,36] cannot access org.springframework.web.bind.annotation
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[7,47] import requires canonical name for <any>.annotation.RequestMapping
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[8,36] cannot access org.springframework.web.bind.annotation
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[8,47] package org.springframework.web.bind.annotation does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[9,47] package org.springframework.web.bind.annotation does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[11,29] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[8,47] package org.springframework.web.bind.annotation does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[9,47] package org.springframework.web.bind.annotation does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[11,29] cannot find symbol
 #20 15.70   symbol:   class CustomErrorType
-#20 15.70   location: package com.docker.atsea.util
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[13,27] cannot access org.springframework.jdbc
+#20 15.70   location: package com.docker.onlineshop.util
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[13,27] cannot access org.springframework.jdbc
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[13,32] cannot access org.springframework.jdbc.core
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[13,32] cannot access org.springframework.jdbc.core
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[13,37] import requires canonical name for <any>.JdbcTemplate
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[14,11] cannot access org.slf4j
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[13,37] import requires canonical name for <any>.JdbcTemplate
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[14,11] cannot access org.slf4j
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[14,17] package org.slf4j does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[15,17] package org.slf4j does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[17,8] cannot access java
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[14,17] package org.slf4j does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[15,17] package org.slf4j does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[17,8] cannot access java
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[17,12] cannot access java.net
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[17,12] cannot access java.net
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[17,16] import requires canonical name for <any>.InetAddress
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[21,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[17,16] import requires canonical name for <any>.InetAddress
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[21,2] cannot find symbol
 #20 15.70   symbol: class RestController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[22,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[22,2] cannot find symbol
 #20 15.70   symbol: class RequestMapping
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[25,29] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[25,29] cannot find symbol
 #20 15.70   symbol:   class Logger
-#20 15.70   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[28,9] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[28,9] cannot find symbol
 #20 15.70   symbol:   class JdbcTemplate
-#20 15.70   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[34,12] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[34,12] cannot find symbol
 #20 15.70   symbol:   class ResponseEntity
-#20 15.70   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[53,16] cannot find symbol
+#20 15.70   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[53,16] cannot find symbol
 #20 15.70   symbol:   class ResponseEntity
-#20 15.70   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[3,12] cannot access java.util
+#20 15.70   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[3,12] cannot access java.util
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[4,12] cannot access java.io
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[4,12] cannot access java.io
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[8,8] cannot access javax
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[8,8] cannot access javax
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[8,13] cannot access javax.naming
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[8,13] cannot access javax.naming
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[8,20] import requires canonical name for <any>.NamingException
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[9,13] cannot access javax.persistence
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[8,20] import requires canonical name for <any>.NamingException
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[9,13] cannot access javax.persistence
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[9,25] package javax.persistence does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[10,13] cannot access javax.sql
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[9,25] package javax.persistence does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[10,13] cannot access javax.sql
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[12,11] cannot access org.apache
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[12,11] cannot access org.apache
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[12,18] cannot access org.apache.commons
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[12,18] cannot access org.apache.commons
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[12,32] import requires canonical name for <any>.lang3.StringUtils
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[13,41] cannot access org.springframework.beans.factory.annotation
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[12,32] import requires canonical name for <any>.lang3.StringUtils
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[13,41] cannot access org.springframework.beans.factory.annotation
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[13,52] package org.springframework.beans.factory.annotation does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,27] cannot access org.springframework.boot
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[13,52] package org.springframework.beans.factory.annotation does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,27] cannot access org.springframework.boot
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,32] cannot access org.springframework.boot.autoconfigure
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,32] cannot access org.springframework.boot.autoconfigure
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,51] import requires canonical name for <any>.jdbc.DataSourceBuilder
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[15,46] cannot access org.springframework.boot.autoconfigure.jdbc
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,51] import requires canonical name for <any>.jdbc.DataSourceBuilder
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[15,46] cannot access org.springframework.boot.autoconfigure.jdbc
 #20 15.70   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [INFO] 101 errors 
+#20 15.70 [INFO] 101 errors
 #20 15.70 [INFO] -------------------------------------------------------------
 #20 15.70 [INFO] ------------------------------------------------------------------------
 #20 15.70 [INFO] BUILD FAILURE
@@ -1937,223 +1937,223 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #20 15.70 [INFO] Total time:  14.424 s
 #20 15.70 [INFO] Finished at: 2026-07-26T23:50:17Z
 #20 15.70 [INFO] ------------------------------------------------------------------------
-#20 15.70 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project AtSea: Compilation failure: Compilation failure: 
+#20 15.70 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project OnlineShop: Compilation failure: Compilation failure:
 #20 15.70 [ERROR] error reading /usr/share/maven/ref/repository/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar; Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/model/Product.java:[1,1] cannot access com.docker.atsea.model
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/model/Product.java:[1,1] cannot access com.docker.onlineshop.model
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/CustomerRepository.java:[1,1] cannot access com.docker.atsea.repositories
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/CustomerRepository.java:[1,1] cannot access com.docker.onlineshop.repositories
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/PurchaseController.java:[1,1] cannot access com.docker.atsea.controller
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/PurchaseController.java:[1,1] cannot access com.docker.onlineshop.controller
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/security/JwtFilter.java:[1,1] cannot access com.docker.atsea.security
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/security/JwtFilter.java:[1,1] cannot access com.docker.onlineshop.security
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/util/CustomErrorType.java:[1,1] cannot access com.docker.atsea.util
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/util/CustomErrorType.java:[1,1] cannot access com.docker.onlineshop.util
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/service/OrderServiceImpl.java:[1,1] cannot access com.docker.atsea.service
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/service/OrderServiceImpl.java:[1,1] cannot access com.docker.onlineshop.service
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/WebConfiguration.java:[1,1] cannot access com.docker.atsea.configuration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/WebConfiguration.java:[1,1] cannot access com.docker.onlineshop.configuration
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/AtSeaApp.java:[1,1] cannot access com.docker.atsea
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/OnlineShopApp.java:[1,1] cannot access com.docker.onlineshop
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[25,8] cannot access java.lang
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[25,8] cannot access java.lang
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[23,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[23,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class RestController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[24,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[24,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class RequestMapping
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[27,29] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[27,29] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Logger
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[30,9] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[30,9] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class OrderService
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[39,59] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[39,59] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Order
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[39,72] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[39,72] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class UriComponentsBuilder
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[39,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[39,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[63,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[63,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[80,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[80,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[80,31] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[80,31] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class List
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[80,36] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[80,36] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Order
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[93,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[93,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[107,98] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[107,98] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Order
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/OrderController.java:[107,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/OrderController.java:[107,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.OrderController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[21,8] cannot access com.docker
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.OrderController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[21,8] cannot access com.docker
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[19,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[19,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class RestController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[20,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[20,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class RequestMapping
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[22,29] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[22,29] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Logger
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[25,9] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[25,9] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ProductService
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[35,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[35,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[35,31] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[35,31] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class List
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[35,36] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[35,36] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Product
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/ProductController.java:[47,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/ProductController.java:[47,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.ProductController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[14,8] cannot access com
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.ProductController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[14,8] cannot access com
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[17,16] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[17,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class CustomerService
-#20 15.70 [ERROR]   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[22,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[22,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class OrderService
-#20 15.70 [ERROR]   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[27,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[27,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ProductService
-#20 15.70 [ERROR]   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/BeanConfiguration.java:[34,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/BeanConfiguration.java:[34,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ComboPooledDataSource
-#20 15.70 [ERROR]   location: class com.docker.atsea.configuration.BeanConfiguration
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[3,8] cannot access org
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.configuration.BeanConfiguration
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[3,8] cannot access org
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[3,11] cannot access org.springframework
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[3,11] cannot access org.springframework
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[3,47] import requires canonical name for <any>.data.jpa.repository.JpaRepository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[4,27] cannot access org.springframework.stereotype
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[3,47] import requires canonical name for <any>.data.jpa.repository.JpaRepository
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[4,27] cannot access org.springframework.stereotype
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[4,38] package org.springframework.stereotype does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[5,27] cannot access org.springframework.transaction
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[4,38] package org.springframework.stereotype does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[5,27] cannot access org.springframework.transaction
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[5,39] cannot access org.springframework.transaction.annotation
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[5,39] cannot access org.springframework.transaction.annotation
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[5,50] import requires canonical name for <any>.Transactional
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[7,30] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[5,50] import requires canonical name for <any>.Transactional
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[7,30] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Product
-#20 15.70 [ERROR]   location: package com.docker.atsea.model
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[11,44] cannot find symbol
+#20 15.70 [ERROR]   location: package com.docker.onlineshop.model
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[11,44] cannot find symbol
 #20 15.70 [ERROR]   symbol: class JpaRepository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[9,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[9,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class Repository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[10,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[10,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class Transactional
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[11,58] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[11,58] cannot find symbol
 #20 15.70 [ERROR]   symbol: class Product
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[11,67] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[11,67] cannot find symbol
 #20 15.70 [ERROR]   symbol: class Long
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/repositories/ProductRepository.java:[13,9] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/repositories/ProductRepository.java:[13,9] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Product
-#20 15.70 [ERROR]   location: interface com.docker.atsea.repositories.ProductRepository
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[3,11] cannot access org.json
+#20 15.70 [ERROR]   location: interface com.docker.onlineshop.repositories.ProductRepository
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[3,11] cannot access org.json
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[3,16] cannot access org.json.simple
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[3,16] cannot access org.json.simple
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[3,23] import requires canonical name for <any>.JSONObject
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[4,27] cannot access org.springframework.beans
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[3,23] import requires canonical name for <any>.JSONObject
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[4,27] cannot access org.springframework.beans
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[4,33] cannot access org.springframework.beans.factory
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[4,33] cannot access org.springframework.beans.factory
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[4,52] import requires canonical name for <any>.annotation.Autowired
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[5,27] cannot access org.springframework.http
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[4,52] import requires canonical name for <any>.annotation.Autowired
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[5,27] cannot access org.springframework.http
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[5,32] package org.springframework.http does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[6,32] package org.springframework.http does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[7,27] cannot access org.springframework.web
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[5,32] package org.springframework.http does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[6,32] package org.springframework.http does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[7,27] cannot access org.springframework.web
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[7,31] cannot access org.springframework.web.bind
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[7,31] cannot access org.springframework.web.bind
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[7,47] import requires canonical name for <any>.annotation.RequestMapping
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[8,36] cannot access org.springframework.web.bind.annotation
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[7,47] import requires canonical name for <any>.annotation.RequestMapping
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[8,36] cannot access org.springframework.web.bind.annotation
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[8,47] package org.springframework.web.bind.annotation does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[9,47] package org.springframework.web.bind.annotation does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[11,29] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[8,47] package org.springframework.web.bind.annotation does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[9,47] package org.springframework.web.bind.annotation does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[11,29] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class CustomErrorType
-#20 15.70 [ERROR]   location: package com.docker.atsea.util
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[13,27] cannot access org.springframework.jdbc
+#20 15.70 [ERROR]   location: package com.docker.onlineshop.util
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[13,27] cannot access org.springframework.jdbc
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[13,32] cannot access org.springframework.jdbc.core
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[13,32] cannot access org.springframework.jdbc.core
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[13,37] import requires canonical name for <any>.JdbcTemplate
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[14,11] cannot access org.slf4j
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[13,37] import requires canonical name for <any>.JdbcTemplate
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[14,11] cannot access org.slf4j
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[14,17] package org.slf4j does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[15,17] package org.slf4j does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[17,8] cannot access java
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[14,17] package org.slf4j does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[15,17] package org.slf4j does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[17,8] cannot access java
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[17,12] cannot access java.net
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[17,12] cannot access java.net
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[17,16] import requires canonical name for <any>.InetAddress
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[21,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[17,16] import requires canonical name for <any>.InetAddress
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[21,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class RestController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[22,2] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[22,2] cannot find symbol
 #20 15.70 [ERROR]   symbol: class RequestMapping
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[25,29] cannot find symbol
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[25,29] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class Logger
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[28,9] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[28,9] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class JdbcTemplate
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[34,12] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[34,12] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/controller/UtilityController.java:[53,16] cannot find symbol
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/controller/UtilityController.java:[53,16] cannot find symbol
 #20 15.70 [ERROR]   symbol:   class ResponseEntity
-#20 15.70 [ERROR]   location: class com.docker.atsea.controller.UtilityController
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[3,12] cannot access java.util
+#20 15.70 [ERROR]   location: class com.docker.onlineshop.controller.UtilityController
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[3,12] cannot access java.util
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[4,12] cannot access java.io
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[4,12] cannot access java.io
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[8,8] cannot access javax
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[8,8] cannot access javax
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[8,13] cannot access javax.naming
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[8,13] cannot access javax.naming
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[8,20] import requires canonical name for <any>.NamingException
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[9,13] cannot access javax.persistence
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[8,20] import requires canonical name for <any>.NamingException
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[9,13] cannot access javax.persistence
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[9,25] package javax.persistence does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[10,13] cannot access javax.sql
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[9,25] package javax.persistence does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[10,13] cannot access javax.sql
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[12,11] cannot access org.apache
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[12,11] cannot access org.apache
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[12,18] cannot access org.apache.commons
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[12,18] cannot access org.apache.commons
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[12,32] import requires canonical name for <any>.lang3.StringUtils
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[13,41] cannot access org.springframework.beans.factory.annotation
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[12,32] import requires canonical name for <any>.lang3.StringUtils
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[13,41] cannot access org.springframework.beans.factory.annotation
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[13,52] package org.springframework.beans.factory.annotation does not exist
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,27] cannot access org.springframework.boot
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[13,52] package org.springframework.beans.factory.annotation does not exist
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,27] cannot access org.springframework.boot
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,32] cannot access org.springframework.boot.autoconfigure
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,32] cannot access org.springframework.boot.autoconfigure
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,51] import requires canonical name for <any>.jdbc.DataSourceBuilder
-#20 15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[15,46] cannot access org.springframework.boot.autoconfigure.jdbc
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,51] import requires canonical name for <any>.jdbc.DataSourceBuilder
+#20 15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[15,46] cannot access org.springframework.boot.autoconfigure.jdbc
 #20 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
 #20 15.70 [ERROR] -> [Help 1]
-#20 15.70 [ERROR] 
+#20 15.70 [ERROR]
 #20 15.70 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
 #20 15.70 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-#20 15.70 [ERROR] 
+#20 15.70 [ERROR]
 #20 15.70 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 #20 15.70 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
 #20 ERROR: process "/bin/sh -c mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests" did not complete successfully: exit code: 1
@@ -2162,14 +2162,14 @@ time="2026-07-26T23:48:34Z" level=warning msg="/home/docker/atsea-sample-shop-ap
 #15 CANCELED
 ------
  > [appserver 6/6] RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests:
-15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[14,51] import requires canonical name for <any>.jdbc.DataSourceBuilder
-15.70 [ERROR] /usr/src/atsea/src/main/java/com/docker/atsea/configuration/JpaConfiguration.java:[15,46] cannot access org.springframework.boot.autoconfigure.jdbc
+15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[14,51] import requires canonical name for <any>.jdbc.DataSourceBuilder
+15.70 [ERROR] /usr/src/onlineshop/src/main/java/com/docker/onlineshop/configuration/JpaConfiguration.java:[15,46] cannot access org.springframework.boot.autoconfigure.jdbc
 15.70 [ERROR]   ZipException opening "aspectjweaver-1.8.10.jar": Invalid CEN header (invalid zip64 extra data field size)
 15.70 [ERROR] -> [Help 1]
-15.70 [ERROR] 
+15.70 [ERROR]
 15.70 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
 15.70 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-15.70 [ERROR] 
+15.70 [ERROR]
 15.70 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 15.70 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
 ------
@@ -2183,7 +2183,7 @@ Dockerfile:12
 
   12 | >>> RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
 
-  13 |     
+  13 |
 
   14 |     FROM alpine/java:17.0.9-jdk
 

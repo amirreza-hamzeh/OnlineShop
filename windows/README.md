@@ -16,10 +16,10 @@ Use the PowerShell [build.ps1](build.ps1) script to build the containers:
 
 That creates the following images:
 
-- `atsea-db-builder` - build agent for the database
-- `atsea-db` - SQL Server database with schema deployed
-- `atsea-api-builder` - build agent for the WebApi
-- `atsea-api` - .NET WebApi for the shop back-end
+- `onlineshop-db-builder` - build agent for the database
+- `onlineshop-db` - SQL Server database with schema deployed
+- `onlineshop-api-builder` - build agent for the WebApi
+- `onlineshop-api` - .NET WebApi for the shop back-end
 
 > If you don't already have the Windows and SQL Server base images, it will take a while to download them.
 

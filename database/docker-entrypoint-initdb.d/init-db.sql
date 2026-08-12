@@ -15,7 +15,7 @@ ALTER TABLE product
 ALTER ROLE gordonuser CONNECTION LIMIT -1;
 
 -- add product data
--- note: images are pulled from the public folder at atsea/app/react-app/public
+-- note: images are pulled from the public folder at onlineshop/app/react-app/public
 -- Keep these IDs and product details aligned with react-app/src/api/products.json.
 -- Wishlist rows reference these records, so the profile must receive the same
 -- product the customer selected in the storefront.
