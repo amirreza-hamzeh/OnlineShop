@@ -1,3 +1,9 @@
+<!--
+Modified from dockersamples/atsea-sample-shop-app.
+Modifications by Amirreza Hamzeh, 2026.
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # REST Requests
 
 The REST endpoints are divided into three types:
