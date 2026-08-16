@@ -1,3 +1,6 @@
+# Modified from dockersamples/atsea-sample-shop-app.
+# Modifications by Amirreza Hamzeh, 2026.
+# SPDX-License-Identifier: Apache-2.0
 FROM node:latest AS storefront
 WORKDIR /usr/src/onlineshop/app/react-app
 COPY react-app .
