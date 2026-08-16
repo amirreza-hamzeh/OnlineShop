@@ -243,6 +243,24 @@ For the Windows-container implementation, see [`windows/README.md`](windows/READ
 - **A build does not recognize `RUN --mount=type=cache`:** enable BuildKit or
   update Docker to a current release.
 
+## Attribution
+
+OnlineShop is based on the
+[dockersamples/atsea-sample-shop-app](https://github.com/dockersamples/atsea-sample-shop-app)
+project originally developed by Docker, Inc.
+
+The original project is licensed under the Apache License, Version 2.0.
+
+This repository contains modifications and additional functionality
+developed by Amirreza Hamzeh, including changes to the user interface,
+application functionality, configuration, and deployment.
+
+Original work:
+Copyright 2016 Docker, Inc.
+
+Modifications:
+Copyright 2026 Amirreza Hamzeh
+
 ## License
 
 This project is distributed under the terms in [`LICENSE`](LICENSE).
