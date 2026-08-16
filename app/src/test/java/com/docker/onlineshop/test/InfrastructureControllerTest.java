@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.servlet.FilterChain;
@@ -26,6 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.docker.onlineshop.controller.LoginController;
 import com.docker.onlineshop.controller.PurchaseController;
 import com.docker.onlineshop.controller.UtilityController;
+import com.docker.onlineshop.exception.AuthenticationExceptionHandler;
 import com.docker.onlineshop.model.Customer;
 import com.docker.onlineshop.security.JwtFilter;
 import com.docker.onlineshop.service.CustomerService;
@@ -45,7 +47,8 @@ public class InfrastructureControllerTest {
 
     @Before
     public void setup() {
-        loginMvc = MockMvcBuilders.standaloneSetup(loginController).build();
+        loginMvc = MockMvcBuilders.standaloneSetup(loginController)
+                .setControllerAdvice(new AuthenticationExceptionHandler()).build();
     }
 
     @Test
@@ -59,9 +62,20 @@ public class InfrastructureControllerTest {
                 .andExpect(status().isOk()).andExpect(jsonPath("$.token", notNullValue()));
         loginMvc.perform(post("/login/").contentType(MediaType.APPLICATION_JSON)
                 .content("{\"identifier\":\"ford@example.com\",\"password\":\"wrong\"}"))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.errorMessage").value("The email address or password is incorrect."));
+        loginMvc.perform(post("/login/").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"identifier\":\"unknown@example.com\",\"password\":\"towel\"}"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.errorMessage").value("The email address or password is incorrect."));
         loginMvc.perform(post("/login/").contentType(MediaType.APPLICATION_JSON).content("{}"))
                 .andExpect(status().isBadRequest());
+        loginMvc.perform(post("/login/").contentType(MediaType.APPLICATION_JSON).content("null"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMessage")
+                        .value("Email address or phone number and password are required."));
     }
 
     @Test
