@@ -87,4 +87,36 @@ describe('full-page authentication flow', () => {
         expect(hashHistory.replace).not.toHaveBeenCalled();
       });
   });
+
+  it('shows the authentication error returned by the server', () => {
+    const container = makeContainer({
+      loginCustomer: jest.fn(() => Promise.reject({
+        reason: {
+          response: { body: { errorMessage: 'The email address or password is incorrect.' } },
+        },
+      })),
+    });
+
+    return container.handleLogin({ identifier: 'shopper@example.com', password: 'wrong' })
+      .then(() => { throw new Error('Expected sign in to fail'); })
+      .catch(error => {
+        expect(error.errors._error).toBe('The email address or password is incorrect.');
+        expect(localStorage.getItem('jwtToken')).toBe(null);
+        expect(hashHistory.replace).not.toHaveBeenCalled();
+      });
+  });
+
+  it('uses a safe fallback when the server error is not a displayable string', () => {
+    const container = makeContainer({
+      loginCustomer: jest.fn(() => Promise.reject({
+        reason: { response: { body: { errorMessage: { detail: 'unexpected shape' } } } },
+      })),
+    });
+
+    return container.handleLogin({ identifier: 'shopper@example.com', password: 'wrong' })
+      .then(() => { throw new Error('Expected sign in to fail'); })
+      .catch(error => {
+        expect(error.errors._error).toBe('We could not sign you in with those details.');
+      });
+  });
 });
