@@ -2,5 +2,7 @@ html { scroll-behavior: smooth; }
 body { background: #f8fafc; margin: 0; }
 * { box-sizing: border-box; }
 a, button, input, select, textarea { transition: box-shadow 160ms ease, border-color 160ms ease, transform 160ms ease; }
-a:focus, button:focus, input:focus, select:focus, textarea:focus { outline: 3px solid rgba(20, 184, 166, .35); outline-offset: 2px; }
+a:focus, button:focus, input:focus, select:focus, textarea:focus { outline: none; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid rgba(20, 184, 166, .35); outline-offset: 2px; }
+*:focus:not(:focus-visible) { box-shadow: none !important; outline: none !important; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
