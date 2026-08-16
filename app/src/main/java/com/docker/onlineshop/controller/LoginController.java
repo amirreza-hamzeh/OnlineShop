@@ -1,9 +1,7 @@
 package com.docker.onlineshop.controller;
 
 import java.util.Date;
-import java.util.Objects;
 
-import javax.servlet.ServletException;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.docker.onlineshop.exception.InvalidCredentialsException;
 import com.docker.onlineshop.model.Customer;
 import com.docker.onlineshop.service.CustomerService;
 import com.docker.onlineshop.util.CustomErrorType;
@@ -36,13 +35,12 @@ public class LoginController {
         public String password;
     }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<?> login(@RequestBody final UserLogin login) 
-		throws ServletException {
+	public ResponseEntity<?> login(@RequestBody(required = false) final UserLogin login) {
 		
 		JSONObject reponseToken = new JSONObject();
-		if (login.identifier == null || login.identifier.trim().isEmpty()
+		if (login == null || login.identifier == null || login.identifier.trim().isEmpty()
 				|| login.password == null || login.password.isEmpty()) {
 			return new ResponseEntity<Object>(new CustomErrorType(
 					"Email address or phone number and password are required."), HttpStatus.BAD_REQUEST);
@@ -56,12 +54,11 @@ public class LoginController {
 			customer = customerService.findByUserName(identifier);
 		}
 		if (customer == null) {
-			logger.error("Customer with email address or phone number {} not found.", identifier);
-			return new ResponseEntity(new CustomErrorType("Customer with that email address or phone number"
-					+ " not found"), HttpStatus.NOT_FOUND);
+			logger.warn("Failed login attempt: credentials did not match.");
+			throw new InvalidCredentialsException();
 		}
 		
-		if (Objects.deepEquals(login.password, customer.getPassword())) {
+		if (login.password.equals(customer.getPassword())) {
 			String token = Jwts.builder().setSubject(customer.getUsername())
                 .claim("roles", customer.getUsername())
                 .setIssuedAt(new Date())
@@ -72,7 +69,8 @@ public class LoginController {
 			
 			return new ResponseEntity<JSONObject>(reponseToken, HttpStatus.OK);
 		}
-		return new ResponseEntity<Object>(new CustomErrorType("Customer name or password not found."), HttpStatus.UNAUTHORIZED);
+		logger.warn("Failed login attempt: credentials did not match.");
+		throw new InvalidCredentialsException();
 		
 		
 	}

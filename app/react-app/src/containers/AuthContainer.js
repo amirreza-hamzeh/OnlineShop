@@ -10,6 +10,15 @@ import { setJwtToken } from '../actions/storage';
 import { createAuthLocation, getReturnPath } from '../authNavigation';
 import './AuthContainer.css';
 
+const loginErrorMessage = error => {
+  // redux-promise-middleware wraps a rejected request in a `reason` property.
+  const requestError = error && error.reason ? error.reason : error;
+  const responseBody = requestError && requestError.response && requestError.response.body;
+  return responseBody && responseBody.errorMessage
+    ? responseBody.errorMessage
+    : 'We could not sign you in with those details.';
+};
+
 export class AuthContainer extends Component {
   finishLogin = response => {
     const token = response && response.value && response.value.token;
@@ -22,8 +31,8 @@ export class AuthContainer extends Component {
 
   handleLogin = ({ identifier, password }) => this.props.loginCustomer(identifier, password)
     .then(this.finishLogin)
-    .catch(() => {
-      throw new SubmissionError({ _error: 'We could not sign you in with those details.' });
+    .catch(error => {
+      throw new SubmissionError({ _error: loginErrorMessage(error) });
     });
 
   handleCreateUser = ({ name, email, phone, password }) => this.props.createCustomer(
