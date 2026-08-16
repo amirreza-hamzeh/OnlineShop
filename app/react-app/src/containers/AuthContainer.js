@@ -14,8 +14,9 @@ const loginErrorMessage = error => {
   // redux-promise-middleware wraps a rejected request in a `reason` property.
   const requestError = error && error.reason ? error.reason : error;
   const responseBody = requestError && requestError.response && requestError.response.body;
-  return responseBody && responseBody.errorMessage
-    ? responseBody.errorMessage
+  const serverMessage = responseBody && responseBody.errorMessage;
+  return typeof serverMessage === 'string' && serverMessage.trim()
+    ? serverMessage
     : 'We could not sign you in with those details.';
 };
 
