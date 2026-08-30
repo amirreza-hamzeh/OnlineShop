@@ -1,13 +1,13 @@
 # Modified from dockersamples/atsea-sample-shop-app.
 # Modifications by Amirreza Hamzeh, 2026.
 # SPDX-License-Identifier: Apache-2.0
-FROM node:latest AS storefront
+FROM node:lts-alpine3.24 AS storefront
 WORKDIR /usr/src/onlineshop/app/react-app
 COPY react-app .
 RUN --mount=type=cache,target=/root/.npm npm install
 RUN npm run build
 
-FROM maven:latest AS appserver
+FROM maven:3.9.16-ibmjava-8 AS appserver
 WORKDIR /usr/src/onlineshop
 COPY pom.xml .
 RUN --mount=type=cache,target=/root/.m2 \
