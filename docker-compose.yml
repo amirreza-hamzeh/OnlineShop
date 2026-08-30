@@ -4,7 +4,7 @@ services:
   reverse_proxy:
     depends_on:
       - appserver
-    image: nginx:alpine
+    image: nginx:1.31.4-alpine-slim
     ports:
       - "80:80"
       - "443:443"
